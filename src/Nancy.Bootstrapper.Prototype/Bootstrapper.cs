@@ -1,5 +1,6 @@
 using System;
 using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Bootstrapper.Prototype.Scanning;
 
 namespace Nancy.Bootstrapper.Prototype
 {

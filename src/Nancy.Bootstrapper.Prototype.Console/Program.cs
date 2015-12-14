@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Microsoft.Extensions.PlatformAbstractions;
 using Nancy.Bootstrapper.Prototype.Http;
+using Nancy.Bootstrapper.Prototype.Scanning;
 
 namespace Nancy.Bootstrapper.Prototype.Console
 {

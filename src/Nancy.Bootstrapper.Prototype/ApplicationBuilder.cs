@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Bootstrapper.Prototype.Scanning;
 
 namespace Nancy.Bootstrapper.Prototype
 {

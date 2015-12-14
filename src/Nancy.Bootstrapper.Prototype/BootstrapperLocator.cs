@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Nancy.Bootstrapper.Prototype.Scanning;
 
 namespace Nancy.Bootstrapper.Prototype
 {

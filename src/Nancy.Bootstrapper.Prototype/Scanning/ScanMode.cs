@@ -1,4 +1,4 @@
-namespace Nancy.Bootstrapper.Prototype
+namespace Nancy.Bootstrapper.Prototype.Scanning
 {
     public enum ScanMode
     {
