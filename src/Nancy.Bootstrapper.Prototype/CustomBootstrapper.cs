@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Autofac;
 using ConsoleApplication7.Bootstrappers.Autofac;
 using ConsoleApplication7.Cruft;

@@ -1,0 +1,18 @@
+﻿{
+    "version": "2.0.0-*",
+
+    "dependencies": {
+        "Autofac": "4.0.0-rc1-177",
+        "structuremap": "4.0.0.315",
+        "SimpleInjector.Extensions.ExecutionContextScoping": "3.1.2-alpha2"
+    },
+
+    "frameworks": {
+        "net45": { },
+        "dotnet5.4": {
+            "dependencies": {
+                "System.Runtime": "4.0.21-beta-23516"
+            }
+        }
+    }
+}
