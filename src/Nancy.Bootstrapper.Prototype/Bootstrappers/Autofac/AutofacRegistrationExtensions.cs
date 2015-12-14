@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Autofac.Builder;
-using ConsoleApplication7.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 
-namespace ConsoleApplication7.Bootstrappers.Autofac
+namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
 {
     internal static class AutofacRegistrationExtensions
     {

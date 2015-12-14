@@ -1,7 +1,7 @@
 using System;
-using ConsoleApplication7.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 
-namespace ConsoleApplication7.Cruft
+namespace Nancy.Bootstrapper.Prototype.Cruft
 {
     /// <summary>
     /// The main base class for all bootstrappers.

@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ConsoleApplication7.Cruft.Http;
+using Nancy.Bootstrapper.Prototype.Cruft.Http;
 
-namespace ConsoleApplication7.Cruft
+namespace Nancy.Bootstrapper.Prototype.Cruft
 {
     public abstract class Application<TContainer, TScope> : IApplication
         where TContainer : IDisposable

@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleApplication7.Cruft.Registration
+namespace Nancy.Bootstrapper.Prototype.Cruft.Registration
 {
     public class TypeRegistration : Registration
     {

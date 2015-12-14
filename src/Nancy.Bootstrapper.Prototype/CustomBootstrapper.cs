@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using Autofac;
-using ConsoleApplication7.Bootstrappers.Autofac;
-using ConsoleApplication7.Cruft;
+using Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac;
+using Nancy.Bootstrapper.Prototype.Cruft;
 
-namespace ConsoleApplication7
+namespace Nancy.Bootstrapper.Prototype
 {
     public class CustomBootstrapper : AutofacBootstrapper
     {

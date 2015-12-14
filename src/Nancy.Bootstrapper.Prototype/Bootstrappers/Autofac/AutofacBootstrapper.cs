@@ -1,9 +1,9 @@
 using Autofac;
 using Autofac.Core.Lifetime;
-using ConsoleApplication7.Cruft;
-using ConsoleApplication7.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Cruft;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 
-namespace ConsoleApplication7.Bootstrappers.Autofac
+namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
 {
     public class AutofacBootstrapper : Bootstrapper<ContainerBuilder, ILifetimeScope>
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using ConsoleApplication7.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 
-namespace ConsoleApplication7.Cruft
+namespace Nancy.Bootstrapper.Prototype.Cruft
 {
     internal class ApplicationBuilder<TContainer> : IApplicationBuilder<TContainer>
     {

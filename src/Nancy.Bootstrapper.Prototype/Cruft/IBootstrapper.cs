@@ -1,4 +1,4 @@
-namespace ConsoleApplication7.Cruft
+namespace Nancy.Bootstrapper.Prototype.Cruft
 {
     public interface IBootstrapper
     {

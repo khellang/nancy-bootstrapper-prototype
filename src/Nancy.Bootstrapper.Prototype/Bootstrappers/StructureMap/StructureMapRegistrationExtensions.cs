@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleApplication7.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace ConsoleApplication7.Bootstrappers.StructureMap
+namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
 {
     internal static class StructureMapRegistrationExtensions
     {

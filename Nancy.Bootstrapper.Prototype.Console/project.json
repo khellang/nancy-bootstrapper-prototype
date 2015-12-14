@@ -1,0 +1,19 @@
+﻿{
+    "version": "2.0.0-*",
+
+    "compilationOptions": {
+        "emitEntryPoint": true
+    },
+
+    "dependencies": {
+        "Nancy.Bootstrapper.Prototype": { "target": "project" }
+    },
+
+    "commands": {
+        "Nancy.Bootstrapper.Prototype.Console": "Nancy.Bootstrapper.Prototype.Console"
+    },
+
+    "frameworks": {
+        "dnx451": { }
+    }
+}

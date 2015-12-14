@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleApplication7.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 using SimpleInjector;
 using Registration = SimpleInjector.Registration;
 
-namespace ConsoleApplication7.Bootstrappers.SimpleInjector
+namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
 {
     internal static class SimpleInjectorRegistrationExtensions
     {

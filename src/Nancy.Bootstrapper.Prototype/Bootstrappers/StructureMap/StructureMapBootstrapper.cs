@@ -1,8 +1,8 @@
-﻿using ConsoleApplication7.Cruft;
-using ConsoleApplication7.Cruft.Registration;
+﻿using Nancy.Bootstrapper.Prototype.Cruft;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 using StructureMap;
 
-namespace ConsoleApplication7.Bootstrappers.StructureMap
+namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
 {
     public class StructureMapBootstrapper : Bootstrapper<IContainer>
     {

@@ -1,4 +1,4 @@
-namespace ConsoleApplication7.Cruft.Registration
+namespace Nancy.Bootstrapper.Prototype.Cruft.Registration
 {
     public enum Lifetime
     {

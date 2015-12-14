@@ -1,4 +1,4 @@
-﻿namespace ConsoleApplication7.Cruft.Http
+﻿namespace Nancy.Bootstrapper.Prototype.Cruft.Http
 {
     public class HttpRequest
     {

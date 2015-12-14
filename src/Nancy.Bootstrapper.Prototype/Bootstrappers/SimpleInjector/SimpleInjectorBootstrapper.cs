@@ -1,9 +1,9 @@
-using ConsoleApplication7.Cruft;
-using ConsoleApplication7.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Cruft;
+using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 
-namespace ConsoleApplication7.Bootstrappers.SimpleInjector
+namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
 {
     public class SimpleInjectorBootstrapper : Bootstrapper<Container>
     {
