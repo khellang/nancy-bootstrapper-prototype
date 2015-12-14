@@ -15,7 +15,12 @@ namespace Nancy.Bootstrapper.Prototype.Cruft.Registration
         public static TypeRegistration Create<TService, TImplementation>(Lifetime lifetime)
             where TImplementation : TService
         {
-            return new TypeRegistration(typeof(TService), typeof(TImplementation), lifetime);
+            return Create<TService>(typeof(TImplementation), lifetime);
+        }
+
+        public static TypeRegistration Create<TService>(Type implementationType, Lifetime lifetime)
+        {
+            return new TypeRegistration(typeof(TService), implementationType, lifetime);
         }
     }
 }

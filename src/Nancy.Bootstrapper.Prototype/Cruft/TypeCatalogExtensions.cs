@@ -7,7 +7,7 @@ namespace Nancy.Bootstrapper.Prototype.Cruft
     {
         public static IEnumerable<Type> TypesOf<T>(this ITypeCatalog typeCatalog)
         {
-            return typeCatalog.TypesOf(typeof (T));
+            return typeCatalog.TypesOf(typeof(T));
         }
 
         public static IEnumerable<Type> TypesOf(this ITypeCatalog typeCatalog, Type type)
@@ -17,7 +17,7 @@ namespace Nancy.Bootstrapper.Prototype.Cruft
 
         public static IEnumerable<Type> TypesOf<T>(this ITypeCatalog typeCatalog, ScanMode scanMode)
         {
-            return typeCatalog.TypesOf(typeof (T), scanMode);
+            return typeCatalog.TypesOf(typeof(T), scanMode);
         }
     }
 }
