@@ -13,7 +13,7 @@ namespace Nancy.Bootstrapper.Prototype.Scanning
 
         private IAssemblyCatalog AssemblyCatalog { get; }
 
-        public IReadOnlyCollection<Type> TypesOf(Type targetType, ScanMode scanMode)
+        public IReadOnlyCollection<Type> GetTypesAssignableTo(Type targetType, ScanMode scanMode)
         {
             var result = new List<Type>();
 

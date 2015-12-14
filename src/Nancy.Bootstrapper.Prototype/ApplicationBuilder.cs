@@ -42,7 +42,7 @@ namespace Nancy.Bootstrapper.Prototype
         {
             // TODO: Should we throw if multiple types are found?
             var customImplementationType = TypeCatalog
-                .TypesOf<TService>(ScanMode.ExcludeNancy)
+                .GetTypesAssignableTo<TService>(ScanMode.ExcludeNancy)
                 .FirstOrDefault();
 
             var implementationType = customImplementationType ?? typeof(TDefaultImplementation);

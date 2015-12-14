@@ -17,7 +17,7 @@ namespace Nancy.Bootstrapper.Prototype
         {
             // TODO: Should we throw if multiple types are found?
             var bootstrapper = TypeCatalog
-                .TypesOf<IBootstrapper>(ScanMode.ExcludeNancy)
+                .GetTypesAssignableTo<IBootstrapper>(ScanMode.ExcludeNancy)
                 .FirstOrDefault();
 
             if (bootstrapper == null)

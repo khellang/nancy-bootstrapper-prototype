@@ -5,19 +5,19 @@ namespace Nancy.Bootstrapper.Prototype.Scanning
 {
     public static class TypeCatalogExtensions
     {
-        public static IEnumerable<Type> TypesOf<T>(this ITypeCatalog typeCatalog)
+        public static IEnumerable<Type> GetTypesAssignableTo<T>(this ITypeCatalog typeCatalog)
         {
-            return typeCatalog.TypesOf(typeof(T));
+            return typeCatalog.GetTypesAssignableTo(typeof(T));
         }
 
-        public static IEnumerable<Type> TypesOf(this ITypeCatalog typeCatalog, Type type)
+        public static IEnumerable<Type> GetTypesAssignableTo(this ITypeCatalog typeCatalog, Type type)
         {
-            return typeCatalog.TypesOf(type, ScanMode.All);
+            return typeCatalog.GetTypesAssignableTo(type, ScanMode.All);
         }
 
-        public static IEnumerable<Type> TypesOf<T>(this ITypeCatalog typeCatalog, ScanMode scanMode)
+        public static IEnumerable<Type> GetTypesAssignableTo<T>(this ITypeCatalog typeCatalog, ScanMode scanMode)
         {
-            return typeCatalog.TypesOf(typeof(T), scanMode);
+            return typeCatalog.GetTypesAssignableTo(typeof(T), scanMode);
         }
     }
 }
