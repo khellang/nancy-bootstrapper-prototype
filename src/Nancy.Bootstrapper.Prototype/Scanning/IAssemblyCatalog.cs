@@ -5,6 +5,6 @@ namespace Nancy.Bootstrapper.Prototype.Scanning
 {
     public interface IAssemblyCatalog
     {
-        IEnumerable<Assembly> GetAssemblies(ScanMode scanMode);
+        IReadOnlyCollection<Assembly> GetAssemblies(ScanMode scanMode);
     }
 }

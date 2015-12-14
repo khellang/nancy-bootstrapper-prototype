@@ -5,6 +5,6 @@ namespace Nancy.Bootstrapper.Prototype.Scanning
 {
     public interface ITypeCatalog
     {
-        IEnumerable<Type> TypesOf(Type type, ScanMode scanMode);
+        IReadOnlyCollection<Type> TypesOf(Type type, ScanMode scanMode);
     }
 }

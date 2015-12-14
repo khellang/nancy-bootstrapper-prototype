@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Nancy.Bootstrapper.Prototype.Scanning;
@@ -15,20 +14,22 @@ namespace Nancy.Bootstrapper.Prototype.Console
 
         private ILibraryManager LibraryManager { get; }
 
-        public IEnumerable<Assembly> GetAssemblies(ScanMode scanMode)
+        public IReadOnlyCollection<Assembly> GetAssemblies(ScanMode scanMode)
         {
+            var assemblies = new List<Assembly>();
+
             if (scanMode != ScanMode.ExcludeNancy)
             {
-                var nancy = LibraryManager.GetLibrary("Nancy.Bootstrapper.Prototyp");
+                var nancy = LibraryManager.GetLibrary("Nancy.Bootstrapper.Prototype");
 
                 foreach (var assemblyName in nancy.Assemblies)
                 {
-                    yield return Assembly.Load(assemblyName);
+                    assemblies.Add(Assembly.Load(assemblyName));
                 }
 
                 if (scanMode == ScanMode.OnlyNancy)
                 {
-                    yield break;
+                    return assemblies;
                 }
             }
 
@@ -38,9 +39,11 @@ namespace Nancy.Bootstrapper.Prototype.Console
             {
                 foreach (var assemblyName in referencingLibrary.Assemblies)
                 {
-                    yield return Assembly.Load(assemblyName);
+                    assemblies.Add(Assembly.Load(assemblyName));
                 }
             }
+
+            return assemblies.ToArray();
         }
     }
 }
