@@ -1,4 +1,4 @@
-namespace Nancy.Bootstrapper.Prototype.Cruft.Registration
+namespace Nancy.Bootstrapper.Prototype.Registration
 {
     public enum Lifetime
     {

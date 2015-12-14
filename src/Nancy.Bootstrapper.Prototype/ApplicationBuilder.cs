@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Nancy.Bootstrapper.Prototype.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft
+namespace Nancy.Bootstrapper.Prototype
 {
     public class ApplicationBuilder<TContainer> : IApplicationBuilder<TContainer>
     {

@@ -1,7 +1,7 @@
 using System;
-using Nancy.Bootstrapper.Prototype.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft
+namespace Nancy.Bootstrapper.Prototype
 {
     /// <summary>
     /// The main base class for all bootstrappers.

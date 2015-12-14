@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.PlatformAbstractions;
-using Nancy.Bootstrapper.Prototype.Cruft;
 
 namespace Nancy.Bootstrapper.Prototype.Console
 {
@@ -17,7 +16,7 @@ namespace Nancy.Bootstrapper.Prototype.Console
 
         public IEnumerable<Assembly> Assemblies =>
             LibraryManager.GetReferencingLibraries("Nancy.Bootstrapper.Prototype")
-            .SelectMany(x => x.Assemblies)
-            .Select(Assembly.Load);
+                .SelectMany(x => x.Assemblies)
+                .Select(Assembly.Load);
     }
 }

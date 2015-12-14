@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft
+namespace Nancy.Bootstrapper.Prototype
 {
     public static class TypeCatalogExtensions
     {

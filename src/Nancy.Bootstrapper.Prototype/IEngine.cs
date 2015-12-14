@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Nancy.Bootstrapper.Prototype.Cruft.Http;
+using Nancy.Bootstrapper.Prototype.Http;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft
+namespace Nancy.Bootstrapper.Prototype
 {
     public interface IEngine
     {

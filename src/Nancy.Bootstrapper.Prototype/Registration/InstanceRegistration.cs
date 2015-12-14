@@ -1,6 +1,6 @@
 using System;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft.Registration
+namespace Nancy.Bootstrapper.Prototype.Registration
 {
     public class InstanceRegistration : Registration
     {

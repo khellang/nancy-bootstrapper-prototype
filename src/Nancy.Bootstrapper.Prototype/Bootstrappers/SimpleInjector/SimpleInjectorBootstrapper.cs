@@ -1,5 +1,4 @@
-using Nancy.Bootstrapper.Prototype.Cruft;
-using Nancy.Bootstrapper.Prototype.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Registration;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 

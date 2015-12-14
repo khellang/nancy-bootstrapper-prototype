@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft.Registration
+namespace Nancy.Bootstrapper.Prototype.Registration
 {
     public class CollectionTypeRegistration : Registration
     {

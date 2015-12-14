@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft
+namespace Nancy.Bootstrapper.Prototype
 {
-    public class DefaultTypeCatalog : ITypeCatalog
+    public class TypeCatalog : ITypeCatalog
     {
-        public DefaultTypeCatalog(IAssemblyCatalog assemblyCatalog)
+        public TypeCatalog(IAssemblyCatalog assemblyCatalog)
         {
             AssemblyCatalog = assemblyCatalog;
         }

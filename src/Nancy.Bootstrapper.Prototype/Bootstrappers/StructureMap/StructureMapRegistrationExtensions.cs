@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nancy.Bootstrapper.Prototype.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Registration;
 using StructureMap;
 using StructureMap.Pipeline;
 
@@ -60,7 +60,7 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
             }
         }
 
-        private static TypeRegistration AsTypeRegistration(this Registration registration, Type implementationType)
+        private static TypeRegistration AsTypeRegistration(this Registration.Registration registration, Type implementationType)
         {
             return new TypeRegistration(registration.ServiceType, implementationType, registration.Lifetime);
         }

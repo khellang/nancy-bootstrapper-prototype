@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Autofac.Builder;
-using Nancy.Bootstrapper.Prototype.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Registration;
 
 namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
 {
@@ -65,7 +65,7 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
             }
         }
 
-        private static TypeRegistration AsTypeRegistration(this Registration registration, Type implementationType)
+        private static TypeRegistration AsTypeRegistration(this Registration.Registration registration, Type implementationType)
         {
             return new TypeRegistration(registration.ServiceType, implementationType, registration.Lifetime);
         }

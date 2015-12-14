@@ -1,7 +1,6 @@
 using Autofac;
 using Autofac.Core.Lifetime;
-using Nancy.Bootstrapper.Prototype.Cruft;
-using Nancy.Bootstrapper.Prototype.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Registration;
 
 namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
 {

@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using Microsoft.Extensions.PlatformAbstractions;
-using Nancy.Bootstrapper.Prototype.Cruft;
-using Nancy.Bootstrapper.Prototype.Cruft.Http;
+using Nancy.Bootstrapper.Prototype.Http;
 
 namespace Nancy.Bootstrapper.Prototype.Console
 {
@@ -13,7 +12,7 @@ namespace Nancy.Bootstrapper.Prototype.Console
 
             var assemblyCatalog = new LibraryManagerAssemblyCatalog(libraryManager);
 
-            var typeCatalog = new DefaultTypeCatalog(assemblyCatalog);
+            var typeCatalog = new TypeCatalog(assemblyCatalog);
 
             var bootstrapperLocator = new BootstrapperLocator(typeCatalog);
 

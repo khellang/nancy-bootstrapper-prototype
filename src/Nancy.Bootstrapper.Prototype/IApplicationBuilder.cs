@@ -1,4 +1,4 @@
-namespace Nancy.Bootstrapper.Prototype.Cruft
+namespace Nancy.Bootstrapper.Prototype
 {
     public interface IApplicationBuilder<out TContainer>
     {

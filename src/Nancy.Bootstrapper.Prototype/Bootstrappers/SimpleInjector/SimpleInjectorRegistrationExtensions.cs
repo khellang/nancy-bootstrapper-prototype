@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nancy.Bootstrapper.Prototype.Cruft.Registration;
+using Nancy.Bootstrapper.Prototype.Registration;
 using SimpleInjector;
-using Registration = SimpleInjector.Registration;
 
 namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
 {
@@ -64,7 +63,7 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
             }
         }
 
-        private static Registration CreateRegistration(this Container container, Type implementationType, Lifetime lifetime)
+        private static global::SimpleInjector.Registration CreateRegistration(this Container container, Type implementationType, Lifetime lifetime)
         {
             return lifetime.AsLifestyle().CreateRegistration(implementationType, container);
         }

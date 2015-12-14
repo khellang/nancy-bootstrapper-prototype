@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Nancy.Bootstrapper.Prototype.Cruft
+namespace Nancy.Bootstrapper.Prototype
 {
     public class BootstrapperLocator : IBootstrapperLocator
     {
@@ -14,18 +14,19 @@ namespace Nancy.Bootstrapper.Prototype.Cruft
 
         public IBootstrapper GetBootstrapper()
         {
-            var bootstrappers = TypeCatalog.TypesOf<IBootstrapper>(ScanMode.ExcludeNancy);
+            // TODO: Should we throw if multiple types are found?
+            var bootstrapper = TypeCatalog
+                .TypesOf<IBootstrapper>(ScanMode.ExcludeNancy)
+                .FirstOrDefault();
 
-            var bootstrapperType = bootstrappers.FirstOrDefault();
-
-            if (bootstrapperType == null)
+            if (bootstrapper == null)
             {
                 // TODO: Return default bootstrapper.
                 throw new InvalidOperationException("Could not locate a bootstrapper implementation.");
             }
 
             // TODO: Wrap potential exception with a better error message.
-            return (IBootstrapper) Activator.CreateInstance(bootstrapperType);
+            return (IBootstrapper) Activator.CreateInstance(bootstrapper);
         }
     }
 }
