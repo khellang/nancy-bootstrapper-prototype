@@ -7,13 +7,16 @@ namespace Nancy.Bootstrapper.Prototype
 {
     public class ApplicationBuilder<TContainer> : IApplicationBuilder<TContainer>
     {
-        public ApplicationBuilder(TContainer container, ITypeCatalog typeCatalog)
+        public ApplicationBuilder(TContainer container, IAssemblyCatalog assemblyCatalog, ITypeCatalog typeCatalog)
         {
             Container = container;
+            AssemblyCatalog = assemblyCatalog;
             TypeCatalog = typeCatalog;
         }
 
         public TContainer Container { get; }
+
+        public IAssemblyCatalog AssemblyCatalog { get; }
 
         public ITypeCatalog TypeCatalog { get; }
 
@@ -26,7 +29,11 @@ namespace Nancy.Bootstrapper.Prototype
 
             var collectionTypeRegistrations = new List<CollectionTypeRegistration>();
 
-            var instanceRegistrations = new List<InstanceRegistration>();
+            var instanceRegistrations = new List<InstanceRegistration>
+            {
+                InstanceRegistration.Create(AssemblyCatalog),
+                InstanceRegistration.Create(TypeCatalog)
+            };
 
             return new ContainerRegistry(typeRegistrations, collectionTypeRegistrations, instanceRegistrations);
         }

@@ -6,14 +6,14 @@ namespace Nancy.Bootstrapper.Prototype
 {
     /// <summary>
     /// The main base class for all bootstrappers.
-    /// 
+    ///
     /// This is responsible for creating and configuring the
     /// application container and the framework as a whole.
     /// </summary>
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper
         where TContainer : IDisposable
     {
-        public IApplication InitializeApplication(ITypeCatalog typeCatalog)
+        public IApplication InitializeApplication(IAssemblyCatalog assemblyCatalog, ITypeCatalog typeCatalog)
         {
             // First, we need a container builder.
             // This step is a noop in bootstrappers without the builder/container split.
@@ -21,7 +21,7 @@ namespace Nancy.Bootstrapper.Prototype
 
             // We'll hang all configuration related stuff off this object.
             // Everything will be pre-configured with Nancy defaults.
-            var configuration = new ApplicationBuilder<TBuilder>(builder, typeCatalog);
+            var configuration = new ApplicationBuilder<TBuilder>(builder, assemblyCatalog, typeCatalog);
 
             // This is the main configuration point for the user.
             // Here you can register stuff in the container, swap out

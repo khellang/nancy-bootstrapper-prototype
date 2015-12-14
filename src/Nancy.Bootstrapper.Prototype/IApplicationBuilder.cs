@@ -6,6 +6,8 @@ namespace Nancy.Bootstrapper.Prototype
     {
         TContainer Container { get; }
 
+        IAssemblyCatalog AssemblyCatalog { get; }
+
         ITypeCatalog TypeCatalog { get; }
     }
 }

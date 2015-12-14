@@ -15,9 +15,32 @@ namespace Nancy.Bootstrapper.Prototype.Console
 
         private ILibraryManager LibraryManager { get; }
 
-        public IEnumerable<Assembly> Assemblies =>
-            LibraryManager.GetReferencingLibraries("Nancy.Bootstrapper.Prototype")
-                .SelectMany(x => x.Assemblies)
-                .Select(Assembly.Load);
+        public IEnumerable<Assembly> GetAssemblies(ScanMode scanMode)
+        {
+            if (scanMode != ScanMode.ExcludeNancy)
+            {
+                var nancy = LibraryManager.GetLibrary("Nancy.Bootstrapper.Prototyp");
+
+                foreach (var assemblyName in nancy.Assemblies)
+                {
+                    yield return Assembly.Load(assemblyName);
+                }
+
+                if (scanMode == ScanMode.OnlyNancy)
+                {
+                    yield break;
+                }
+            }
+
+            var referencingLibraries = LibraryManager.GetReferencingLibraries("Nancy.Bootstrapper.Prototype");
+
+            foreach (var referencingLibrary in referencingLibraries)
+            {
+                foreach (var assemblyName in referencingLibrary.Assemblies)
+                {
+                    yield return Assembly.Load(assemblyName);
+                }
+            }
+        }
     }
 }

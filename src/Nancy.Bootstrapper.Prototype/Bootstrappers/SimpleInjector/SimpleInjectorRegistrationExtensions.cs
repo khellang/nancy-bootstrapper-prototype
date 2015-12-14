@@ -59,7 +59,7 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
                 case Lifetime.Singleton: return Lifestyle.Singleton;
                 case Lifetime.Scoped: return Lifestyle.Scoped;
                 case Lifetime.Transient: return Lifestyle.Transient;
-                default: throw new ArgumentOutOfRangeException(nameof(lifetime), lifetime, null);
+                default: throw new ArgumentOutOfRangeException(nameof(lifetime), lifetime, "Invalid lifetime.");
             }
         }
 

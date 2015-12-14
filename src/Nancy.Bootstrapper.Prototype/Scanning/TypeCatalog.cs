@@ -16,7 +16,7 @@ namespace Nancy.Bootstrapper.Prototype.Scanning
 
         public IEnumerable<Type> TypesOf(Type targetType, ScanMode scanMode)
         {
-            return AssemblyCatalog.Assemblies
+            return AssemblyCatalog.GetAssemblies(scanMode)
                 .SelectMany(assembly => assembly.ExportedTypes)
                 .Where(type => IsCandidate(type, targetType))
                 .ToArray();
