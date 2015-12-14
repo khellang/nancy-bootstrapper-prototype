@@ -3,14 +3,17 @@ using Nancy.Bootstrapper.Prototype.Cruft.Registration;
 
 namespace Nancy.Bootstrapper.Prototype.Cruft
 {
-    internal class ApplicationBuilder<TContainer> : IApplicationBuilder<TContainer>
+    public class ApplicationBuilder<TContainer> : IApplicationBuilder<TContainer>
     {
-        public ApplicationBuilder(TContainer container)
+        public ApplicationBuilder(TContainer container, ITypeCatalog typeCatalog)
         {
             Container = container;
+            TypeCatalog = typeCatalog;
         }
 
         public TContainer Container { get; }
+
+        public ITypeCatalog TypeCatalog { get; }
 
         public IContainerRegistry BuildRegistry()
         {

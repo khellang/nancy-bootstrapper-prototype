@@ -5,7 +5,7 @@ using Nancy.Bootstrapper.Prototype.Cruft.Http;
 
 namespace Nancy.Bootstrapper.Prototype.Cruft
 {
-    internal class Engine : IEngine
+    public class Engine : IEngine
     {
         public async Task<HttpResponse> HandleRequest(HttpRequest request, CancellationToken cancellationToken)
         {

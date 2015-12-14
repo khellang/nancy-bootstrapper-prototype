@@ -2,6 +2,6 @@ namespace Nancy.Bootstrapper.Prototype.Cruft
 {
     public interface IBootstrapper
     {
-        IApplication InitializeApplication();
+        IApplication InitializeApplication(ITypeCatalog typeCatalog);
     }
 }

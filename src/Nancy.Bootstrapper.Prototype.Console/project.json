@@ -6,7 +6,8 @@
     },
 
     "dependencies": {
-        "Nancy.Bootstrapper.Prototype": { "target": "project" }
+        "Nancy.Bootstrapper.Prototype": { "target": "project" },
+        "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final"
     },
 
     "commands": {

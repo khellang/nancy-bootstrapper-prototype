@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrapper.Prototype", "src\Nancy.Bootstrapper.Prototype\Nancy.Bootstrapper.Prototype.xproj", "{87C7C329-1824-4AC7-AF25-3D06068A01F6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrapper.Prototype.Console", "Nancy.Bootstrapper.Prototype.Console\Nancy.Bootstrapper.Prototype.Console.xproj", "{188AA603-0FCE-4AC1-B650-D270DF92743A}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrapper.Prototype.Console", "src\Nancy.Bootstrapper.Prototype.Console\Nancy.Bootstrapper.Prototype.Console.xproj", "{188AA603-0FCE-4AC1-B650-D270DF92743A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
