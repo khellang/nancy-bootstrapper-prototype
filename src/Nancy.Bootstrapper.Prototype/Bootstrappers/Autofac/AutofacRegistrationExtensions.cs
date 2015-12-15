@@ -65,7 +65,7 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
             }
         }
 
-        private static TypeRegistration AsTypeRegistration(this Registration.Registration registration, Type implementationType)
+        private static TypeRegistration AsTypeRegistration(this ContainerRegistration registration, Type implementationType)
         {
             return new TypeRegistration(registration.ServiceType, implementationType, registration.Lifetime);
         }

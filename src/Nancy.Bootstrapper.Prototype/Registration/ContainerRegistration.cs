@@ -2,9 +2,9 @@
 
 namespace Nancy.Bootstrapper.Prototype.Registration
 {
-    public abstract class Registration
+    public abstract class ContainerRegistration
     {
-        protected Registration(Type serviceType, Lifetime lifetime)
+        protected ContainerRegistration(Type serviceType, Lifetime lifetime)
         {
             ServiceType = serviceType;
             Lifetime = lifetime;

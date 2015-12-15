@@ -1,4 +1,5 @@
 using System;
+using Nancy.Bootstrapper.Prototype.Configuration;
 using Nancy.Bootstrapper.Prototype.Registration;
 using Nancy.Bootstrapper.Prototype.Scanning;
 
@@ -19,19 +20,21 @@ namespace Nancy.Bootstrapper.Prototype
             // This step is a noop in bootstrappers without the builder/container split.
             var builder = CreateBuilder();
 
+            var frameworkConfig = new FrameworkConfiguration();
+
             // We'll hang all configuration related stuff off this object.
             // Everything will be pre-configured with Nancy defaults.
-            var configuration = new ApplicationBuilder<TBuilder>(builder, assemblyCatalog, typeCatalog);
+            var applicationConfig = new ApplicationConfiguration<TBuilder>(builder, frameworkConfig);
 
             // This is the main configuration point for the user.
             // Here you can register stuff in the container, swap out
             // Nancy services, change configuration etc.
-            ConfigureApplication(configuration);
+            ConfigureApplication(applicationConfig);
 
             // Once the user has configured everything, we build a
             // "container registry", this contains all registrations
             // for framework services.
-            var registry = configuration.BuildRegistry();
+            var registry = frameworkConfig.GetRegistry(typeCatalog);
 
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.
@@ -53,7 +56,7 @@ namespace Nancy.Bootstrapper.Prototype
 
         protected abstract TBuilder CreateBuilder();
 
-        protected virtual void ConfigureApplication(IApplicationBuilder<TBuilder> app)
+        protected virtual void ConfigureApplication(IApplicationConfiguration<TBuilder> app)
         {
         }
 

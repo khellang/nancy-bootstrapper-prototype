@@ -2,7 +2,7 @@ using System;
 
 namespace Nancy.Bootstrapper.Prototype.Registration
 {
-    public class TypeRegistration : Registration
+    public class TypeRegistration : ContainerRegistration
     {
         public TypeRegistration(Type serviceType, Type implementationType, Lifetime lifetime)
             : base(serviceType, lifetime)
@@ -21,6 +21,11 @@ namespace Nancy.Bootstrapper.Prototype.Registration
         public static TypeRegistration Create<TService>(Type implementationType, Lifetime lifetime)
         {
             return new TypeRegistration(typeof(TService), implementationType, lifetime);
+        }
+
+        public override string ToString()
+        {
+            return $"{Lifetime} - {ServiceType.Name} -> {ImplementationType.Name}";
         }
     }
 }
