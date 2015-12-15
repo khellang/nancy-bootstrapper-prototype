@@ -5,9 +5,9 @@ using Nancy.Bootstrapper.Prototype.Scanning;
 
 namespace Nancy.Bootstrapper.Prototype.Configuration
 {
-    public class RegistrationFactory<TService, TDefaultImplementation> : IRegistrationFactory<TService>
+    public class TypeRegistrationFactory<TService, TDefaultImplementation> : ITypeRegistrationFactory<TService>
     {
-        public RegistrationFactory(Lifetime lifetime)
+        public TypeRegistrationFactory(Lifetime lifetime)
         {
             Lifetime = lifetime;
         }
@@ -28,7 +28,9 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 
         public TypeRegistration GetRegistration(ITypeCatalog typeCatalog)
         {
-            return Registration ?? ScanForCustomRegistration(typeCatalog, Lifetime) ?? GetDefaultRegistration(Lifetime);
+            return Registration
+                ?? ScanForCustomRegistration(typeCatalog, Lifetime)
+                ?? GetDefaultRegistration(Lifetime);
         }
 
         private static TypeRegistration ScanForCustomRegistration(ITypeCatalog typeCatalog, Lifetime lifetime)
@@ -38,12 +40,12 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
                 .GetTypesAssignableTo<TService>(ScanMode.ExcludeNancy)
                 .FirstOrDefault();
 
-            if (customImplementationType == null)
+            if (customImplementationType != null)
             {
-                return null;
+                return new TypeRegistration(typeof(TService), customImplementationType, lifetime);
             }
 
-            return new TypeRegistration(typeof(TService), customImplementationType, lifetime);
+            return null;
         }
 
         private static TypeRegistration GetDefaultRegistration(Lifetime lifetime)

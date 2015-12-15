@@ -12,17 +12,6 @@ namespace Nancy.Bootstrapper.Prototype.Registration
 
         public Type ImplementationType { get; }
 
-        public static TypeRegistration Create<TService, TImplementation>(Lifetime lifetime)
-            where TImplementation : TService
-        {
-            return Create<TService>(typeof(TImplementation), lifetime);
-        }
-
-        public static TypeRegistration Create<TService>(Type implementationType, Lifetime lifetime)
-        {
-            return new TypeRegistration(typeof(TService), implementationType, lifetime);
-        }
-
         public override string ToString()
         {
             return $"{Lifetime} - {ServiceType.Name} -> {ImplementationType.Name}";

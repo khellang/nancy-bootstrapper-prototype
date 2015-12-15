@@ -12,11 +12,6 @@ namespace Nancy.Bootstrapper.Prototype.Registration
 
         public object Instance { get; }
 
-        public static InstanceRegistration Create<TService>(TService instance)
-        {
-            return new InstanceRegistration(typeof(TService), instance);
-        }
-
         public override string ToString()
         {
             return $"{Lifetime} - {ServiceType.Name} -> {Instance}";

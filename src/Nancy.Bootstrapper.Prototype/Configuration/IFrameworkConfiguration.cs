@@ -5,7 +5,9 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 {
     public interface IFrameworkConfiguration
     {
-        IRegistrationFactory<IEngine> Engine { get; }
+        ITypeRegistrationFactory<IEngine> Engine { get; }
+
+        ICollectionTypeRegistrationFactory<ISerializer> Serializers { get; }
 
         IContainerRegistry GetRegistry(ITypeCatalog typeCatalog);
     }

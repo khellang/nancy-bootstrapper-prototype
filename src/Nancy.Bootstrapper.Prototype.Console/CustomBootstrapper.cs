@@ -13,6 +13,8 @@ namespace Nancy.Bootstrapper.Prototype.Console
                 .InstancePerRequest();
 
             app.Framework.Engine.Use<CustomEngine>();
+
+            app.Framework.Serializers.Use<CustomSerializer>();
         }
     }
 }
