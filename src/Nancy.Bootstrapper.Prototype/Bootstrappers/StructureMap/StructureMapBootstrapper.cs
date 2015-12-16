@@ -1,5 +1,6 @@
 ﻿using Nancy.Bootstrapper.Prototype.Registration;
 using StructureMap;
+using StructureMap.Pipeline;
 
 namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
 {
@@ -18,6 +19,16 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
         protected sealed override void ValidateContainerConfiguration(IContainer container)
         {
             container.AssertConfigurationIsValid();
+
+            // We don't want to keep the container-scoped
+            // instances around after verifying the configuration.
+            foreach (var instance in container.Model.AllInstances)
+            {
+                if (instance.Lifecycle == Lifecycles.Container)
+                {
+                    instance.EjectObject();
+                }
+            }
         }
 
         protected sealed override IApplication CreateApplication(IContainer container)

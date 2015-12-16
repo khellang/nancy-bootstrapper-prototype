@@ -31,11 +31,6 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
             ImplementationTypes.Add(implementationType);
         }
 
-        public void Clear()
-        {
-            ImplementationTypes.Clear();
-        }
-
         public CollectionTypeRegistration GetRegistration(ITypeCatalog typeCatalog)
         {
             return GetRegistration(ImplementationTypes, Lifetime)

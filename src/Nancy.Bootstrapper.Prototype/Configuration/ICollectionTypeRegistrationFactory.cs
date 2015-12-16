@@ -8,7 +8,5 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
         void Use<TImplementation>() where TImplementation : TService;
 
         void Use(Type implementationType);
-
-        void Clear();
     }
 }

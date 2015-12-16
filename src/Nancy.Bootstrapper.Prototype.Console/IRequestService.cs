@@ -1,6 +1,8 @@
+using System;
+
 namespace Nancy.Bootstrapper.Prototype.Console
 {
-    public interface IRequestService
+    public interface IRequestService : IDisposable
     {
     }
 }
