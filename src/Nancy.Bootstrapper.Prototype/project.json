@@ -3,13 +3,14 @@
 
     "dependencies": {
         "Autofac": "4.0.0-rc1-177",
-        "structuremap": "4.0.0.315",
+        "Microsoft.AspNet.Http": "1.0.0-rc1-final",
+        "Newtonsoft.Json": "8.0.1-beta3",
         "SimpleInjector.Extensions.ExecutionContextScoping": "3.1.2-alpha2",
-        "Newtonsoft.Json": "8.0.1-beta3"
+        "structuremap": "4.0.0.315"
     },
 
     "frameworks": {
-        "net45": { },
+        "net451": { },
         "dotnet5.4": {
             "dependencies": {
                 "System.Runtime": "4.0.21-beta-23516",

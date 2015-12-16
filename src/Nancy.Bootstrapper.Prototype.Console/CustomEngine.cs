@@ -1,7 +1,7 @@
-using Nancy.Bootstrapper.Prototype.Http;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Http;
 
 namespace Nancy.Bootstrapper.Prototype.Console
 {
@@ -14,14 +14,14 @@ namespace Nancy.Bootstrapper.Prototype.Console
 
         private IRequestService RequestService { get; }
 
-        public Task<HttpResponse> HandleRequest(HttpRequest request, CancellationToken cancellationToken)
+        public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
             if (RequestService == null)
             {
                 throw new InvalidOperationException("RequestService should've been injected!");
             }
 
-            return Task.FromResult(new HttpResponse());
+            return Task.FromResult(0);
         }
     }
 }

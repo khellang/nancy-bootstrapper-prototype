@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Nancy.Bootstrapper.Prototype.Http;
+using Microsoft.AspNet.Http;
 
 namespace Nancy.Bootstrapper.Prototype
 {
@@ -16,13 +16,13 @@ namespace Nancy.Bootstrapper.Prototype
 
         private TContainer Container { get; }
 
-        public async Task<HttpResponse> HandleRequest(HttpRequest request, CancellationToken cancellationToken)
+        public async Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
             using (var scope = BeginRequestScope(Container))
             {
                 var engine = ComposeEngine(Container, scope);
 
-                return await engine.HandleRequest(request, cancellationToken).ConfigureAwait(false);
+                await engine.HandleRequest(context, cancellationToken).ConfigureAwait(false);
             }
         }
 

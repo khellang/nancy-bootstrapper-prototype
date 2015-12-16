@@ -1,6 +1,7 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Http.Internal;
 using Microsoft.Extensions.PlatformAbstractions;
-using Nancy.Bootstrapper.Prototype.Http;
 using Nancy.Bootstrapper.Prototype.Scanning;
 
 namespace Nancy.Bootstrapper.Prototype.Console
@@ -8,6 +9,11 @@ namespace Nancy.Bootstrapper.Prototype.Console
     public class Program
     {
         public static void Main(string[] args)
+        {
+            MainAsync(args).GetAwaiter().GetResult();
+        }
+
+        private static async Task MainAsync(string[] args)
         {
             var libraryManager = PlatformServices.Default.LibraryManager;
 
@@ -21,9 +27,9 @@ namespace Nancy.Bootstrapper.Prototype.Console
 
             using (var application = bootstrapper.InitializeApplication(assemblyCatalog, typeCatalog))
             {
-                var request = new HttpRequest();
+                var context = new DefaultHttpContext();
 
-                var response = application.HandleRequest(request, CancellationToken.None);
+                await application.HandleRequest(context, CancellationToken.None);
             }
         }
     }
