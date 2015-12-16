@@ -1,16 +1,18 @@
-using Autofac;
-using Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac;
+using Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap;
 using Nancy.Bootstrapper.Prototype.Configuration;
+using StructureMap.Pipeline;
+using StructureMap;
 
 namespace Nancy.Bootstrapper.Prototype.Console
 {
-    public class CustomBootstrapper : AutofacBootstrapper
+    public class CustomBootstrapper : StructureMapBootstrapper
     {
-        protected override void ConfigureApplication(IApplicationConfiguration<ContainerBuilder> app)
+        protected override void ConfigureApplication(IApplicationConfiguration<IContainer> app)
         {
-            app.Container.RegisterType<RequestService>()
-                .As<IRequestService>()
-                .InstancePerRequest();
+            app.Container.Configure(c =>
+                c.For<IRequestService>()
+                    .Use<RequestService>()
+                    .LifecycleIs<ContainerLifecycle>());
 
             app.Framework.Engine.Use<CustomEngine>();
 
