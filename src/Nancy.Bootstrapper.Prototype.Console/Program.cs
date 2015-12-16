@@ -25,7 +25,7 @@ namespace Nancy.Bootstrapper.Prototype.Console
 
             var bootstrapper = bootstrapperLocator.GetBootstrapper();
 
-            using (var application = bootstrapper.InitializeApplication(assemblyCatalog, typeCatalog))
+            using (var application = bootstrapper.InitializeApplication(typeCatalog))
             {
                 var context = new DefaultHttpContext();
 

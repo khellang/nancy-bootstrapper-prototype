@@ -14,7 +14,7 @@ namespace Nancy.Bootstrapper.Prototype
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper
         where TContainer : IDisposable
     {
-        public IApplication InitializeApplication(IAssemblyCatalog assemblyCatalog, ITypeCatalog typeCatalog)
+        public IApplication InitializeApplication(ITypeCatalog typeCatalog)
         {
             // First, we need a container builder.
             // This step is a noop in bootstrappers without the builder/container split.
