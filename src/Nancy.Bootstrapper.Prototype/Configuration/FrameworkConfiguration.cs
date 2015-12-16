@@ -8,14 +8,14 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
     {
         public FrameworkConfiguration()
         {
-            TypeRegistrationFactories = new List<IRegistrationFactory<TypeRegistration>>
+            TypeRegistrationFactories = new IRegistrationFactory<TypeRegistration>[]
             {
-                (Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.Scoped))
+                Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.Scoped)
             };
 
-            CollectionTypeRegistrationFactories = new List<IRegistrationFactory<CollectionTypeRegistration>>
+            CollectionTypeRegistrationFactories = new IRegistrationFactory<CollectionTypeRegistration>[]
             {
-                (Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, typeof(JsonNetSerializer)))
+                Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, typeof(JsonNetSerializer))
             };
         }
 

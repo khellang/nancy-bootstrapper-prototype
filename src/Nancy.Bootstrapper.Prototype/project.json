@@ -5,6 +5,7 @@
         "Autofac": "4.0.0-rc1-177",
         "Microsoft.AspNet.Http": "1.0.0-rc1-final",
         "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+        "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
         "Newtonsoft.Json": "8.0.1-beta3",
         "SimpleInjector.Extensions.ExecutionContextScoping": "3.1.2-alpha2",
         "structuremap": "4.0.0.315"

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.PlatformAbstractions;
-using Nancy.Bootstrapper.Prototype.Scanning;
 
-namespace Nancy.Bootstrapper.Prototype.Console
+namespace Nancy.Bootstrapper.Prototype.Scanning
 {
     public class LibraryManagerAssemblyCatalog : IAssemblyCatalog
     {

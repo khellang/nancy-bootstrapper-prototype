@@ -11,7 +11,7 @@ namespace Nancy.Bootstrapper.Prototype
     /// This is responsible for creating and configuring the
     /// application container and the framework as a whole.
     /// </summary>
-    public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper
+    public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
         where TContainer : IDisposable
     {
         public IApplication InitializeApplication(ITypeCatalog typeCatalog)
@@ -20,6 +20,17 @@ namespace Nancy.Bootstrapper.Prototype
             // This step is a noop in bootstrappers without the builder/container split.
             var builder = CreateBuilder();
 
+            Populate(builder, typeCatalog);
+
+            // Once everything is registered, it's time to build the container.
+            // This step is a noop in bootstrappers without the builder/container split.
+            var container = BuildContainer(builder);
+
+            return InitializeApplication(container);
+        }
+
+        public void Populate(TBuilder builder, ITypeCatalog typeCatalog)
+        {
             var frameworkConfig = new FrameworkConfiguration();
 
             // We'll hang all configuration related stuff off this object.
@@ -39,11 +50,10 @@ namespace Nancy.Bootstrapper.Prototype
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.
             Register(builder, registry);
+        }
 
-            // Once everything is registered, it's time to build the container.
-            // This step is a noop in bootstrappers without the builder/container split.
-            var container = BuildContainer(builder);
-
+        public IApplication InitializeApplication(TContainer container)
+        {
             // When the container is built, we offer the bootstrapper
             // implementation a chance to validate the container configuration
             // This could prevent obvious configuration errors.

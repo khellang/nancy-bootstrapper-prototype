@@ -1,9 +1,9 @@
-﻿namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
-{
-    using System;
-    using Microsoft.Extensions.DependencyInjection;
-    using Registration;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
+using Nancy.Bootstrapper.Prototype.Registration;
 
+namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
+{
     public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IServiceScope>
     {
         protected sealed override IServiceCollection CreateBuilder()
