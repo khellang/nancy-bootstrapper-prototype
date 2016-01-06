@@ -28,7 +28,7 @@ namespace Nancy.Bootstrapper.Prototype.Console
             await ExistingBootstrapper(typeCatalog);
         }
 
-        private static async Task LocatedBootstrapper(TypeCatalog typeCatalog)
+        private static async Task LocatedBootstrapper(ITypeCatalog typeCatalog)
         {
             var bootstrapperLocator = new BootstrapperLocator(typeCatalog);
 
@@ -42,19 +42,19 @@ namespace Nancy.Bootstrapper.Prototype.Console
             }
         }
 
-        private static async Task ExistingBootstrapper(TypeCatalog typeCatalog)
+        private static async Task ExistingBootstrapper(ITypeCatalog typeCatalog)
         {
-            var bpotstrapper = new CustomBootstrapper();
+            var bootstrapper = new CustomBootstrapper();
 
             var builder = new ContainerBuilder();
 
             // Register stuff in the container...
 
-            bpotstrapper.Populate(builder, typeCatalog);
+            bootstrapper.Populate(builder, typeCatalog);
 
             var container = builder.Build();
 
-            using (var application = bpotstrapper.InitializeApplication(container))
+            using (var application = bootstrapper.InitializeApplication(container))
             {
                 var context = new DefaultHttpContext();
 
