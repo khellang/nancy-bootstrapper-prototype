@@ -15,12 +15,12 @@ namespace Nancy.Bootstrapper.Prototype.Scanning
 
         public static IEnumerable<Type> GetTypesAssignableTo(this ITypeCatalog typeCatalog, Type type)
         {
-            return typeCatalog.GetTypesAssignableTo(type, ScanMode.All);
+            return typeCatalog.GetTypesAssignableTo(type, ScanningStrategies.All);
         }
 
-        public static IEnumerable<Type> GetTypesAssignableTo<T>(this ITypeCatalog typeCatalog, ScanMode scanMode)
+        public static IEnumerable<Type> GetTypesAssignableTo<T>(this ITypeCatalog typeCatalog, ScanningStrategy strategy)
         {
-            return typeCatalog.GetTypesAssignableTo(typeof(T), scanMode);
+            return typeCatalog.GetTypesAssignableTo(typeof(T), strategy);
         }
 
         public static IReadOnlyCollection<TRegistration> GetRegistrations<TRegistration>(this ITypeCatalog typeCatalog,

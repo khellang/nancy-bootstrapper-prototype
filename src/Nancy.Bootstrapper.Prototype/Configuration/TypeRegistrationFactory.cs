@@ -37,7 +37,7 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
         {
             // TODO: Throw on multiple results?
             var customImplementationType = typeCatalog
-                .GetTypesAssignableTo<TService>(ScanMode.ExcludeNancy)
+                .GetTypesAssignableTo<TService>(ScanningStrategies.ExcludeNancy)
                 .FirstOrDefault();
 
             if (customImplementationType != null)

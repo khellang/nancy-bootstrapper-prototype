@@ -51,7 +51,7 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
         private static CollectionTypeRegistration ScanForCustomImplementations(ITypeCatalog typeCatalog, Lifetime lifetime)
         {
             var customImplementationTypes = typeCatalog
-                .GetTypesAssignableTo<TService>(ScanMode.ExcludeNancy)
+                .GetTypesAssignableTo<TService>(ScanningStrategies.ExcludeNancy)
                 .ToArray();
 
             if (customImplementationTypes.Any())
