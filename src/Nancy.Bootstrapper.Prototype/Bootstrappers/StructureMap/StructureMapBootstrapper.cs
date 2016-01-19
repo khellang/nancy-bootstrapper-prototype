@@ -11,9 +11,9 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
             return new Container();
         }
 
-        protected sealed override void Register(IContainer builder, IContainerRegistry registry)
+        protected sealed override void Register(IContainer container, IContainerRegistry registry)
         {
-            builder.Configure(config => config.AddRegistry(registry));
+            container.Configure(config => config.AddRegistry(registry));
         }
 
         protected sealed override void ValidateContainerConfiguration(IContainer container)
