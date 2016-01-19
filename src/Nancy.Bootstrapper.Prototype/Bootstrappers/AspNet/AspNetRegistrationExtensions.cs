@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Nancy.Bootstrapper.Prototype.Registration;
 
@@ -10,56 +9,59 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
     {
         public static void AddRegistry(this IServiceCollection services, IContainerRegistry registry)
         {
-            services.AddTypes(registry.TypeRegistrations)
-                .AddCollectionTypes(registry.CollectionTypeRegistrations)
-                .AddInstances(registry.InstanceRegistrations);
+            services.AddTypes(registry.TypeRegistrations);
+            services.AddCollectionTypes(registry.CollectionTypeRegistrations);
+            services.AddInstances(registry.InstanceRegistrations);
         }
 
-        private static IServiceCollection AddTypes(this IServiceCollection services, IEnumerable<TypeRegistration> registrations)
+        private static void AddTypes(this IServiceCollection services, IEnumerable<TypeRegistration> registrations)
         {
-            return registrations.Aggregate(services, Add);
+            foreach (var registration in registrations)
+            {
+                services.Add(registration);
+            }
         }
 
-        private static IServiceCollection AddCollectionTypes(this IServiceCollection services, IEnumerable<CollectionTypeRegistration> registrations)
+        private static void AddCollectionTypes(this IServiceCollection services, IEnumerable<CollectionTypeRegistration> registrations)
         {
-            return registrations.Aggregate(services, Add);
+            foreach (var collectionTypeRegistration in registrations)
+            {
+                foreach (var implementationType in collectionTypeRegistration.ImplementationTypes)
+                {
+                    var registration = new TypeRegistration(
+                        collectionTypeRegistration.ServiceType,
+                        implementationType,
+                        collectionTypeRegistration.Lifetime);
+
+                    services.Add(registration);
+                }
+            }
         }
 
-        private static IServiceCollection AddInstances(this IServiceCollection services, IEnumerable<InstanceRegistration> registrations)
+        private static void AddInstances(this IServiceCollection services, IEnumerable<InstanceRegistration> registrations)
         {
-            return registrations.Aggregate(services, Add);
+            foreach (var registration in registrations)
+            {
+                services.AddInstance(registration.ServiceType, registration.Instance);
+            }
         }
 
-        private static IServiceCollection Add(this IServiceCollection services, TypeRegistration registration)
+        private static void Add(this IServiceCollection services, TypeRegistration registration)
         {
             switch (registration.Lifetime)
             {
                 case Lifetime.Singleton:
-                    return services.AddSingleton(registration.ServiceType, registration.ImplementationType);
+                    services.AddSingleton(registration.ServiceType, registration.ImplementationType);
+                    break;
                 case Lifetime.Scoped:
-                    return services.AddScoped(registration.ServiceType, registration.ImplementationType);
+                    services.AddScoped(registration.ServiceType, registration.ImplementationType);
+                    break;
                 case Lifetime.Transient:
-                    return services.AddTransient(registration.ServiceType, registration.ImplementationType);
+                    services.AddTransient(registration.ServiceType, registration.ImplementationType);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(registration.Lifetime), "Invalid lifetime.");
             }
-        }
-
-        private static IServiceCollection Add(this IServiceCollection services, CollectionTypeRegistration registration)
-        {
-            return registration.ImplementationTypes
-                .Aggregate(services, (serviceCollection, implementationType) =>
-                    serviceCollection.Add(CreateRegistration(registration, implementationType)));
-        }
-
-        private static IServiceCollection Add(this IServiceCollection services, InstanceRegistration registration)
-        {
-            return services.AddInstance(registration.ServiceType, registration.Instance);
-        }
-
-        private static TypeRegistration CreateRegistration(ContainerRegistration registration, Type implementationType)
-        {
-            return new TypeRegistration(registration.ServiceType, implementationType, registration.Lifetime);
         }
     }
 }

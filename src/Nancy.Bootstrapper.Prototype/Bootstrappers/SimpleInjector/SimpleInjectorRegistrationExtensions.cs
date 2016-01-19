@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Nancy.Bootstrapper.Prototype.Registration;
 using SimpleInjector;
 
@@ -10,62 +9,64 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
     {
         public static void Register(this Container container, IContainerRegistry registry)
         {
-            container.RegisterTypes(registry.TypeRegistrations)
-                .RegisterCollectionTypes(registry.CollectionTypeRegistrations)
-                .RegisterInstances(registry.InstanceRegistrations);
+            container.RegisterTypes(registry.TypeRegistrations);
+            container.RegisterCollectionTypes(registry.CollectionTypeRegistrations);
+            container.RegisterInstances(registry.InstanceRegistrations);
         }
 
-        private static Container RegisterTypes(this Container container, IEnumerable<TypeRegistration> registrations)
+        private static void RegisterTypes(this Container container, IEnumerable<TypeRegistration> registrations)
         {
-            return registrations.Aggregate(container, Register);
+            foreach (var registration in registrations)
+            {
+                container.Register(registration.ServiceType, registration.ImplementationType, registration.Lifetime.AsLifestyle());
+            }
         }
 
-        private static Container RegisterCollectionTypes(this Container container, IEnumerable<CollectionTypeRegistration> registrations)
+        private static void RegisterCollectionTypes(this Container container, IEnumerable<CollectionTypeRegistration> registrations)
         {
-            return registrations.Aggregate(container, Register);
+            foreach (var collectionTypeRegistration in registrations)
+            {
+                var capacity = collectionTypeRegistration.ImplementationTypes.Count;
+
+                var convertedRegistrations = new List<global::SimpleInjector.Registration>(capacity);
+
+                var lifestyle = collectionTypeRegistration.Lifetime.AsLifestyle();
+
+                foreach (var implementationType in collectionTypeRegistration.ImplementationTypes)
+                {
+                    var converted = lifestyle.CreateRegistration(
+                        collectionTypeRegistration.ServiceType,
+                        implementationType,
+                        container);
+
+                    convertedRegistrations.Add(converted);
+                }
+
+                container.RegisterCollection(collectionTypeRegistration.ServiceType, convertedRegistrations);
+            }
         }
 
-        private static Container RegisterInstances(this Container container, IEnumerable<InstanceRegistration> registrations)
+        private static void RegisterInstances(this Container container, IEnumerable<InstanceRegistration> registrations)
         {
-            return registrations.Aggregate(container, Register);
-        }
-
-        private static Container Register(this Container container, TypeRegistration registration)
-        {
-            container.Register(registration.ServiceType, registration.ImplementationType, registration.Lifetime.AsLifestyle());
-            return container;
-        }
-
-        private static Container Register(this Container container, CollectionTypeRegistration registration)
-        {
-            var registrations = registration.ImplementationTypes
-                .Select(implementationType => container.CreateRegistration(implementationType, registration.Lifetime));
-
-            container.RegisterCollection(registration.ServiceType, registrations);
-
-            return container;
-        }
-
-        private static Container Register(this Container container, InstanceRegistration registration)
-        {
-            container.RegisterSingleton(registration.ServiceType, registration.Instance);
-            return container;
+            foreach (var registration in registrations)
+            {
+                container.RegisterSingleton(registration.ServiceType, registration.Instance);
+            }
         }
 
         private static Lifestyle AsLifestyle(this Lifetime lifetime)
         {
             switch (lifetime)
             {
-                case Lifetime.Singleton: return Lifestyle.Singleton;
-                case Lifetime.Scoped: return Lifestyle.Scoped;
-                case Lifetime.Transient: return Lifestyle.Transient;
-                default: throw new ArgumentOutOfRangeException(nameof(lifetime), lifetime, "Invalid lifetime.");
+                case Lifetime.Singleton:
+                    return Lifestyle.Singleton;
+                case Lifetime.Scoped:
+                    return Lifestyle.Scoped;
+                case Lifetime.Transient:
+                    return Lifestyle.Transient;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(lifetime), lifetime, "Invalid lifetime.");
             }
-        }
-
-        private static global::SimpleInjector.Registration CreateRegistration(this Container container, Type implementationType, Lifetime lifetime)
-        {
-            return lifetime.AsLifestyle().CreateRegistration(implementationType, container);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Nancy.Bootstrapper.Prototype.Registration;
 using StructureMap;
 using StructureMap.Pipeline;
@@ -9,60 +8,68 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
 {
     internal static class StructureMapRegistrationExtensions
     {
-        public static void AddRegistry(this ConfigurationExpression config, IContainerRegistry registry)
+        public static void AddRegistry(this IProfileRegistry profileRegistry, IContainerRegistry registry)
         {
-            config.RegisterTypes(registry.TypeRegistrations)
-                .RegisterCollectionTypes(registry.CollectionTypeRegistrations)
-                .RegisterInstances(registry.InstanceRegistrations);
+            profileRegistry.RegisterTypes(registry.TypeRegistrations);
+            profileRegistry.RegisterCollectionTypes(registry.CollectionTypeRegistrations);
+            profileRegistry.RegisterInstances(registry.InstanceRegistrations);
         }
 
-        private static ConfigurationExpression RegisterTypes(this ConfigurationExpression config, IEnumerable<TypeRegistration> registrations)
+        private static void RegisterTypes(this IProfileRegistry registry, IEnumerable<TypeRegistration> registrations)
         {
-            return registrations.Aggregate(config, Register);
-        }
-
-        private static ConfigurationExpression RegisterCollectionTypes(this ConfigurationExpression config, IEnumerable<CollectionTypeRegistration> registrations)
-        {
-            return registrations.SelectMany(registration =>
-                registration.ImplementationTypes
-                    .Select(registration.AsTypeRegistration))
-                .Aggregate(config, Register);
-        }
-
-        private static ConfigurationExpression RegisterInstances(this ConfigurationExpression config, IEnumerable<InstanceRegistration> registrations)
-        {
-            return registrations.Aggregate(config, Register);
-        }
-
-        private static ConfigurationExpression Register(this ConfigurationExpression config, TypeRegistration registration)
-        {
-            config.For(registration.ServiceType)
-                .Use(registration.ImplementationType)
-                .LifecycleIs(registration.Lifetime);
-
-            return config;
-        }
-
-        private static ConfigurationExpression Register(this ConfigurationExpression config, InstanceRegistration registration)
-        {
-            config.For(registration.ServiceType).Use(registration.Instance);
-            return config;
-        }
-
-        private static ConfiguredInstance LifecycleIs(this ConfiguredInstance config, Lifetime lifetime)
-        {
-            switch (lifetime)
+            foreach (var registration in registrations)
             {
-                case Lifetime.Singleton: return config.LifecycleIs<SingletonLifecycle>();
-                case Lifetime.Scoped: return config.LifecycleIs<ContainerLifecycle>();
-                case Lifetime.Transient: return config.LifecycleIs<UniquePerRequestLifecycle>();
-                default: throw new ArgumentOutOfRangeException(nameof(lifetime), lifetime, "Invalid lifetime.");
+                registry.Register(registration);
             }
         }
 
-        private static TypeRegistration AsTypeRegistration(this ContainerRegistration registration, Type implementationType)
+        private static void RegisterCollectionTypes(this IProfileRegistry registry, IEnumerable<CollectionTypeRegistration> registrations)
         {
-            return new TypeRegistration(registration.ServiceType, implementationType, registration.Lifetime);
+            foreach (var collectionRegistration in registrations)
+            {
+                foreach (var implementationType in collectionRegistration.ImplementationTypes)
+                {
+                    var registration = new TypeRegistration(
+                        collectionRegistration.ServiceType,
+                        implementationType,
+                        collectionRegistration.Lifetime);
+
+                    registry.Register(registration);
+                }
+            }
+        }
+
+        private static void Register(this IProfileRegistry registry, TypeRegistration registration)
+        {
+            registry.For(registration.ServiceType)
+                .Use(registration.ImplementationType)
+                .LifecycleIs(registration.Lifetime);
+        }
+
+        private static void RegisterInstances(this IProfileRegistry registry, IEnumerable<InstanceRegistration> registrations)
+        {
+            foreach (var registration in registrations)
+            {
+                registry.For(registration.ServiceType).Use(registration.Instance);
+            }
+        }
+
+        private static void LifecycleIs(this ConfiguredInstance instance, Lifetime lifetime)
+        {
+            switch (lifetime)
+            {
+                case Lifetime.Singleton:
+                    instance.LifecycleIs<SingletonLifecycle>();
+                    break;
+                case Lifetime.Scoped:
+                    instance.LifecycleIs<ContainerLifecycle>();
+                    break;
+                case Lifetime.Transient:
+                    instance.LifecycleIs<UniquePerRequestLifecycle>();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(lifetime), lifetime, "Invalid lifetime.");
+            }
         }
     }
 }
