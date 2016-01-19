@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Nancy.Bootstrapper.Prototype.Registration;
 using Nancy.Bootstrapper.Prototype.Scanning;
 
@@ -40,7 +39,7 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 
         private static CollectionTypeRegistration GetRegistration(IReadOnlyCollection<Type> implementationTypes, Lifetime lifetime)
         {
-            if (implementationTypes.Any())
+            if (implementationTypes.Count > 0)
             {
                 return new CollectionTypeRegistration(typeof(TService), implementationTypes, lifetime);
             }
@@ -51,10 +50,9 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
         private static CollectionTypeRegistration ScanForCustomImplementations(ITypeCatalog typeCatalog, Lifetime lifetime)
         {
             var customImplementationTypes = typeCatalog
-                .GetTypesAssignableTo<TService>(ScanningStrategies.ExcludeNancy)
-                .ToArray();
+                .GetTypesAssignableTo<TService>(ScanningStrategies.ExcludeNancy);
 
-            if (customImplementationTypes.Length > 0)
+            if (customImplementationTypes.Count > 0)
             {
                 return new CollectionTypeRegistration(typeof(TService), customImplementationTypes, lifetime);
             }
