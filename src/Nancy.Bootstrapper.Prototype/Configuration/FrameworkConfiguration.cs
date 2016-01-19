@@ -11,14 +11,14 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 
         public FrameworkConfiguration()
         {
-            TypeRegistrationFactories = new IRegistrationFactory<TypeRegistration>[]
+            TypeRegistrationFactories = new List<IRegistrationFactory<TypeRegistration>>
             {
-                Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.Scoped)
+                (Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.Scoped))
             };
 
-            CollectionTypeRegistrationFactories = new IRegistrationFactory<CollectionTypeRegistration>[]
+            CollectionTypeRegistrationFactories = new List<IRegistrationFactory<CollectionTypeRegistration>>
             {
-                Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, DefaultSerializerTypes)
+                (Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, DefaultSerializerTypes))
             };
         }
 
@@ -26,9 +26,9 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 
         public ICollectionTypeRegistrationFactory<ISerializer> Serializers { get; }
 
-        private IList<IRegistrationFactory<TypeRegistration>> TypeRegistrationFactories { get; }
+        private List<IRegistrationFactory<TypeRegistration>> TypeRegistrationFactories { get; }
 
-        private IList<IRegistrationFactory<CollectionTypeRegistration>> CollectionTypeRegistrationFactories { get; }
+        private List<IRegistrationFactory<CollectionTypeRegistration>> CollectionTypeRegistrationFactories { get; }
 
         public IContainerRegistry GetRegistry(ITypeCatalog typeCatalog)
         {

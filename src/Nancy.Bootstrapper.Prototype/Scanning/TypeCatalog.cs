@@ -27,17 +27,10 @@ namespace Nancy.Bootstrapper.Prototype.Scanning
                 {
                     var exportedTypeInfo = exportedType.GetTypeInfo();
 
-                    if (exportedTypeInfo.IsAbstract)
+                    if (!exportedTypeInfo.IsAbstract && targetTypeInfo.IsAssignableFrom(exportedTypeInfo))
                     {
-                        continue;
+                        result.Add(exportedType);
                     }
-
-                    if (!targetTypeInfo.IsAssignableFrom(exportedTypeInfo))
-                    {
-                        continue;
-                    }
-
-                    result.Add(exportedType);
                 }
             }
 
