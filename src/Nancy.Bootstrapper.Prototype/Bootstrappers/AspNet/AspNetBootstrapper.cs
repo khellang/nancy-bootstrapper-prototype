@@ -1,50 +1,47 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Nancy.Bootstrapper.Prototype.Registration;
 
 namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
 {
-    public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IServiceScope>
+    public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IServiceProvider>
     {
         protected sealed override IServiceCollection CreateBuilder()
         {
             return new ServiceCollection();
         }
 
-        protected sealed override void Register(IServiceCollection builder, IContainerRegistry registry)
+        protected sealed override void Register(IServiceCollection services, IContainerRegistry registry)
         {
-            builder.AddRegistry(registry);
+            services.AddRegistry(registry);
         }
 
-        protected sealed override IServiceScope BuildContainer(IServiceCollection builder)
+        protected sealed override IServiceProvider BuildContainer(IServiceCollection services)
         {
-            return CreateScope(builder.BuildServiceProvider());
+            return new DisposableServiceProvider(services.BuildServiceProvider());
         }
 
-        protected sealed override IApplication CreateApplication(IServiceScope container)
+        protected sealed override IApplication CreateApplication(IServiceProvider provider)
         {
-            return new AspNetApplication(container);
+            return new AspNetApplication(provider);
         }
 
-        private static IServiceScope CreateScope(IServiceProvider container)
+        private sealed class AspNetApplication : Application<IServiceProvider, IServiceScope>
         {
-            return container.GetRequiredService<IServiceScopeFactory>().CreateScope();
-        }
-
-        private sealed class AspNetApplication : Application<IServiceScope>
-        {
-            public AspNetApplication(IServiceScope container) : base(container)
+            public AspNetApplication(IServiceProvider provider) : base(provider)
             {
+                ScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
             }
 
-            protected override IServiceScope BeginRequestScope(IServiceScope container)
+            private IServiceScopeFactory ScopeFactory { get; }
+
+            protected override IServiceScope BeginRequestScope(IServiceProvider provider)
             {
-                return CreateScope(container.ServiceProvider);
+                return ScopeFactory.CreateScope();
             }
 
-            protected override IEngine ComposeEngine(IServiceScope container)
+            protected override IEngine ComposeEngine(IServiceProvider provider, IServiceScope scope)
             {
-                return container.ServiceProvider.GetRequiredService<IEngine>();
+                return scope.ServiceProvider.GetRequiredService<IEngine>();
             }
         }
     }
