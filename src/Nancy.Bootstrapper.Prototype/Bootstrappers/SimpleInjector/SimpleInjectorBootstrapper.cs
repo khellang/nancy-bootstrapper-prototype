@@ -6,17 +6,20 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
 {
     public class SimpleInjectorBootstrapper : Bootstrapper<Container>
     {
+        private static readonly ExecutionContextScopeLifestyle DefaultLifestyle = new ExecutionContextScopeLifestyle();
+
         protected sealed override Container CreateContainer()
         {
-            return new Container
-            {
-                Options = { DefaultScopedLifestyle = new ExecutionContextScopeLifestyle() }
-            };
+            var container = new Container();
+
+            container.Options.DefaultScopedLifestyle = DefaultLifestyle;
+
+            return container;
         }
 
-        protected sealed override void Register(Container builder, IContainerRegistry registry)
+        protected sealed override void Register(Container container, IContainerRegistry registry)
         {
-            builder.Register(registry);
+            container.Register(registry);
         }
 
         protected sealed override void ValidateContainerConfiguration(Container container)
