@@ -21,25 +21,25 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
             return builder.Build();
         }
 
-        protected sealed override IApplication CreateApplication(ILifetimeScope container)
+        protected sealed override IApplication CreateApplication(ILifetimeScope lifetimeScope)
         {
-            return new AutofacApplication(container);
+            return new AutofacApplication(lifetimeScope);
         }
 
         private sealed class AutofacApplication : Application<ILifetimeScope>
         {
-            public AutofacApplication(ILifetimeScope container) : base(container)
+            public AutofacApplication(ILifetimeScope lifetimeScope) : base(lifetimeScope)
             {
             }
 
-            protected override ILifetimeScope BeginRequestScope(ILifetimeScope container)
+            protected override ILifetimeScope BeginRequestScope(ILifetimeScope lifetimeScope)
             {
-                return container.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
+                return lifetimeScope.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
             }
 
-            protected override IEngine ComposeEngine(ILifetimeScope scope)
+            protected override IEngine ComposeEngine(ILifetimeScope lifetimeScope)
             {
-                return scope.Resolve<IEngine>();
+                return lifetimeScope.Resolve<IEngine>();
             }
         }
     }
