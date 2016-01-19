@@ -48,13 +48,18 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
         private static IServiceCollection Add(this IServiceCollection services, CollectionTypeRegistration registration)
         {
             return registration.ImplementationTypes
-                .Aggregate(services, (s, i) =>
-                    services.Add(new TypeRegistration(registration.ServiceType, i, registration.Lifetime)));
+                .Aggregate(services, (serviceCollection, implementationType) =>
+                    serviceCollection.Add(CreateRegistration(registration, implementationType)));
         }
 
         private static IServiceCollection Add(this IServiceCollection services, InstanceRegistration registration)
         {
             return services.AddInstance(registration.ServiceType, registration.Instance);
+        }
+
+        private static TypeRegistration CreateRegistration(ContainerRegistration registration, Type implementationType)
+        {
+            return new TypeRegistration(registration.ServiceType, implementationType, registration.Lifetime);
         }
     }
 }

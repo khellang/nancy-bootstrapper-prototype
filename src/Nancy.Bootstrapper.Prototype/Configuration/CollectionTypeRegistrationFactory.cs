@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Nancy.Bootstrapper.Prototype.Registration;
@@ -36,6 +37,16 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
             return GetRegistration(ImplementationTypes, Lifetime)
                 ?? ScanForCustomImplementations(typeCatalog, Lifetime)
                 ?? GetDefaultRegistration(DefaultImplementationTypes, Lifetime);
+        }
+
+        public IEnumerator<Type> GetEnumerator()
+        {
+            return ImplementationTypes.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         private static CollectionTypeRegistration GetRegistration(IReadOnlyCollection<Type> implementationTypes, Lifetime lifetime)

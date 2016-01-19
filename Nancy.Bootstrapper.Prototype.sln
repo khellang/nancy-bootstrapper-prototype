@@ -7,6 +7,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrapper.Prototyp
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrapper.Prototype.Console", "src\Nancy.Bootstrapper.Prototype.Console\Nancy.Bootstrapper.Prototype.Console.xproj", "{188AA603-0FCE-4AC1-B650-D270DF92743A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7ED0C780-05ED-4EFF-9BB2-98E6497979EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87C7C329-1824-4AC7-AF25-3D06068A01F6} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
+		{188AA603-0FCE-4AC1-B650-D270DF92743A} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
 	EndGlobalSection
 EndGlobal
