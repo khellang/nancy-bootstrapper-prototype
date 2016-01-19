@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Nancy.Bootstrapper.Prototype.Registration;
 using Nancy.Bootstrapper.Prototype.Scanning;
@@ -6,6 +7,8 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 {
     public class FrameworkConfiguration : IFrameworkConfiguration
     {
+        private static readonly Type[] DefaultSerializerTypes = { typeof(JsonNetSerializer) };
+
         public FrameworkConfiguration()
         {
             TypeRegistrationFactories = new IRegistrationFactory<TypeRegistration>[]
@@ -15,7 +18,7 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 
             CollectionTypeRegistrationFactories = new IRegistrationFactory<CollectionTypeRegistration>[]
             {
-                Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, typeof(JsonNetSerializer))
+                Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, DefaultSerializerTypes)
             };
         }
 

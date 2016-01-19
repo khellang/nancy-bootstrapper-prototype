@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Nancy.Bootstrapper.Prototype.Registration;
@@ -9,7 +8,7 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
 {
     public class CollectionTypeRegistrationFactory<TService> : ICollectionTypeRegistrationFactory<TService>
     {
-        public CollectionTypeRegistrationFactory(Lifetime lifetime, params Type[] defaultImplementationTypes)
+        public CollectionTypeRegistrationFactory(Lifetime lifetime, IReadOnlyCollection<Type> defaultImplementationTypes)
         {
             Lifetime = lifetime;
             DefaultImplementationTypes = defaultImplementationTypes;
@@ -39,16 +38,6 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
                 ?? GetDefaultRegistration(DefaultImplementationTypes, Lifetime);
         }
 
-        public IEnumerator<Type> GetEnumerator()
-        {
-            return ImplementationTypes.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         private static CollectionTypeRegistration GetRegistration(IReadOnlyCollection<Type> implementationTypes, Lifetime lifetime)
         {
             if (implementationTypes.Any())
@@ -65,7 +54,7 @@ namespace Nancy.Bootstrapper.Prototype.Configuration
                 .GetTypesAssignableTo<TService>(ScanningStrategies.ExcludeNancy)
                 .ToArray();
 
-            if (customImplementationTypes.Any())
+            if (customImplementationTypes.Length > 0)
             {
                 return new CollectionTypeRegistration(typeof(TService), customImplementationTypes, lifetime);
             }
