@@ -4,7 +4,6 @@ using Autofac;
 using Microsoft.AspNet.Http.Internal;
 using Microsoft.Extensions.PlatformAbstractions;
 using Nancy.Bootstrapper.Prototype.Scanning;
-using Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac;
 
 namespace Nancy.Bootstrapper.Prototype.Console
 {
