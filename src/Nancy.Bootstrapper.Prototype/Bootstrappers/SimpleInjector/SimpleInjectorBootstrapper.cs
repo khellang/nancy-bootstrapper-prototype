@@ -1,3 +1,4 @@
+#if NET451
 using Nancy.Bootstrapper.Prototype.Registration;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
@@ -50,3 +51,4 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
         }
     }
 }
+#endif

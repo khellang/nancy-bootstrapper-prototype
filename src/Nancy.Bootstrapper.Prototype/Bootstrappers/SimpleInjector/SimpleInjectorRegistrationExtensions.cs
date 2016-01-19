@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET451
+using System;
 using System.Collections.Generic;
 using Nancy.Bootstrapper.Prototype.Registration;
 using SimpleInjector;
@@ -70,3 +71,4 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
         }
     }
 }
+#endif

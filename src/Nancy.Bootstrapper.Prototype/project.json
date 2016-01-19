@@ -7,11 +7,20 @@
         "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
         "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
         "Newtonsoft.Json": "8.0.1-beta3",
-        "SimpleInjector.Extensions.ExecutionContextScoping": "3.1.2",
         "structuremap": "4.0.0.315"
     },
 
     "frameworks": {
-        "net451": { }
+        "net451": {
+            "dependencies": {
+                "SimpleInjector": "3.1.2",
+                "SimpleInjector.Extensions.ExecutionContextScoping": "3.1.2"
+            }
+        },
+        "dotnet5.4": {
+            "dependencies": {
+                "System.Runtime": "4.0.21-beta-23516"
+            }
+        }
     }
 }
