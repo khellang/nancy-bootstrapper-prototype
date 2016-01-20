@@ -11,10 +11,5 @@ namespace Nancy.Core.Registration
         }
 
         public Type ImplementationType { get; }
-
-        public override string ToString()
-        {
-            return $"{Lifetime} - {ServiceType.Name} -> {ImplementationType.Name}";
-        }
     }
 }

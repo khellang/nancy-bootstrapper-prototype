@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Nancy.Core.Registration
 {
@@ -13,10 +12,5 @@ namespace Nancy.Core.Registration
         }
 
         public IReadOnlyCollection<Type> ImplementationTypes { get; }
-
-        public override string ToString()
-        {
-            return $"{Lifetime} - {ServiceType.Name} -> {string.Join(", ", ImplementationTypes.Select(t => t.Name))}";
-        }
     }
 }
