@@ -4,8 +4,7 @@
     "dependencies": {
         "Microsoft.AspNet.Http": "1.0.0-rc1-final",
         "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
-        "Newtonsoft.Json": "8.0.1-beta3",
-        "structuremap": "4.0.0.315"
+        "Newtonsoft.Json": "8.0.1-beta3"
     },
 
     "frameworks": {

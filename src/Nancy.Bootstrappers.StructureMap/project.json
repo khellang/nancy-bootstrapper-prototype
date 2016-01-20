@@ -1,0 +1,13 @@
+﻿{
+    "version": "1.0.0-*",
+
+    "dependencies": {
+        "Nancy.Core": { "target": "project" },
+        "structuremap": "4.0.0.315"
+    },
+
+    "frameworks": {
+        "net451": { },
+        "dotnet5.4": { }
+    }
+}
