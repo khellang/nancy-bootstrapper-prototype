@@ -30,12 +30,12 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
 
         protected sealed override IApplication CreateApplication(Container container)
         {
-            return new SimpleInjectorApplication(container);
+            return new Application(container);
         }
 
-        private sealed class SimpleInjectorApplication : Application<Container, Scope>
+        private sealed class Application : Application<Container, Scope>
         {
-            public SimpleInjectorApplication(Container container) : base(container)
+            public Application(Container container) : base(container)
             {
             }
 

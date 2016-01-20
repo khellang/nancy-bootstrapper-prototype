@@ -23,12 +23,12 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
 
         protected sealed override IApplication CreateApplication(ILifetimeScope lifetimeScope)
         {
-            return new AutofacApplication(lifetimeScope);
+            return new Application(lifetimeScope);
         }
 
-        private sealed class AutofacApplication : Application<ILifetimeScope>
+        private sealed class Application : Application<ILifetimeScope>
         {
-            public AutofacApplication(ILifetimeScope lifetimeScope) : base(lifetimeScope)
+            public Application(ILifetimeScope lifetimeScope) : base(lifetimeScope)
             {
             }
 

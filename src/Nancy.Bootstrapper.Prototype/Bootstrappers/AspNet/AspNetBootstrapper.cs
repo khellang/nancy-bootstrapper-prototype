@@ -22,12 +22,12 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
 
         protected sealed override IApplication CreateApplication(IServiceProvider provider)
         {
-            return new AspNetApplication(provider);
+            return new Application(provider);
         }
 
-        private sealed class AspNetApplication : Application<IServiceProvider, IServiceScope>
+        private sealed class Application : Application<IServiceProvider, IServiceScope>
         {
-            public AspNetApplication(IServiceProvider provider) : base(provider)
+            public Application(IServiceProvider provider) : base(provider)
             {
                 ScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
             }

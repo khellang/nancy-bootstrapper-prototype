@@ -33,12 +33,12 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
 
         protected sealed override IApplication CreateApplication(IContainer container)
         {
-            return new StructureMapApplication(container);
+            return new Application(container);
         }
 
-        private sealed class StructureMapApplication : Application<IContainer>
+        private sealed class Application : Application<IContainer>
         {
-            public StructureMapApplication(IContainer container) : base(container)
+            public Application(IContainer container) : base(container)
             {
             }
 
