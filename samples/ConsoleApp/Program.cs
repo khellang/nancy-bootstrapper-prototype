@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using Autofac;
 using Microsoft.AspNet.Http.Internal;
 using Microsoft.Extensions.PlatformAbstractions;
-using Nancy.Bootstrapper.Prototype.Scanning;
+using Nancy.Core;
+using Nancy.Core.Scanning;
 
-namespace Nancy.Bootstrapper.Prototype.Console
+namespace ConsoleApp
 {
     public class Program
     {

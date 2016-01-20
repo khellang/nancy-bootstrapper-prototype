@@ -1,6 +1,7 @@
 using System;
+using Nancy.Core;
 
-namespace Nancy.Bootstrapper.Prototype.Console
+namespace ConsoleApp
 {
     public class CustomSerializer : ISerializer, IDisposable
     {

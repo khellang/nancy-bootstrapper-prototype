@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Nancy.Bootstrapper.Prototype;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core;
+using Nancy.Core.Registration;
 
 namespace Nancy.Bootstrappers.AspNet
 {

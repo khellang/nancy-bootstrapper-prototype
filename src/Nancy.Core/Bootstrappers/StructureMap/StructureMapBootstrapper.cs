@@ -1,8 +1,8 @@
-﻿using Nancy.Bootstrapper.Prototype.Registration;
+﻿using Nancy.Core.Registration;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
+namespace Nancy.Core.Bootstrappers.StructureMap
 {
     public class StructureMapBootstrapper : Bootstrapper<IContainer>
     {

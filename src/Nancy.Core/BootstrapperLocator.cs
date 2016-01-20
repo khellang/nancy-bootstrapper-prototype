@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Nancy.Bootstrapper.Prototype.Scanning;
+using Nancy.Core.Scanning;
 
-namespace Nancy.Bootstrapper.Prototype
+namespace Nancy.Core
 {
     public class BootstrapperLocator : IBootstrapperLocator
     {

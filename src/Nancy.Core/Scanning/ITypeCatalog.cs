@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Nancy.Bootstrapper.Prototype.Scanning
+namespace Nancy.Core.Scanning
 {
     public interface ITypeCatalog
     {

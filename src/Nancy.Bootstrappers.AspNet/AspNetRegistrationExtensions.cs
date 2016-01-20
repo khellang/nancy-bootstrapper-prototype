@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core.Registration;
 
 namespace Nancy.Bootstrappers.AspNet
 {

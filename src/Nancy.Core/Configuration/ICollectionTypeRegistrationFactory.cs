@@ -1,7 +1,7 @@
 using System;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Configuration
+namespace Nancy.Core.Configuration
 {
     public interface ICollectionTypeRegistrationFactory<in TService> : IRegistrationFactory<CollectionTypeRegistration>
     {

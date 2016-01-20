@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 
-namespace Nancy.Bootstrapper.Prototype
+namespace Nancy.Core
 {
     public abstract class Application<TContainer, TScope> : IApplication
         where TContainer : IDisposable

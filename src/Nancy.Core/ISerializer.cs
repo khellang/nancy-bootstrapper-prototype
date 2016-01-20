@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nancy.Bootstrapper.Prototype
+namespace Nancy.Core
 {
     public interface ISerializer
     {

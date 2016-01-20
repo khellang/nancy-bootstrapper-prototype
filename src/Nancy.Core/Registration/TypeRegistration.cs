@@ -1,6 +1,6 @@
 using System;
 
-namespace Nancy.Bootstrapper.Prototype.Registration
+namespace Nancy.Core.Registration
 {
     public class TypeRegistration : ContainerRegistration
     {

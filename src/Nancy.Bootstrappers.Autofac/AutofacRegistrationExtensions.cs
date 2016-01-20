@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Autofac;
 using Autofac.Builder;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
+namespace Nancy.Bootstrappers.Autofac
 {
     internal static class AutofacRegistrationExtensions
     {

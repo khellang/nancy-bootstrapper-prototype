@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Nancy.Bootstrapper.Prototype.Web
+namespace WebApp
 {
     public class Startup
     {

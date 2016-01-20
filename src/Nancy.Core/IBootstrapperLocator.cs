@@ -1,4 +1,4 @@
-﻿namespace Nancy.Bootstrapper.Prototype
+﻿namespace Nancy.Core
 {
     public interface IBootstrapperLocator
     {

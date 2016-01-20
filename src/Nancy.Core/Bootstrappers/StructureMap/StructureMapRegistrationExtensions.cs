@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core.Registration;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.StructureMap
+namespace Nancy.Core.Bootstrappers.StructureMap
 {
     internal static class StructureMapRegistrationExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Nancy.Bootstrapper.Prototype
+namespace Nancy.Core
 {
     public class JsonNetSerializer : ISerializer
     {

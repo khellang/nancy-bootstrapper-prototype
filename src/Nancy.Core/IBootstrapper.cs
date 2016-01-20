@@ -1,6 +1,6 @@
-using Nancy.Bootstrapper.Prototype.Scanning;
+using Nancy.Core.Scanning;
 
-namespace Nancy.Bootstrapper.Prototype
+namespace Nancy.Core
 {
     public interface IBootstrapper
     {

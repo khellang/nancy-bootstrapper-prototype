@@ -1,7 +1,7 @@
-using Nancy.Bootstrapper.Prototype.Registration;
-using Nancy.Bootstrapper.Prototype.Scanning;
+using Nancy.Core.Registration;
+using Nancy.Core.Scanning;
 
-namespace Nancy.Bootstrapper.Prototype.Configuration
+namespace Nancy.Core.Configuration
 {
     public interface IRegistrationFactory<out TRegistration> where TRegistration : ContainerRegistration
     {

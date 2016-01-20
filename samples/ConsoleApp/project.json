@@ -6,7 +6,8 @@
     },
 
     "dependencies": {
-        "Nancy.Bootstrappers.Autofac": { "target": "project" }
+        "Nancy.Bootstrappers.Autofac": { "target": "project" },
+        "Nancy.Core": { "target": "project" }
     },
 
     "commands": {

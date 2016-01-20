@@ -77,19 +77,17 @@
 
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
+using System.Threading;
 
-namespace TinyIoC
+namespace Nancy.Core.Bootstrappers.TinyIoC
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Reflection;
-
-#if EXPRESSIONS
+    #if EXPRESSIONS
     using System.Linq.Expressions;
-    using System.Threading;
 
 #endif
 

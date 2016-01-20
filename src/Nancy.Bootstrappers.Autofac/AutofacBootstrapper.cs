@@ -1,8 +1,9 @@
 using Autofac;
 using Autofac.Core.Lifetime;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core;
+using Nancy.Core.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac
+namespace Nancy.Bootstrappers.Autofac
 {
     public class AutofacBootstrapper : Bootstrapper<ContainerBuilder, ILifetimeScope>
     {

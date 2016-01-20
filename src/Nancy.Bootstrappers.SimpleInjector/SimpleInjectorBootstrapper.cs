@@ -1,9 +1,9 @@
-#if NET451
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core;
+using Nancy.Core.Registration;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
+namespace Nancy.Bootstrappers.SimpleInjector
 {
     public class SimpleInjectorBootstrapper : Bootstrapper<Container>
     {
@@ -51,4 +51,3 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
         }
     }
 }
-#endif

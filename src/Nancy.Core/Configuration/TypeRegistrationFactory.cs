@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using Nancy.Bootstrapper.Prototype.Registration;
-using Nancy.Bootstrapper.Prototype.Scanning;
+using Nancy.Core.Registration;
+using Nancy.Core.Scanning;
 
-namespace Nancy.Bootstrapper.Prototype.Configuration
+namespace Nancy.Core.Configuration
 {
     public class TypeRegistrationFactory<TService, TDefaultImplementation> : ITypeRegistrationFactory<TService>
     {

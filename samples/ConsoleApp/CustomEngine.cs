@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
+using Nancy.Core;
 
-namespace Nancy.Bootstrapper.Prototype.Console
+namespace ConsoleApp
 {
     public class CustomEngine : IEngine, IDisposable
     {

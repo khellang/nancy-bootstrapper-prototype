@@ -1,4 +1,4 @@
-namespace Nancy.Bootstrapper.Prototype.Configuration
+namespace Nancy.Core.Configuration
 {
     public interface IApplicationConfiguration<out TContainer>
     {

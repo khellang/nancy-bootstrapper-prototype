@@ -1,4 +1,4 @@
-namespace Nancy.Bootstrapper.Prototype.Console
+namespace ConsoleApp
 {
     public class RequestService : IRequestService
     {

@@ -1,4 +1,4 @@
-namespace Nancy.Bootstrapper.Prototype.Registration
+namespace Nancy.Core.Registration
 {
     public enum Lifetime
     {

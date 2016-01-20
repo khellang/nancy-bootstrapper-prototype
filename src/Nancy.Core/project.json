@@ -9,12 +9,7 @@
     },
 
     "frameworks": {
-        "net451": {
-            "dependencies": {
-                "SimpleInjector": "3.1.2",
-                "SimpleInjector.Extensions.ExecutionContextScoping": "3.1.2"
-            }
-        },
+        "net451": { },
         "dotnet5.4": {
             "dependencies": {
                 "System.Runtime": "4.0.21-beta-23516"

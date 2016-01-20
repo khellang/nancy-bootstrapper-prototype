@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Nancy.Bootstrapper.Prototype.Configuration;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core.Configuration;
+using Nancy.Core.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Scanning
+namespace Nancy.Core.Scanning
 {
     public static class TypeCatalogExtensions
     {

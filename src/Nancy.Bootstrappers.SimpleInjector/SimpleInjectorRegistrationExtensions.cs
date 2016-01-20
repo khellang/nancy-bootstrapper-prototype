@@ -1,10 +1,9 @@
-﻿#if NET451
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Nancy.Bootstrapper.Prototype.Registration;
+using Nancy.Core.Registration;
 using SimpleInjector;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
+namespace Nancy.Bootstrappers.SimpleInjector
 {
     internal static class SimpleInjectorRegistrationExtensions
     {
@@ -71,4 +70,3 @@ namespace Nancy.Bootstrapper.Prototype.Bootstrappers.SimpleInjector
         }
     }
 }
-#endif

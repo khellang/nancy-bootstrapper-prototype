@@ -1,6 +1,6 @@
 using System;
 
-namespace Nancy.Bootstrapper.Prototype.Console
+namespace ConsoleApp
 {
     public interface IRequestService : IDisposable
     {

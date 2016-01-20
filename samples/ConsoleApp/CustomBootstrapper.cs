@@ -1,8 +1,8 @@
 using Autofac;
-using Nancy.Bootstrapper.Prototype.Bootstrappers.Autofac;
-using Nancy.Bootstrapper.Prototype.Configuration;
+using Nancy.Bootstrappers.Autofac;
+using Nancy.Core.Configuration;
 
-namespace Nancy.Bootstrapper.Prototype.Console
+namespace ConsoleApp
 {
     public class CustomBootstrapper : AutofacBootstrapper
     {

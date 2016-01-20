@@ -1,9 +1,9 @@
 using System;
-using Nancy.Bootstrapper.Prototype.Configuration;
-using Nancy.Bootstrapper.Prototype.Registration;
-using Nancy.Bootstrapper.Prototype.Scanning;
+using Nancy.Core.Configuration;
+using Nancy.Core.Registration;
+using Nancy.Core.Scanning;
 
-namespace Nancy.Bootstrapper.Prototype
+namespace Nancy.Core
 {
     /// <summary>
     /// The main base class for all bootstrappers.

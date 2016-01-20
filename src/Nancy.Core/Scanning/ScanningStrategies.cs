@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Nancy.Bootstrapper.Prototype.Scanning
+namespace Nancy.Core.Scanning
 {
     public static class ScanningStrategies
     {

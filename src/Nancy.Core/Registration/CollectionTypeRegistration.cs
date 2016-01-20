@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nancy.Bootstrapper.Prototype.Registration
+namespace Nancy.Core.Registration
 {
     public class CollectionTypeRegistration : ContainerRegistration
     {
