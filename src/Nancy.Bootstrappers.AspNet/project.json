@@ -1,0 +1,14 @@
+﻿{
+    "version": "1.0.0-*",
+
+    "dependencies": {
+        "Nancy.Core": { "target": "project" },
+        "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final"
+    },
+
+    "frameworks": {
+        "net451": { },
+        "dotnet5.4": {
+        }
+    }
+}

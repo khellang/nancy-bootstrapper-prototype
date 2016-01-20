@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Nancy.Bootstrapper.Prototype;
 using Nancy.Bootstrapper.Prototype.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
+namespace Nancy.Bootstrappers.AspNet
 {
     public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IServiceProvider>
     {

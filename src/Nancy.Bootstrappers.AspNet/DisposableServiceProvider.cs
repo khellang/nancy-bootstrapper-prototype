@@ -1,6 +1,7 @@
 using System;
+using IServiceProvider = Nancy.Bootstrappers.AspNet.IServiceProvider;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
+namespace Nancy.Bootstrappers.AspNet
 {
     internal class DisposableServiceProvider : IServiceProvider
     {

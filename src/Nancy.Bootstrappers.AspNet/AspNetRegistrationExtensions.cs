@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Nancy.Bootstrapper.Prototype.Registration;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
+namespace Nancy.Bootstrappers.AspNet
 {
-    public static class AspNetRegistrationExtensions
+    internal static class AspNetRegistrationExtensions
     {
         public static void AddRegistry(this IServiceCollection services, IContainerRegistry registry)
         {

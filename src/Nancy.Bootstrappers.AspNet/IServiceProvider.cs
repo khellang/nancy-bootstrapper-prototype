@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nancy.Bootstrapper.Prototype.Bootstrappers.AspNet
+namespace Nancy.Bootstrappers.AspNet
 {
     /// <summary>
     /// Interface to make up for the missing IDisposable
