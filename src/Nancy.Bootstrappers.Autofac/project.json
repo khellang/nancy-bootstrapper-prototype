@@ -2,7 +2,7 @@
     "version": "1.0.0-*",
 
     "dependencies": {
-        "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+        "Autofac": "4.0.0-rc1-177",
         "Nancy.Core": { "target": "project" }
     },
 
