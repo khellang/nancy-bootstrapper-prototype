@@ -1,7 +1,6 @@
 using System;
 using Nancy.Core.Configuration;
 using Nancy.Core.Registration;
-using Nancy.Core.Scanning;
 
 namespace Nancy.Core
 {
@@ -14,13 +13,13 @@ namespace Nancy.Core
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
         where TContainer : IDisposable
     {
-        public IApplication InitializeApplication(ITypeCatalog typeCatalog)
+        public IApplication InitializeApplication()
         {
             // First, we need a container builder.
             // This step is a noop in bootstrappers without the builder/container split.
             var builder = CreateBuilder();
 
-            Populate(builder, typeCatalog);
+            Populate(builder);
 
             // Once everything is registered, it's time to build the container.
             // This step is a noop in bootstrappers without the builder/container split.
@@ -29,7 +28,7 @@ namespace Nancy.Core
             return InitializeApplication(container);
         }
 
-        public void Populate(TBuilder builder, ITypeCatalog typeCatalog)
+        public void Populate(TBuilder builder)
         {
             var frameworkConfig = new FrameworkConfiguration();
 
@@ -45,7 +44,7 @@ namespace Nancy.Core
             // Once the user has configured everything, we build a
             // "container registry", this contains all registrations
             // for framework services.
-            var registry = frameworkConfig.GetRegistry(typeCatalog);
+            var registry = frameworkConfig.GetRegistry(PlatformServices.Default.TypeCatalog);
 
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.

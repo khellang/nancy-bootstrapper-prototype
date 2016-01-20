@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 using Autofac;
 using Microsoft.AspNet.Http.Internal;
-using Microsoft.Extensions.PlatformAbstractions;
 using Nancy.Core;
-using Nancy.Core.Scanning;
 
 namespace ConsoleApp
 {
@@ -17,24 +15,16 @@ namespace ConsoleApp
 
         private static async Task MainAsync(string[] args)
         {
-            var libraryManager = PlatformServices.Default.LibraryManager;
+            await LocatedBootstrapper();
 
-            var assemblyCatalog = new LibraryManagerAssemblyCatalog(libraryManager);
-
-            var typeCatalog = new TypeCatalog(assemblyCatalog);
-
-            await LocatedBootstrapper(typeCatalog);
-
-            await ExistingBootstrapper(typeCatalog);
+            await ExistingBootstrapper();
         }
 
-        private static async Task LocatedBootstrapper(ITypeCatalog typeCatalog)
+        private static async Task LocatedBootstrapper()
         {
-            var bootstrapperLocator = new BootstrapperLocator(typeCatalog);
+            var bootstrapper = PlatformServices.Default.BootstrapperLocator.GetBootstrapper();
 
-            var bootstrapper = bootstrapperLocator.GetBootstrapper();
-
-            using (var application = bootstrapper.InitializeApplication(typeCatalog))
+            using (var application = bootstrapper.InitializeApplication())
             {
                 var context = new DefaultHttpContext();
 
@@ -42,7 +32,7 @@ namespace ConsoleApp
             }
         }
 
-        private static async Task ExistingBootstrapper(ITypeCatalog typeCatalog)
+        private static async Task ExistingBootstrapper()
         {
             var bootstrapper = new CustomBootstrapper();
 
@@ -50,15 +40,18 @@ namespace ConsoleApp
 
             // Register stuff in the container...
 
-            bootstrapper.Populate(builder, typeCatalog);
+            bootstrapper.Populate(builder);
 
             var container = builder.Build();
 
             using (var application = bootstrapper.InitializeApplication(container))
             {
-                var context = new DefaultHttpContext();
+                //while (true)
+                {
+                    var context = new DefaultHttpContext();
 
-                await application.HandleRequest(context, CancellationToken.None);
+                    await application.HandleRequest(context, CancellationToken.None);
+                }
             }
         }
     }
