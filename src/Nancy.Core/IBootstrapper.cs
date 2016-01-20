@@ -7,7 +7,7 @@ namespace Nancy.Core
         IApplication InitializeApplication(ITypeCatalog typeCatalog);
     }
 
-    public interface IBootstrapper<in TBuilder, in TContainer> : IBootstrapper
+    public interface IBootstrapper<in TBuilder, in TContainer>
     {
         void Populate(TBuilder builder, ITypeCatalog typeCatalog);
 
