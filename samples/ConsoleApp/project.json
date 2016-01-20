@@ -6,11 +6,11 @@
     },
 
     "dependencies": {
-        "Nancy.Bootstrapper.Prototype": { "target": "project" }
+        "Nancy.Core": { "target": "project" }
     },
 
     "commands": {
-        "Nancy.Bootstrapper.Prototype.Console": "Nancy.Bootstrapper.Prototype.Console"
+        "ConsoleApp": "ConsoleApp"
     },
 
     "frameworks": {

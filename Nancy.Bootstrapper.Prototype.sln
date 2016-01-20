@@ -1,13 +1,17 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrapper.Prototype", "src\Nancy.Bootstrapper.Prototype\Nancy.Bootstrapper.Prototype.xproj", "{87C7C329-1824-4AC7-AF25-3D06068A01F6}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Core", "src\Nancy.Core\Nancy.Core.xproj", "{87C7C329-1824-4AC7-AF25-3D06068A01F6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrapper.Prototype.Console", "src\Nancy.Bootstrapper.Prototype.Console\Nancy.Bootstrapper.Prototype.Console.xproj", "{188AA603-0FCE-4AC1-B650-D270DF92743A}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ConsoleApp", "samples\ConsoleApp\ConsoleApp.xproj", "{188AA603-0FCE-4AC1-B650-D270DF92743A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7ED0C780-05ED-4EFF-9BB2-98E6497979EB}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApp", "samples\WebApp\WebApp.xproj", "{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{8EAF21DF-341F-45E5-ABBC-79053ACC4CED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +27,17 @@ Global
 		{188AA603-0FCE-4AC1-B650-D270DF92743A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{188AA603-0FCE-4AC1-B650-D270DF92743A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{188AA603-0FCE-4AC1-B650-D270DF92743A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{87C7C329-1824-4AC7-AF25-3D06068A01F6} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
-		{188AA603-0FCE-4AC1-B650-D270DF92743A} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
+		{188AA603-0FCE-4AC1-B650-D270DF92743A} = {8EAF21DF-341F-45E5-ABBC-79053ACC4CED}
+		{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813} = {8EAF21DF-341F-45E5-ABBC-79053ACC4CED}
 	EndGlobalSection
 EndGlobal
