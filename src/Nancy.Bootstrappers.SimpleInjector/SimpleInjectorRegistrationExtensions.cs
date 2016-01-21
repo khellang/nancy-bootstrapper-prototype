@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nancy.Core;
 using Nancy.Core.Registration;
 using SimpleInjector;
 
 namespace Nancy.Bootstrappers.SimpleInjector
 {
-    internal static class SimpleInjectorRegistrationExtensions
+    public static class SimpleInjectorRegistrationExtensions
     {
-        public static void Register(this Container container, IContainerRegistry registry)
+        public static void Populate(this Container builder,
+            IBootstrapper<Container, Container> bootstrapper)
+        {
+            bootstrapper.Populate(builder);
+        }
+
+        internal static void Register(this Container container, IContainerRegistry registry)
         {
             container.RegisterTypes(registry.TypeRegistrations);
             container.RegisterCollectionTypes(registry.CollectionTypeRegistrations);

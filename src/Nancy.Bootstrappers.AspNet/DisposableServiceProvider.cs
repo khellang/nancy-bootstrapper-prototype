@@ -1,5 +1,4 @@
 using System;
-using IServiceProvider = Nancy.Bootstrappers.AspNet.IServiceProvider;
 
 namespace Nancy.Bootstrappers.AspNet
 {

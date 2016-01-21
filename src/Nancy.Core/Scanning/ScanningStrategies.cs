@@ -4,7 +4,7 @@ namespace Nancy.Core.Scanning
 {
     public static class ScanningStrategies
     {
-        private static readonly AssemblyName NancyAssemblyName = typeof(IEngine).GetTypeInfo().Assembly.GetName();
+        public static readonly AssemblyName NancyAssemblyName = typeof(IEngine).GetTypeInfo().Assembly.GetName();
 
         public static readonly ScanningStrategy All = assemblyName => true;
 

@@ -6,7 +6,7 @@ namespace Nancy.Core.Scanning
 {
     public class LibraryManagerAssemblyCatalog : IAssemblyCatalog
     {
-        private const string NancyLibraryName = "Nancy.Bootstrapper.Prototype";
+        private static readonly string NancyLibraryName = ScanningStrategies.NancyAssemblyName.Name;
 
         public LibraryManagerAssemblyCatalog(ILibraryManager libraryManager)
         {

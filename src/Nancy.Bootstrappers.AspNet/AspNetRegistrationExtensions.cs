@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using Nancy.Core;
 using Nancy.Core.Registration;
 
 namespace Nancy.Bootstrappers.AspNet
 {
-    internal static class AspNetRegistrationExtensions
+    public static class AspNetRegistrationExtensions
     {
-        public static void AddRegistry(this IServiceCollection services, IContainerRegistry registry)
+        public static void Populate(this IServiceCollection services,
+            IBootstrapper<IServiceCollection, IServiceProvider> bootstrapper)
+        {
+            bootstrapper.Populate(services);
+        }
+
+        internal static void AddRegistry(this IServiceCollection services, IContainerRegistry registry)
         {
             services.AddTypes(registry.TypeRegistrations);
             services.AddCollectionTypes(registry.CollectionTypeRegistrations);

@@ -8,7 +8,8 @@
     "dependencies": {
         "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
         "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
-        "Nancy.Core": { "target": "project" }
+        "Nancy.Bootstrappers.StructureMap": { "target": "project" },
+        "StructureMap.Dnx": "0.4.0-alpha4"
     },
 
     "commands": {
