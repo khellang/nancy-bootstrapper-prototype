@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.PlatformAbstractions;
 
@@ -6,7 +7,7 @@ namespace Nancy.Core.Scanning
 {
     public class LibraryManagerAssemblyCatalog : IAssemblyCatalog
     {
-        private static readonly string NancyLibraryName = ScanningStrategies.NancyAssemblyName.Name;
+        private static readonly string NancyLibraryName = ScanningStrategies.NancyAssemblyName;
 
         public LibraryManagerAssemblyCatalog(ILibraryManager libraryManager)
         {
@@ -17,11 +18,11 @@ namespace Nancy.Core.Scanning
 
         public IReadOnlyCollection<Assembly> GetAssemblies(ScanningStrategy strategy)
         {
-            var assemblies = new List<Assembly>();
+            var assemblies = new HashSet<Assembly>();
 
-            var nancy = LibraryManager.GetLibrary(NancyLibraryName);
+            var nancyLibrary = LibraryManager.GetLibrary(NancyLibraryName);
 
-            foreach (var assemblyName in nancy.Assemblies)
+            foreach (var assemblyName in nancyLibrary.Assemblies)
             {
                 if (strategy.Invoke(assemblyName))
                 {
