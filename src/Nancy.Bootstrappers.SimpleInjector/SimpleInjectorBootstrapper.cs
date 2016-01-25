@@ -1,3 +1,4 @@
+using Microsoft.AspNet.Http;
 using Nancy.Core;
 using Nancy.Core.Registration;
 using SimpleInjector;
@@ -39,7 +40,7 @@ namespace Nancy.Bootstrappers.SimpleInjector
             {
             }
 
-            protected override Scope BeginRequestScope(Container container)
+            protected override Scope BeginRequestScope(HttpContext context, Container container)
             {
                 return container.BeginExecutionContextScope();
             }

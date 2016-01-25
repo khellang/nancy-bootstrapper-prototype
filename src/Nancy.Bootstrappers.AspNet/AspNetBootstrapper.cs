@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNet.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Nancy.Core;
 using Nancy.Core.Registration;
 
@@ -35,7 +36,7 @@ namespace Nancy.Bootstrappers.AspNet
 
             private IServiceScopeFactory ScopeFactory { get; }
 
-            protected override IServiceScope BeginRequestScope(IServiceProvider provider)
+            protected override IServiceScope BeginRequestScope(HttpContext context, IServiceProvider provider)
             {
                 return ScopeFactory.CreateScope();
             }

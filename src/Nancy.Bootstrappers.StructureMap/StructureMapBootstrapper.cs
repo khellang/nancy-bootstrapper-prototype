@@ -1,4 +1,5 @@
-﻿using Nancy.Core;
+﻿using Microsoft.AspNet.Http;
+using Nancy.Core;
 using Nancy.Core.Registration;
 using StructureMap;
 using StructureMap.Pipeline;
@@ -43,7 +44,7 @@ namespace Nancy.Bootstrappers.StructureMap
             {
             }
 
-            protected override IContainer BeginRequestScope(IContainer container)
+            protected override IContainer BeginRequestScope(HttpContext context, IContainer container)
             {
                 return container.GetNestedContainer();
             }

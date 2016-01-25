@@ -18,7 +18,7 @@ namespace Nancy.Core
 
         public async Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
-            using (var scope = BeginRequestScope(Container))
+            using (var scope = BeginRequestScope(context, Container))
             {
                 var engine = ComposeEngine(Container, scope);
 
@@ -31,7 +31,7 @@ namespace Nancy.Core
             Container.Dispose();
         }
 
-        protected abstract TScope BeginRequestScope(TContainer container);
+        protected abstract TScope BeginRequestScope(HttpContext context, TContainer container);
 
         protected abstract IEngine ComposeEngine(TContainer container, TScope scope);
     }

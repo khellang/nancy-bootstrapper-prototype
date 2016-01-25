@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Core.Lifetime;
+using Microsoft.AspNet.Http;
 using Nancy.Core;
 using Nancy.Core.Registration;
 
@@ -33,7 +34,7 @@ namespace Nancy.Bootstrappers.Autofac
             {
             }
 
-            protected override ILifetimeScope BeginRequestScope(ILifetimeScope lifetimeScope)
+            protected override ILifetimeScope BeginRequestScope(HttpContext context, ILifetimeScope lifetimeScope)
             {
                 return lifetimeScope.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
             }
