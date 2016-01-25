@@ -7,7 +7,7 @@
     },
 
     "frameworks": {
-        "net46": { },
+        "net451": { },
         "dotnet5.4": { }
     }
 }
