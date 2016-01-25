@@ -67,7 +67,7 @@ namespace Nancy.Bootstrappers.SimpleInjector
             {
                 case Lifetime.Singleton:
                     return Lifestyle.Singleton;
-                case Lifetime.Scoped:
+                case Lifetime.PerRequest:
                     return Lifestyle.Scoped;
                 case Lifetime.Transient:
                     return Lifestyle.Transient;

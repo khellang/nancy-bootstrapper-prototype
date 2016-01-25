@@ -13,7 +13,7 @@ namespace Nancy.Core.Configuration
         {
             TypeRegistrationFactories = new List<IRegistrationFactory<TypeRegistration>>
             {
-                (Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.Scoped))
+                (Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.PerRequest))
             };
 
             CollectionTypeRegistrationFactories = new List<IRegistrationFactory<CollectionTypeRegistration>>

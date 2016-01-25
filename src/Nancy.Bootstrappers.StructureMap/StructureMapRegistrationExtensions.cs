@@ -68,7 +68,7 @@ namespace Nancy.Bootstrappers.StructureMap
                 case Lifetime.Singleton:
                     instance.LifecycleIs<SingletonLifecycle>();
                     break;
-                case Lifetime.Scoped:
+                case Lifetime.PerRequest:
                     instance.LifecycleIs<ContainerLifecycle>();
                     break;
                 case Lifetime.Transient:

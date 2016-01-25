@@ -72,7 +72,7 @@ namespace Nancy.Bootstrappers.Autofac
             {
                 case Lifetime.Singleton:
                     return builder.SingleInstance();
-                case Lifetime.Scoped:
+                case Lifetime.PerRequest:
                     return builder.InstancePerLifetimeScope();
                 case Lifetime.Transient:
                     return builder.InstancePerDependency();

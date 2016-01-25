@@ -60,7 +60,7 @@ namespace Nancy.Bootstrappers.AspNet
                 case Lifetime.Singleton:
                     services.AddSingleton(registration.ServiceType, registration.ImplementationType);
                     break;
-                case Lifetime.Scoped:
+                case Lifetime.PerRequest:
                     services.AddScoped(registration.ServiceType, registration.ImplementationType);
                     break;
                 case Lifetime.Transient:
