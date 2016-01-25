@@ -8,7 +8,7 @@ namespace Nancy.Bootstrappers.SimpleInjector
 {
     public static class SimpleInjectorRegistrationExtensions
     {
-        public static void Populate(this Container builder,
+        public static void AddNancy(this Container builder,
             IBootstrapper<Container, Container> bootstrapper)
         {
             bootstrapper.Populate(builder);

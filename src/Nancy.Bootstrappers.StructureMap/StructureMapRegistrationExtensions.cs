@@ -9,7 +9,7 @@ namespace Nancy.Bootstrappers.StructureMap
 {
     public static class StructureMapRegistrationExtensions
     {
-        public static void Populate(this IContainer builder,
+        public static void AddNancy(this IContainer builder,
             IBootstrapper<IContainer, IContainer> bootstrapper)
         {
             bootstrapper.Populate(builder);

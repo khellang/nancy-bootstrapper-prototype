@@ -8,7 +8,7 @@ namespace Nancy.Bootstrappers.AspNet
 {
     public static class AspNetRegistrationExtensions
     {
-        public static void Populate(this IServiceCollection services,
+        public static void AddNancy(this IServiceCollection services,
             IBootstrapper<IServiceCollection, IServiceProvider> bootstrapper)
         {
             bootstrapper.Populate(services);

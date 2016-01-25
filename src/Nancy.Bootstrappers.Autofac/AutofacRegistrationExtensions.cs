@@ -9,7 +9,7 @@ namespace Nancy.Bootstrappers.Autofac
 {
     public static class AutofacRegistrationExtensions
     {
-        public static void Populate(this ContainerBuilder builder,
+        public static void AddNancy(this ContainerBuilder builder,
             IBootstrapper<ContainerBuilder, ILifetimeScope> bootstrapper)
         {
             bootstrapper.Populate(builder);

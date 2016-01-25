@@ -11,7 +11,7 @@ namespace WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Populate(Bootstrapper);
+            services.AddNancy(Bootstrapper);
         }
 
         public void Configure(IApplicationBuilder app)
