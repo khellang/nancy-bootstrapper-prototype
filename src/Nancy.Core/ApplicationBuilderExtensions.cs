@@ -24,7 +24,7 @@ namespace Nancy.Core
             return builder.UseNancy(bootstrapper.InitializeApplication());
         }
 
-        private static IApplicationBuilder UseNancy(this IApplicationBuilder builder, IApplication application)
+        public static IApplicationBuilder UseNancy(this IApplicationBuilder builder, IApplication application)
         {
             return builder.UseMiddleware<NancyMiddleware>(application);
         }
