@@ -36,10 +36,7 @@ namespace Nancy.Core.Configuration
 
             var collectionTypeRegistrations = typeCatalog.GetRegistrations(CollectionTypeRegistrationFactories);
 
-            // TODO: What to do about instance registrations?
-            var instanceRegistrations = new List<InstanceRegistration>();
-
-            return new ContainerRegistry(typeRegistrations, collectionTypeRegistrations, instanceRegistrations);
+            return new ContainerRegistry(typeRegistrations, collectionTypeRegistrations);
         }
     }
 }

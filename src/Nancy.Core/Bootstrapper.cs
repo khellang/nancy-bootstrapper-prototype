@@ -41,14 +41,19 @@ namespace Nancy.Core
             // Nancy services, change configuration etc.
             ConfigureApplication(applicationConfig);
 
+            // Get platform services to register in the container.
+            var platformRegistry = PlatformServices.Default.GetRegistry();
+
+            Register(builder, platformRegistry);
+
             // Once the user has configured everything, we build a
             // "container registry", this contains all registrations
             // for framework services.
-            var registry = frameworkConfig.GetRegistry(PlatformServices.Default.TypeCatalog);
+            var frameworkRegistry = frameworkConfig.GetRegistry(PlatformServices.Default.TypeCatalog);
 
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.
-            Register(builder, registry);
+            Register(builder, frameworkRegistry);
         }
 
         public IApplication InitializeApplication(TContainer container)

@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Nancy.Core.Registration
 {
     public class ContainerRegistry : IContainerRegistry
     {
-        public ContainerRegistry(IReadOnlyCollection<TypeRegistration> typeRegistrations,
-            IReadOnlyCollection<CollectionTypeRegistration> collectionTypeRegistrations,
-            IReadOnlyCollection<InstanceRegistration> instanceRegistrations)
+        public ContainerRegistry(IReadOnlyCollection<TypeRegistration> typeRegistrations = null,
+            IReadOnlyCollection<CollectionTypeRegistration> collectionTypeRegistrations = null,
+            IReadOnlyCollection<InstanceRegistration> instanceRegistrations = null)
         {
-            TypeRegistrations = typeRegistrations;
-            CollectionTypeRegistrations = collectionTypeRegistrations;
-            InstanceRegistrations = instanceRegistrations;
+            TypeRegistrations = typeRegistrations ?? Array.Empty<TypeRegistration>();
+            CollectionTypeRegistrations = collectionTypeRegistrations ?? Array.Empty<CollectionTypeRegistration>();
+            InstanceRegistrations = instanceRegistrations ?? Array.Empty<InstanceRegistration>();
         }
 
         public IReadOnlyCollection<TypeRegistration> TypeRegistrations { get; }
