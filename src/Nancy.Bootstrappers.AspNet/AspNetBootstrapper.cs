@@ -27,7 +27,7 @@ namespace Nancy.Bootstrappers.AspNet
             return new Application(provider);
         }
 
-        private sealed class Application : Application<IServiceProvider, IServiceScope>
+        private sealed class Application : Application<IServiceProvider>
         {
             public Application(IServiceProvider provider) : base(provider)
             {
@@ -36,14 +36,17 @@ namespace Nancy.Bootstrappers.AspNet
 
             private IServiceScopeFactory ScopeFactory { get; }
 
-            protected override IServiceScope BeginRequestScope(HttpContext context, IServiceProvider provider)
+            protected override IServiceProvider BeginRequestScope(HttpContext context, IServiceProvider provider)
             {
-                return ScopeFactory.CreateScope();
+                var serviceProvider = context.RequestServices
+                    ?? ScopeFactory.CreateScope().ServiceProvider;
+
+                return new DisposableServiceProvider(serviceProvider);
             }
 
-            protected override IEngine ComposeEngine(IServiceProvider provider, IServiceScope scope)
+            protected override IEngine ComposeEngine(IServiceProvider provider)
             {
-                return scope.ServiceProvider.GetRequiredService<IEngine>();
+                return provider.GetRequiredService<IEngine>();
             }
         }
     }

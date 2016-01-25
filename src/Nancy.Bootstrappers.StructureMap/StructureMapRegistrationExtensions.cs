@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nancy.Core;
 using Nancy.Core.Registration;
 using StructureMap;
 using StructureMap.Pipeline;
 
 namespace Nancy.Bootstrappers.StructureMap
 {
-    public static class StructureMapRegistrationExtensions
+    internal static class StructureMapRegistrationExtensions
     {
-        public static void AddNancy(this IContainer builder,
-            IBootstrapper<IContainer, IContainer> bootstrapper)
-        {
-            bootstrapper.Populate(builder);
-        }
-
-        internal static void AddRegistry(this IProfileRegistry profileRegistry, IContainerRegistry registry)
+        public static void AddRegistry(this IProfileRegistry profileRegistry, IContainerRegistry registry)
         {
             profileRegistry.RegisterTypes(registry.TypeRegistrations);
             profileRegistry.RegisterCollectionTypes(registry.CollectionTypeRegistrations);

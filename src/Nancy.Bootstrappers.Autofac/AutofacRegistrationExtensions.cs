@@ -2,20 +2,13 @@ using System;
 using System.Collections.Generic;
 using Autofac;
 using Autofac.Builder;
-using Nancy.Core;
 using Nancy.Core.Registration;
 
 namespace Nancy.Bootstrappers.Autofac
 {
-    public static class AutofacRegistrationExtensions
+    internal static class AutofacRegistrationExtensions
     {
-        public static void AddNancy(this ContainerBuilder builder,
-            IBootstrapper<ContainerBuilder, ILifetimeScope> bootstrapper)
-        {
-            bootstrapper.Populate(builder);
-        }
-
-        internal static void Register(this ContainerBuilder builder, IContainerRegistry registry)
+        public static void Register(this ContainerBuilder builder, IContainerRegistry registry)
         {
             builder.RegisterTypes(registry.TypeRegistrations);
             builder.RegisterCollectionTypes(registry.CollectionTypeRegistrations);

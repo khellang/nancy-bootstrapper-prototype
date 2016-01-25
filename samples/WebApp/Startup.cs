@@ -7,16 +7,14 @@ namespace WebApp
 {
     public class Startup
     {
-        private AspNetBootstrapper Bootstrapper { get; } = new AspNetBootstrapper();
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddNancy(Bootstrapper);
+            services.AddNancy();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseNancy(Bootstrapper);
+            app.UseNancy();
         }
 
         public static void Main(string[] args)
