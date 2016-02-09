@@ -22,6 +22,11 @@ namespace Nancy.Bootstrappers.AspNet
             return new DisposableServiceProvider(services.BuildServiceProvider());
         }
 
+        protected sealed override void ValidateContainerConfiguration(IServiceProvider container)
+        {
+            // Not supported.
+        }
+
         protected sealed override IApplication CreateApplication(IServiceProvider provider)
         {
             return new Application(provider);

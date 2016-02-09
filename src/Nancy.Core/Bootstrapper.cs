@@ -78,9 +78,7 @@ namespace Nancy.Core
 
         protected abstract TContainer BuildContainer(TBuilder builder);
 
-        protected virtual void ValidateContainerConfiguration(TContainer container)
-        {
-        }
+        protected abstract void ValidateContainerConfiguration(TContainer container);
 
         protected abstract IApplication CreateApplication(TContainer container);
     }

@@ -23,6 +23,11 @@ namespace Nancy.Bootstrappers.Autofac
             return builder.Build();
         }
 
+        protected sealed override void ValidateContainerConfiguration(ILifetimeScope container)
+        {
+            // Not supported.
+        }
+
         protected sealed override IApplication CreateApplication(ILifetimeScope lifetimeScope)
         {
             return new Application(lifetimeScope);
