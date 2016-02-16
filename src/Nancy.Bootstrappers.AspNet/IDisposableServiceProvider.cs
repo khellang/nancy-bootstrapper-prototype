@@ -9,7 +9,7 @@ namespace Nancy.Bootstrappers.AspNet
     /// <remarks>
     /// Without this we'd have to drop the IDisposable generic constraint.
     /// </remarks>
-    public interface IServiceProvider : System.IServiceProvider, IDisposable
+    public interface IDisposableServiceProvider : IServiceProvider, IDisposable
     {
     }
 }

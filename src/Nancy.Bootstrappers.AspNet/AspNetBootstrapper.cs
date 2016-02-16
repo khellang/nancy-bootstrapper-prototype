@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Nancy.Core;
 using Nancy.Core.Http;
 using Nancy.Core.Registration;
 
 namespace Nancy.Bootstrappers.AspNet
 {
-    public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IServiceProvider>
+    public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IDisposableServiceProvider>
     {
         protected sealed override IServiceCollection CreateBuilder()
         {
@@ -17,48 +18,49 @@ namespace Nancy.Bootstrappers.AspNet
             services.AddRegistry(registry);
         }
 
-        protected sealed override IServiceProvider BuildContainer(IServiceCollection services)
+        protected sealed override IDisposableServiceProvider BuildContainer(IServiceCollection services)
         {
             return new DisposableServiceProvider(services.BuildServiceProvider());
         }
 
-        protected sealed override void ValidateContainerConfiguration(IServiceProvider container)
+        protected sealed override void ValidateContainerConfiguration(IDisposableServiceProvider container)
         {
             // Not supported.
         }
 
-        protected sealed override IApplication CreateApplication(IServiceProvider provider)
+        protected sealed override IApplication CreateApplication(IDisposableServiceProvider provider)
         {
             return new Application(provider);
         }
 
-        private sealed class Application : Application<IServiceProvider>
+        private sealed class Application : Application<IDisposableServiceProvider>
         {
-            public Application(IServiceProvider provider) : base(provider)
+            public Application(IDisposableServiceProvider provider) : base(provider)
             {
                 ScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
             }
 
             private IServiceScopeFactory ScopeFactory { get; }
 
-            protected override IServiceProvider BeginRequestScope(HttpContext context, IServiceProvider provider)
+            protected override IDisposableServiceProvider BeginRequestScope(HttpContext context, IDisposableServiceProvider provider)
             {
                 IServiceProvider requestServices;
                 if (TryGetRequestServices(context, out requestServices))
                 {
                     // We want to reuse the existing request services instead
                     // of creating a new Nancy-specific scope if we can.
+
                     return new DisposableServiceProvider(requestServices);
                 }
 
                 var requestScope = ScopeFactory.CreateScope();
 
-                var serviceProvider = requestScope.ServiceProvider;
+                var requestProvider = requestScope.ServiceProvider;
 
-                return new DisposableServiceProvider(serviceProvider);
+                return new DisposableServiceProvider(requestProvider);
             }
 
-            protected override IEngine ComposeEngine(IServiceProvider provider)
+            protected override IEngine ComposeEngine(IDisposableServiceProvider provider)
             {
                 return provider.GetRequiredService<IEngine>();
             }

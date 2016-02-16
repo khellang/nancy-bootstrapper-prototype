@@ -4,7 +4,6 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Nancy.Core;
-using IServiceProvider = Nancy.Bootstrappers.AspNet.IServiceProvider;
 using Nancy.Bootstrappers.AspNet;
 
 namespace Nancy.AspNet
@@ -19,7 +18,7 @@ namespace Nancy.AspNet
 
             // We assume that the user has already called `AddNancy`
             // in `ConfigureServices`, otherwise this will fail.
-            var bootstrapper = provider.GetRequiredService<IBootstrapper<IServiceProvider>>();
+            var bootstrapper = provider.GetRequiredService<IBootstrapper<IDisposableServiceProvider>>();
 
             var application = bootstrapper.InitializeApplication(provider);
 

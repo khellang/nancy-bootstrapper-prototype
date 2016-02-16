@@ -2,14 +2,14 @@ using System;
 
 namespace Nancy.Bootstrappers.AspNet
 {
-    internal class DisposableServiceProvider : IServiceProvider
+    internal class DisposableServiceProvider : IDisposableServiceProvider
     {
-        public DisposableServiceProvider(System.IServiceProvider provider)
+        public DisposableServiceProvider(IServiceProvider provider)
         {
             Provider = provider;
         }
 
-        private System.IServiceProvider Provider { get; }
+        private IServiceProvider Provider { get; }
 
         public object GetService(Type serviceType)
         {

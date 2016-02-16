@@ -26,12 +26,12 @@ namespace Nancy.AspNet
 
         public static IServiceCollection AddNancy(this IServiceCollection services,
             IPlatformServices platformServices,
-            IBootstrapper<IServiceCollection, IServiceProvider> bootstrapper)
+            IBootstrapper<IServiceCollection, IDisposableServiceProvider> bootstrapper)
         {
             bootstrapper.Populate(services, platformServices);
 
             // Make sure we add the bootstrapper so it can be resolved in a call to `UseNancy`.
-            return services.AddInstance<IBootstrapper<IServiceProvider>>(bootstrapper);
+            return services.AddInstance<IBootstrapper<IDisposableServiceProvider>>(bootstrapper);
         }
     }
 }
