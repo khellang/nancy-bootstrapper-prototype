@@ -1,21 +1,29 @@
+﻿using System;
+using Microsoft.Extensions.PlatformAbstractions;
 using Nancy.Core.Scanning;
-using MsPlatformServices = Microsoft.Extensions.PlatformAbstractions.PlatformServices;
 
 namespace Nancy.Core
 {
-    internal sealed class DefaultPlatformServices : PlatformServices
+    public class DefaultPlatformServices : IPlatformServices
     {
+        private static readonly Lazy<IPlatformServices> DefaultInstance =
+            new Lazy<IPlatformServices>(() => new DefaultPlatformServices()); 
+
         public DefaultPlatformServices()
         {
-            AssemblyCatalog = new LibraryManagerAssemblyCatalog(MsPlatformServices.Default.LibraryManager);
+            var libraryManager = PlatformServices.Default.LibraryManager;
+
+            AssemblyCatalog = new LibraryManagerAssemblyCatalog(libraryManager);
             TypeCatalog = new TypeCatalog(AssemblyCatalog);
             BootstrapperLocator = new BootstrapperLocator(TypeCatalog);
         }
 
-        public override IAssemblyCatalog AssemblyCatalog { get; }
+        public static IPlatformServices Instance => DefaultInstance.Value;
 
-        public override ITypeCatalog TypeCatalog { get; }
+        public IAssemblyCatalog AssemblyCatalog { get; }
 
-        public override IBootstrapperLocator BootstrapperLocator { get; }
+        public ITypeCatalog TypeCatalog { get; }
+
+        public IBootstrapperLocator BootstrapperLocator { get; }
     }
 }

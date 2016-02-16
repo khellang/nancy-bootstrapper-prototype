@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,16 +12,22 @@ namespace Nancy.AspNet
     {
         public static IApplicationBuilder UseNancy(this IApplicationBuilder builder)
         {
+            // We need to wrap the default ApplicationServices
+            // because IServiceProvider is not implementing IDisposable.
             var provider = new DisposableServiceProvider(builder.ApplicationServices);
 
-            var bootstrapper = builder.ApplicationServices.GetRequiredService<IBootstrapper<IServiceProvider>>();
+            // We assume that the user has already called `AddNancy`
+            // in `ConfigureServices`, otherwise this will fail.
+            var bootstrapper = provider.GetRequiredService<IBootstrapper<IServiceProvider>>();
 
             var application = bootstrapper.InitializeApplication(provider);
+
+            // TODO: Register application for disposal.
 
             return builder.UseMiddleware<NancyMiddleware>(application);
         }
 
-        private class NancyMiddleware : IDisposable
+        private class NancyMiddleware
         {
             public NancyMiddleware(RequestDelegate next, IApplication application)
             {
@@ -36,16 +41,14 @@ namespace Nancy.AspNet
 
             public Task Invoke(HttpContext context)
             {
-                var nancyContext = new AspNetHttpContext(context);
+                var httpContext = new AspNetHttpContext(context);
+
+                // Add the request services so we can get it out in the bootstrapper.
+                httpContext.Items.Add(Constants.AspNetRequestServices, context.RequestServices);
 
                 var cancellationToken = context.RequestAborted;
 
-                return Application.HandleRequest(nancyContext, cancellationToken);
-            }
-
-            public void Dispose()
-            {
-                Application.Dispose();
+                return Application.HandleRequest(httpContext, cancellationToken);
             }
         }
     }

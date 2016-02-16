@@ -22,9 +22,11 @@ namespace ConsoleApp
 
         private static async Task LocatedBootstrapper()
         {
-            var bootstrapper = PlatformServices.Default.BootstrapperLocator.GetBootstrapper();
+            var platformServices = DefaultPlatformServices.Instance;
 
-            using (var application = bootstrapper.InitializeApplication())
+            var bootstrapper = platformServices.BootstrapperLocator.GetBootstrapper();
+
+            using (var application = bootstrapper.InitializeApplication(platformServices))
             {
                 var context = new DefaultHttpContext();
 

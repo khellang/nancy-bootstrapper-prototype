@@ -2,7 +2,7 @@ namespace Nancy.Core
 {
     public interface IBootstrapper
     {
-        IApplication InitializeApplication();
+        IApplication InitializeApplication(IPlatformServices platformServices);
     }
 
     public interface IBootstrapper<in TContainer> : IBootstrapper
@@ -12,6 +12,6 @@ namespace Nancy.Core
 
     public interface IBootstrapper<in TBuilder, in TContainer> : IBootstrapper<TContainer>
     {
-        void Populate(TBuilder builder);
+        void Populate(TBuilder builder, IPlatformServices platformServices);
     }
 }

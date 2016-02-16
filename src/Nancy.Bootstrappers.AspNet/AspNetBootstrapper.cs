@@ -43,8 +43,17 @@ namespace Nancy.Bootstrappers.AspNet
 
             protected override IServiceProvider BeginRequestScope(HttpContext context, IServiceProvider provider)
             {
-                // TODO: Find a way to get AspNet's HttpContext.RequestServices here...
-                var serviceProvider = ScopeFactory.CreateScope().ServiceProvider;
+                IServiceProvider requestServices;
+                if (TryGetRequestServices(context, out requestServices))
+                {
+                    // We want to reuse the existing request services instead
+                    // of creating a new Nancy-specific scope if we can.
+                    return new DisposableServiceProvider(requestServices);
+                }
+
+                var requestScope = ScopeFactory.CreateScope();
+
+                var serviceProvider = requestScope.ServiceProvider;
 
                 return new DisposableServiceProvider(serviceProvider);
             }
@@ -52,6 +61,24 @@ namespace Nancy.Bootstrappers.AspNet
             protected override IEngine ComposeEngine(IServiceProvider provider)
             {
                 return provider.GetRequiredService<IEngine>();
+            }
+
+            private static bool TryGetRequestServices(HttpContext context, out IServiceProvider requestServices)
+            {
+                object value;
+                // If we're running in ASP.NET, this should be set by the Nancy middleware.
+                if (context.Items.TryGetValue(Constants.AspNetRequestServices, out value))
+                {
+                    var services = value as IServiceProvider;
+                    if (services != null)
+                    {
+                        requestServices = services;
+                        return true;
+                    }
+                }
+
+                requestServices = null;
+                return false;
             }
         }
     }

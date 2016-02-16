@@ -13,13 +13,13 @@ namespace Nancy.Core
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
         where TContainer : IDisposable
     {
-        public IApplication InitializeApplication()
+        public IApplication InitializeApplication(IPlatformServices platformServices)
         {
             // First, we need a container builder.
             // This step is a noop in bootstrappers without the builder/container split.
             var builder = CreateBuilder();
 
-            Populate(builder);
+            Populate(builder, platformServices);
 
             // Once everything is registered, it's time to build the container.
             // This step is a noop in bootstrappers without the builder/container split.
@@ -28,7 +28,7 @@ namespace Nancy.Core
             return InitializeApplication(container);
         }
 
-        public void Populate(TBuilder builder)
+        public void Populate(TBuilder builder, IPlatformServices platformServices)
         {
             var frameworkConfig = new FrameworkConfiguration();
 
@@ -42,14 +42,14 @@ namespace Nancy.Core
             ConfigureApplication(applicationConfig);
 
             // Get platform services to register in the container.
-            var platformRegistry = PlatformServices.Default.GetRegistry();
+            var platformRegistry = platformServices.GetRegistry();
 
             Register(builder, platformRegistry);
 
             // Once the user has configured everything, we build a
             // "container registry", this contains all registrations
             // for framework services.
-            var frameworkRegistry = frameworkConfig.GetRegistry(PlatformServices.Default.TypeCatalog);
+            var frameworkRegistry = frameworkConfig.GetRegistry(platformServices.TypeCatalog);
 
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.

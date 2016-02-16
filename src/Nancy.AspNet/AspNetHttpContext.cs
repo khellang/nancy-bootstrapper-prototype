@@ -10,12 +10,8 @@ namespace Nancy.AspNet
         public AspNetHttpContext(Microsoft.AspNet.Http.HttpContext context)
         {
             Context = context;
-
-            var request = context.Features.Get<IHttpRequestFeature>();
-            Request = new AspNetHttpRequest(this, request);
-
-            var response = context.Features.Get<IHttpResponseFeature>();
-            Response = new AspNetHttpResponse(this, response);
+            Request = new AspNetHttpRequest(this, context.Features.Get<IHttpRequestFeature>());
+            Response = new AspNetHttpResponse(this, context.Features.Get<IHttpResponseFeature>());
         }
 
         private Microsoft.AspNet.Http.HttpContext Context { get; }
