@@ -1,49 +1,68 @@
+using System;
 using System.Collections;
-using System.Linq;
 
 namespace Nancy.Core.Http
 {
     public static class HttpUtility
     {
-        private const string Digit = "0123456789";
+        private const string Token =
+            "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~";
 
-        private const string Token = "!#$%&'*+-.^_`|~" + Digit + Alpha;
-
-        private const string Alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        private static readonly Lazy<TokenValues> Values =
+            new Lazy<TokenValues>(() => GetTokenValues(Token.ToCharArray()));
 
         public static bool IsValidToken(string value)
         {
-            // TODO: Store BitArray in a static field.
-
-            var minValue = Token.Min(x => x);
-
-            var maxValue = Token.Max(x => x);
-
-            var length = maxValue - minValue + 1;
-
-            var bitArray = new BitArray(length: length);
-
-            foreach (var tokenChar in Token)
-            {
-                bitArray.Set(tokenChar - minValue, true);
-            }
+            var values = Values.Value;
 
             foreach (var @char in value)
             {
-                var index = @char - minValue;
-
-                if (index < 0 || index >= bitArray.Length)
-                {
-                    return false;
-                }
-
-                if (!bitArray[index])
+                if (!values.IsValid(@char))
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+
+        private static TokenValues GetTokenValues(char[] validValues)
+        {
+            int minValue = validValues[0];
+            int maxValue = validValues[validValues.Length - 1];
+
+            var length = maxValue - minValue + 1;
+
+            var bitArray = new BitArray(length);
+
+            foreach (var value in validValues)
+            {
+                bitArray.Set(value - minValue, true);
+            }
+
+            return new TokenValues(bitArray, minValue);
+        }
+
+        private struct TokenValues
+        {
+            public TokenValues(BitArray bitArray, int offset)
+            {
+                BitArray = bitArray;
+                Offset = offset;
+            }
+
+            private BitArray BitArray { get; }
+
+            private int Offset { get; }
+
+            public bool IsValid(char value)
+            {
+                var index = value - Offset;
+
+                return index >= 0
+                    && index < BitArray.Length
+                    && BitArray[index];
+            }
         }
     }
 }
