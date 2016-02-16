@@ -9,12 +9,15 @@ namespace Nancy.Core
         where TContainer : IDisposable
         where TScope : IDisposable
     {
-        protected Application(TContainer container)
+        protected Application(TContainer container, bool shouldDispose)
         {
             Container = container;
+            ShouldDispose = shouldDispose;
         }
 
         private TContainer Container { get; }
+
+        private bool ShouldDispose { get; }
 
         public async Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
@@ -28,7 +31,10 @@ namespace Nancy.Core
 
         public void Dispose()
         {
-            Container.Dispose();
+            if (ShouldDispose)
+            {
+                Container.Dispose();
+            }
         }
 
         protected abstract TScope BeginRequestScope(HttpContext context, TContainer container);
@@ -39,7 +45,8 @@ namespace Nancy.Core
     public abstract class Application<TContainer> : Application<TContainer, TContainer>
         where TContainer : IDisposable
     {
-        protected Application(TContainer container) : base(container)
+        protected Application(TContainer container, bool shouldDispose)
+            : base(container, shouldDispose)
         {
         }
 

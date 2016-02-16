@@ -25,7 +25,8 @@ namespace Nancy.Core
             // This step is a noop in bootstrappers without the builder/container split.
             var container = BuildContainer(builder);
 
-            return InitializeApplication(container);
+            // Since we've built the container, we want to dispose it as well.
+            return InitializeApplication(container, shouldDispose: true);
         }
 
         public void Populate(TBuilder builder, IPlatformServices platformServices)
@@ -58,6 +59,13 @@ namespace Nancy.Core
 
         public IApplication InitializeApplication(TContainer container)
         {
+            // In this case, we don't want to control the container
+            // lifetime, because it's passed from outside. We don't own it.
+            return InitializeApplication(container, shouldDispose: false);
+        }
+
+        private IApplication InitializeApplication(TContainer container, bool shouldDispose)
+        {
             // When the container is built, we offer the bootstrapper
             // implementation a chance to validate the container configuration
             // This could prevent obvious configuration errors.
@@ -65,7 +73,7 @@ namespace Nancy.Core
 
             // We finally ask the bootstrapper implementation to give us
             // an IApplication instance before returning it to the caller.
-            return CreateApplication(container);
+            return CreateApplication(container, shouldDispose);
         }
 
         protected abstract TBuilder CreateBuilder();
@@ -80,7 +88,7 @@ namespace Nancy.Core
 
         protected abstract void ValidateContainerConfiguration(TContainer container);
 
-        protected abstract IApplication CreateApplication(TContainer container);
+        protected abstract IApplication CreateApplication(TContainer container, bool shouldDispose);
     }
 
     /// <summary>

@@ -33,14 +33,15 @@ namespace Nancy.Bootstrappers.StructureMap
             }
         }
 
-        protected sealed override IApplication CreateApplication(IContainer container)
+        protected sealed override IApplication CreateApplication(IContainer container, bool shouldDispose)
         {
-            return new Application(container);
+            return new Application(container, shouldDispose);
         }
 
         private sealed class Application : Application<IContainer>
         {
-            public Application(IContainer container) : base(container)
+            public Application(IContainer container, bool shouldDispose)
+                : base(container, shouldDispose)
             {
             }
 

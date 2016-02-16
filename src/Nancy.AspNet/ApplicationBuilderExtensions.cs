@@ -14,7 +14,7 @@ namespace Nancy.AspNet
         {
             // We need to wrap the default ApplicationServices
             // because IServiceProvider is not implementing IDisposable.
-            var provider = new DisposableServiceProvider(builder.ApplicationServices);
+            var provider = builder.ApplicationServices.AsDisposable(shouldDispose: false);
 
             // We assume that the user has already called `AddNancy`
             // in `ConfigureServices`, otherwise this will fail.

@@ -20,7 +20,7 @@ namespace Nancy.Bootstrappers.AspNet
 
         protected sealed override IDisposableServiceProvider BuildContainer(IServiceCollection services)
         {
-            return new DisposableServiceProvider(services.BuildServiceProvider());
+            return services.BuildServiceProvider().AsDisposable(shouldDispose: true);
         }
 
         protected sealed override void ValidateContainerConfiguration(IDisposableServiceProvider container)
@@ -28,14 +28,15 @@ namespace Nancy.Bootstrappers.AspNet
             // Not supported.
         }
 
-        protected sealed override IApplication CreateApplication(IDisposableServiceProvider provider)
+        protected sealed override IApplication CreateApplication(IDisposableServiceProvider provider, bool shouldDispose)
         {
-            return new Application(provider);
+            return new Application(provider, shouldDispose);
         }
 
         private sealed class Application : Application<IDisposableServiceProvider>
         {
-            public Application(IDisposableServiceProvider provider) : base(provider)
+            public Application(IDisposableServiceProvider provider, bool shouldDispose)
+                : base(provider, shouldDispose)
             {
                 ScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
             }
@@ -50,14 +51,14 @@ namespace Nancy.Bootstrappers.AspNet
                     // We want to reuse the existing request services instead
                     // of creating a new Nancy-specific scope if we can.
 
-                    return new DisposableServiceProvider(requestServices);
+                    return requestServices.AsDisposable(shouldDispose: false);
                 }
 
                 var requestScope = ScopeFactory.CreateScope();
 
                 var requestProvider = requestScope.ServiceProvider;
 
-                return new DisposableServiceProvider(requestProvider);
+                return requestProvider.AsDisposable(shouldDispose: true);
             }
 
             protected override IEngine ComposeEngine(IDisposableServiceProvider provider)
