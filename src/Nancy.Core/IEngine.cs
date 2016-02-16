@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
+using Nancy.Core.Http;
 
 namespace Nancy.Core
 {

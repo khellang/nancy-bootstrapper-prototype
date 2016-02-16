@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
-using Microsoft.AspNet.Http.Internal;
 using Nancy.Core;
+using Nancy.Core.Http;
 
 namespace ConsoleApp
 {

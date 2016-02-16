@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNet.Http;
-using Nancy.Core;
+﻿using Nancy.Core;
+using Nancy.Core.Http;
 using Nancy.Core.Registration;
 using StructureMap;
 using StructureMap.Pipeline;

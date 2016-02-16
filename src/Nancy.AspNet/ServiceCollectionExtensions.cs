@@ -1,7 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
+using Nancy.Bootstrappers.AspNet;
 using Nancy.Core;
 
-namespace Nancy.Bootstrappers.AspNet
+namespace Nancy.AspNet
 {
     public static class ServiceCollectionExtensions
     {

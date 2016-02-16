@@ -4,8 +4,10 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Nancy.Core;
+using IServiceProvider = Nancy.Bootstrappers.AspNet.IServiceProvider;
+using Nancy.Bootstrappers.AspNet;
 
-namespace Nancy.Bootstrappers.AspNet
+namespace Nancy.AspNet
 {
     public static class ApplicationBuilderExtensions
     {
@@ -34,7 +36,11 @@ namespace Nancy.Bootstrappers.AspNet
 
             public Task Invoke(HttpContext context)
             {
-                return Application.HandleRequest(context, context.RequestAborted);
+                var nancyContext = new AspNetHttpContext(context);
+
+                var cancellationToken = context.RequestAborted;
+
+                return Application.HandleRequest(nancyContext, cancellationToken);
             }
 
             public void Dispose()

@@ -1,7 +1,7 @@
-using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
+using Nancy.Core.Http;
 
 namespace Nancy.Core
 {
@@ -9,8 +9,13 @@ namespace Nancy.Core
     {
         public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
-            // Simulate some request handling...
-            return Task.Delay(TimeSpan.FromMilliseconds(300), cancellationToken);
+            var hellWorldBytes = Encoding.UTF8.GetBytes("Hello World!");
+
+            context.Response.StatusCode = HttpStatusCode.Ok;
+
+            // TODO: Set Content-Type and Content-Length.
+
+            return context.Response.Body.WriteAsync(hellWorldBytes, 0, hellWorldBytes.Length, cancellationToken);
         }
     }
 }

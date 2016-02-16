@@ -8,7 +8,7 @@
     "dependencies": {
         "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
         "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
-        "Nancy.Bootstrappers.AspNet": { "target": "project" }
+        "Nancy.AspNet": { "target": "project" }
     },
 
     "commands": {

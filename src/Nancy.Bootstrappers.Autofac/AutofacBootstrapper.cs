@@ -1,7 +1,7 @@
 using Autofac;
 using Autofac.Core.Lifetime;
-using Microsoft.AspNet.Http;
 using Nancy.Core;
+using Nancy.Core.Http;
 using Nancy.Core.Registration;
 
 namespace Nancy.Bootstrappers.Autofac

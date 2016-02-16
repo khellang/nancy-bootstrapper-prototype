@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Nancy.Bootstrappers.AspNet;
+using Nancy.AspNet;
 
 namespace WebApp
 {

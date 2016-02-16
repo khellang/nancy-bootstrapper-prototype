@@ -1,0 +1,23 @@
+using System.IO;
+
+namespace Nancy.Core.Http
+{
+    public abstract class HttpRequest
+    {
+        public abstract HttpContext Context { get; }
+
+        public abstract HttpMethod Method { get; set; }
+
+        public abstract Url Url { get; }
+
+        public abstract string Protocol { get; set; }
+
+        // TODO: Headers (Specialize Content-Type and Content-Length?)
+
+        public abstract Stream Body { get; set; }
+
+        // TODO: Cookies
+
+        // TODO: Form
+    }
+}

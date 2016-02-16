@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.StructureMap", "src\Nancy.Bootstrappers.StructureMap\Nancy.Bootstrappers.StructureMap.xproj", "{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.AspNet", "src\Nancy.AspNet\Nancy.AspNet.xproj", "{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +77,6 @@ Global
 		{799249C2-08AF-4F83-A2FC-58686AF999B1} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
 		{1C57294C-18C1-4699-AFE2-440DF822DC31} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
 		{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
+		{34046ECF-3720-4EB0-B2B6-84D096DEBF7F} = {7ED0C780-05ED-4EFF-9BB2-98E6497979EB}
 	EndGlobalSection
 EndGlobal
