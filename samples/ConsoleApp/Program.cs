@@ -15,15 +15,15 @@ namespace ConsoleApp
 
         private static async Task MainAsync(string[] args)
         {
-            await LocatedBootstrapper();
-
-            await ExistingBootstrapper();
-        }
-
-        private static async Task LocatedBootstrapper()
-        {
             var platformServices = DefaultPlatformServices.Instance;
 
+            await LocatedBootstrapper(platformServices);
+
+            await ExistingBootstrapper(platformServices);
+        }
+
+        private static async Task LocatedBootstrapper(IPlatformServices platformServices)
+        {
             var bootstrapper = platformServices.BootstrapperLocator.GetBootstrapper();
 
             using (var application = bootstrapper.InitializeApplication(platformServices))
@@ -34,7 +34,7 @@ namespace ConsoleApp
             }
         }
 
-        private static async Task ExistingBootstrapper()
+        private static async Task ExistingBootstrapper(IPlatformServices platformServices)
         {
             var bootstrapper = new CustomBootstrapper();
 
@@ -42,7 +42,7 @@ namespace ConsoleApp
 
             // Register stuff in the container...
 
-            bootstrapper.Populate(builder);
+            bootstrapper.Populate(builder, platformServices);
 
             var container = builder.Build();
 

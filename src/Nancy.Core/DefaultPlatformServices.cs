@@ -11,7 +11,10 @@ namespace Nancy.Core
 
         public DefaultPlatformServices()
         {
+            // TODO: If LibraryManager is null here, we should use DependencyContext.
             var libraryManager = PlatformServices.Default.LibraryManager;
+
+            // TODO: We need a fallback AssemblyCatalog for full framework. AppDomainAssemblyCatalog?
 
             AssemblyCatalog = new LibraryManagerAssemblyCatalog(libraryManager);
             TypeCatalog = new TypeCatalog(AssemblyCatalog);
