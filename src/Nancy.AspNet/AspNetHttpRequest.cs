@@ -24,7 +24,7 @@ namespace Nancy.AspNet
         public override Url Url
         {
             get { return AspNetUrl; }
-            set { SetUrl(AspNetUrl, value); }
+            set { AspNetUrl.CopyFrom(value); }
         }
 
         public override string Protocol
@@ -42,16 +42,5 @@ namespace Nancy.AspNet
         private IHttpRequestFeature Request { get; }
 
         private AspNetUrl AspNetUrl { get; }
-
-        private static void SetUrl(Url url, Url newUrl)
-        {
-            // If the user sets a new URL, we need to copy over the values.
-
-            url.Scheme = newUrl.Scheme;
-            url.Host = newUrl.Host;
-            url.PathBase = newUrl.PathBase;
-            url.Path = newUrl.Path;
-            url.QueryString = newUrl.QueryString;
-        }
     }
 }

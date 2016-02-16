@@ -42,5 +42,16 @@ namespace Nancy.AspNet
         }
 
         private IHttpRequestFeature Request { get; }
+
+        public void CopyFrom(Url url)
+        {
+            // If the user sets a new URL, we need to copy over the values.
+
+            Scheme = url.Scheme;
+            Host = url.Host;
+            PathBase = url.PathBase;
+            Path = url.Path;
+            QueryString = url.QueryString;
+        }
     }
 }
