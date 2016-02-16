@@ -13,7 +13,11 @@ namespace Nancy.Core.Http
                 throw new ArgumentNullException(nameof(value));
             }
 
-            // TODO: Check for valid HTTP TOKEN?
+            if (!HttpUtility.IsValidToken(value))
+            {
+                throw new ArgumentException(string.Format(
+                    Resources.Exception_InvalidHttpMethodToken, value), nameof(value));
+            }
 
             Value = value;
         }
@@ -22,7 +26,7 @@ namespace Nancy.Core.Http
 
         public bool Equals(HttpMethod other)
         {
-            return string.Equals(Value, other.Value, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(Value, other.Value, StringComparison.Ordinal);
         }
 
         public override bool Equals(object obj)

@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using System.IO;
 
 namespace Nancy.Core.Http
 {
+    [DebuggerDisplay("{ToString(), nq}")]
     public abstract class HttpRequest
     {
         public abstract HttpContext Context { get; }
@@ -19,5 +21,10 @@ namespace Nancy.Core.Http
         // TODO: Cookies
 
         // TODO: Form
+
+        public override string ToString()
+        {
+            return $"{Method.ToString()} {Url} {Protocol}";
+        }
     }
 }

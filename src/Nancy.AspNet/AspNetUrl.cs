@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNet.Http.Features;
 using Nancy.Core.Http;
 
 namespace Nancy.AspNet
 {
     internal class AspNetUrl : Url
     {
-        public AspNetUrl(Microsoft.AspNet.Http.HttpRequest request)
+        public AspNetUrl(IHttpRequestFeature request)
         {
             Request = request;
         }
+
+        private IHttpRequestFeature Request { get; }
 
         public override string Scheme
         {
@@ -18,28 +20,27 @@ namespace Nancy.AspNet
 
         public override string Host
         {
-            get { return Request.Host.Value; }
-            set { Request.Host = new HostString(value); }
+            // TODO: Keep this as-is?
+            get { return Request.Headers["Host"]; }
+            set { Request.Headers["Host"] = value; }
         }
 
         public override string PathBase
         {
-            get { return Request.PathBase.Value; }
-            set { Request.PathBase = new PathString(value); }
+            get { return Request.PathBase; }
+            set { Request.PathBase = value; }
         }
 
         public override string Path
         {
-            get { return Request.Path.Value; }
-            set { Request.Path = new PathString(value); }
+            get { return Request.Path; }
+            set { Request.Path = value; }
         }
 
         public override string QueryString
         {
-            get { return Request.QueryString.Value; }
-            set { Request.QueryString = new QueryString(value); }
+            get { return Request.QueryString; }
+            set { Request.QueryString = value; }
         }
-
-        private Microsoft.AspNet.Http.HttpRequest Request { get; }
     }
 }

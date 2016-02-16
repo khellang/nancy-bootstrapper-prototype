@@ -8,6 +8,12 @@ namespace Nancy.Core.Http
     {
         public HttpStatusCode(int value)
         {
+            if (value < 100 || value > 999)
+            {
+                throw new ArgumentException(string.Format(
+                    Resources.Exception_InvalidHttpStatusCode, value), nameof(value));
+            }
+
             Value = value;
         }
 

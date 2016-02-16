@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Microsoft.AspNet.Http.Features;
 using Nancy.Core.Http;
 using HttpContext = Nancy.Core.Http.HttpContext;
 using HttpRequest = Nancy.Core.Http.HttpRequest;
@@ -7,7 +8,7 @@ namespace Nancy.AspNet
 {
     internal class AspNetHttpRequest : HttpRequest
     {
-        public AspNetHttpRequest(HttpContext context, Microsoft.AspNet.Http.HttpRequest request)
+        public AspNetHttpRequest(HttpContext context, IHttpRequestFeature request)
         {
             Context = context;
             Request = request;
@@ -15,6 +16,8 @@ namespace Nancy.AspNet
         }
 
         public override HttpContext Context { get; }
+
+        private IHttpRequestFeature Request { get; }
 
         public override HttpMethod Method
         {
@@ -35,7 +38,5 @@ namespace Nancy.AspNet
             get { return Request.Body; }
             set { Request.Body = value; }
         }
-
-        private Microsoft.AspNet.Http.HttpRequest Request { get; }
     }
 }
