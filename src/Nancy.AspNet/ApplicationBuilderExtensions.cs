@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -23,10 +24,10 @@ namespace Nancy.AspNet
 
             var application = bootstrapper.InitializeApplication(provider);
 
-            var lifetime = builder.ApplicationServices.GetRequiredService<IApplicationShutdown>();
+            var lifetime = provider.GetRequiredService<IApplicationLifetime>();
 
             // Make sure the application (and the container) is disposed on application shutdown.
-            lifetime.ShutdownRequested.Register(application.Dispose);
+            lifetime.ApplicationStopped.Register(application.Dispose);
 
             return builder.UseMiddleware<NancyMiddleware>(application);
         }
