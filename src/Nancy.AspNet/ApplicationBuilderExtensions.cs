@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Nancy.Core;
 using IServiceProvider = Nancy.Bootstrappers.AspNet.IServiceProvider;
 using Nancy.Bootstrappers.AspNet;
@@ -22,7 +23,10 @@ namespace Nancy.AspNet
 
             var application = bootstrapper.InitializeApplication(provider);
 
-            // TODO: Register application for disposal.
+            var lifetime = builder.ApplicationServices.GetRequiredService<IApplicationShutdown>();
+
+            // Make sure the application (and the container) is disposed on application shutdown.
+            lifetime.ShutdownRequested.Register(application.Dispose);
 
             return builder.UseMiddleware<NancyMiddleware>(application);
         }
