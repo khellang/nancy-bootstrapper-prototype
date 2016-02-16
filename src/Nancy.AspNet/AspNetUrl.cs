@@ -10,8 +10,6 @@ namespace Nancy.AspNet
             Request = request;
         }
 
-        private IHttpRequestFeature Request { get; }
-
         public override string Scheme
         {
             get { return Request.Scheme; }
@@ -42,5 +40,7 @@ namespace Nancy.AspNet
             get { return Request.QueryString; }
             set { Request.QueryString = value; }
         }
+
+        private IHttpRequestFeature Request { get; }
     }
 }

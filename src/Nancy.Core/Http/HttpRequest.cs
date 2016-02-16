@@ -10,7 +10,7 @@ namespace Nancy.Core.Http
 
         public abstract HttpMethod Method { get; set; }
 
-        public abstract Url Url { get; }
+        public abstract Url Url { get; set; }
 
         public abstract string Protocol { get; set; }
 

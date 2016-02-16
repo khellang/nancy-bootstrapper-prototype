@@ -14,8 +14,6 @@ namespace Nancy.AspNet
             Response = new AspNetHttpResponse(this, context.Features.Get<IHttpResponseFeature>());
         }
 
-        private Microsoft.AspNet.Http.HttpContext Context { get; }
-
         public override HttpRequest Request { get; }
 
         public override HttpResponse Response { get; }
@@ -26,9 +24,8 @@ namespace Nancy.AspNet
             set { Context.User = value; }
         }
 
-        public override IDictionary<object, object> Items
-        {
-            get { return Context.Items; }
-        }
+        public override IDictionary<object, object> Items => Context.Items;
+
+        private Microsoft.AspNet.Http.HttpContext Context { get; }
     }
 }

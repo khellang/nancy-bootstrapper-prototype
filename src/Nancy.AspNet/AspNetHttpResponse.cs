@@ -14,8 +14,6 @@ namespace Nancy.AspNet
 
         public override HttpContext Context { get; }
 
-        private IHttpResponseFeature Response { get; }
-
         public override HttpStatusCode StatusCode
         {
             get { return Response.StatusCode; }
@@ -33,5 +31,7 @@ namespace Nancy.AspNet
             get { return Response.Body; }
             set { Response.Body = value; }
         }
+
+        private IHttpResponseFeature Response { get; }
     }
 }
