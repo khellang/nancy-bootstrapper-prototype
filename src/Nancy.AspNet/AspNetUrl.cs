@@ -1,57 +1,57 @@
-﻿using Microsoft.AspNet.Http.Features;
-using Nancy.Core.Http;
-
-namespace Nancy.AspNet
+﻿namespace Nancy.AspNet
 {
+    using Microsoft.AspNet.Http.Features;
+    using Nancy.Core.Http;
+
     internal class AspNetUrl : Url
     {
+        private readonly IHttpRequestFeature request;
+
         public AspNetUrl(IHttpRequestFeature request)
         {
-            Request = request;
+            this.request = request;
         }
 
         public override string Scheme
         {
-            get { return Request.Scheme; }
-            set { Request.Scheme = value; }
+            get { return this.request.Scheme; }
+            set { this.request.Scheme = value; }
         }
 
         public override string Host
         {
             // TODO: Keep this as-is?
-            get { return Request.Headers["Host"]; }
-            set { Request.Headers["Host"] = value; }
+            get { return this.request.Headers["Host"]; }
+            set { this.request.Headers["Host"] = value; }
         }
 
         public override string PathBase
         {
-            get { return Request.PathBase; }
-            set { Request.PathBase = value; }
+            get { return this.request.PathBase; }
+            set { this.request.PathBase = value; }
         }
 
         public override string Path
         {
-            get { return Request.Path; }
-            set { Request.Path = value; }
+            get { return this.request.Path; }
+            set { this.request.Path = value; }
         }
 
         public override string QueryString
         {
-            get { return Request.QueryString; }
-            set { Request.QueryString = value; }
+            get { return this.request.QueryString; }
+            set { this.request.QueryString = value; }
         }
-
-        private IHttpRequestFeature Request { get; }
 
         public void CopyFrom(Url url)
         {
             // If the user sets a new URL, we need to copy over the values.
 
-            Scheme = url.Scheme;
-            Host = url.Host;
-            PathBase = url.PathBase;
-            Path = url.Path;
-            QueryString = url.QueryString;
+            this.Scheme = url.Scheme;
+            this.Host = url.Host;
+            this.PathBase = url.PathBase;
+            this.Path = url.Path;
+            this.QueryString = url.QueryString;
         }
     }
 }

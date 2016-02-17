@@ -1,46 +1,46 @@
-﻿using System.IO;
-using Microsoft.AspNet.Http.Features;
-using Nancy.Core.Http;
-
-namespace Nancy.AspNet
+﻿namespace Nancy.AspNet
 {
+    using System.IO;
+    using Microsoft.AspNet.Http.Features;
+    using Nancy.Core.Http;
+
     internal class AspNetHttpRequest : HttpRequest
     {
+        private readonly IHttpRequestFeature request;
+
+        private readonly AspNetUrl aspNetUrl;
+
         public AspNetHttpRequest(HttpContext context, IHttpRequestFeature request)
         {
-            Context = context;
-            Request = request;
-            AspNetUrl = new AspNetUrl(request);
+            this.Context = context;
+            this.request = request;
+            this.aspNetUrl = new AspNetUrl(request);
         }
 
         public override HttpContext Context { get; }
 
         public override HttpMethod Method
         {
-            get { return Request.Method; }
-            set { Request.Method = value.Value; }
+            get { return this.request.Method; }
+            set { this.request.Method = value.Value; }
         }
 
         public override Url Url
         {
-            get { return AspNetUrl; }
-            set { AspNetUrl.CopyFrom(value); }
+            get { return this.aspNetUrl; }
+            set { this.aspNetUrl.CopyFrom(value); }
         }
 
         public override string Protocol
         {
-            get { return Request.Protocol; }
-            set { Request.Protocol = value; }
+            get { return this.request.Protocol; }
+            set { this.request.Protocol = value; }
         }
 
         public override Stream Body
         {
-            get { return Request.Body; }
-            set { Request.Body = value; }
+            get { return this.request.Body; }
+            set { this.request.Body = value; }
         }
-
-        private IHttpRequestFeature Request { get; }
-
-        private AspNetUrl AspNetUrl { get; }
     }
 }

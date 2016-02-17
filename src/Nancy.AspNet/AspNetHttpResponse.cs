@@ -1,37 +1,37 @@
-using System.IO;
-using Microsoft.AspNet.Http.Features;
-using Nancy.Core.Http;
-
 namespace Nancy.AspNet
 {
+    using System.IO;
+    using Microsoft.AspNet.Http.Features;
+    using Nancy.Core.Http;
+
     internal class AspNetHttpResponse : HttpResponse
     {
+        private readonly IHttpResponseFeature response;
+
         public AspNetHttpResponse(HttpContext context, IHttpResponseFeature response)
         {
-            Context = context;
-            Response = response;
+            this.Context = context;
+            this.response = response;
         }
 
         public override HttpContext Context { get; }
 
         public override HttpStatusCode StatusCode
         {
-            get { return Response.StatusCode; }
-            set { Response.StatusCode = value.Value; }
+            get { return this.response.StatusCode; }
+            set { this.response.StatusCode = value.Value; }
         }
 
         public override string ReasonPhrase
         {
-            get { return Response.ReasonPhrase; }
-            set { Response.ReasonPhrase = value; }
+            get { return this.response.ReasonPhrase; }
+            set { this.response.ReasonPhrase = value; }
         }
 
         public override Stream Body
         {
-            get { return Response.Body; }
-            set { Response.Body = value; }
+            get { return this.response.Body; }
+            set { this.response.Body = value; }
         }
-
-        private IHttpResponseFeature Response { get; }
     }
 }

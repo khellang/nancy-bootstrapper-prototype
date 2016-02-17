@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Nancy.Core;
-using Nancy.Bootstrappers.AspNet;
-
-namespace Nancy.AspNet
+﻿namespace Nancy.AspNet
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNet.Builder;
+    using Microsoft.AspNet.Http;
+    using Microsoft.Extensions.DependencyInjection;
+    using Nancy.Bootstrappers.AspNet;
+    using Nancy.Core;
+
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseNancy(this IApplicationBuilder builder)
@@ -26,15 +26,15 @@ namespace Nancy.AspNet
 
         private class NancyMiddleware
         {
+            private readonly RequestDelegate next;
+
+            private readonly IApplication application;
+
             public NancyMiddleware(RequestDelegate next, IApplication application)
             {
-                Next = next;
-                Application = application;
+                this.next = next;
+                this.application = application;
             }
-
-            private RequestDelegate Next { get; }
-
-            private IApplication Application { get; }
 
             public Task Invoke(HttpContext context)
             {
@@ -45,7 +45,7 @@ namespace Nancy.AspNet
 
                 var cancellationToken = context.RequestAborted;
 
-                return Application.HandleRequest(httpContext, cancellationToken);
+                return this.application.HandleRequest(httpContext, cancellationToken);
             }
         }
     }

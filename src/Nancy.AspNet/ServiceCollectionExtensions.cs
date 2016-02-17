@@ -1,9 +1,9 @@
-using Microsoft.Extensions.DependencyInjection;
-using Nancy.Bootstrappers.AspNet;
-using Nancy.Core;
-
 namespace Nancy.AspNet
 {
+    using Microsoft.Extensions.DependencyInjection;
+    using Nancy.Bootstrappers.AspNet;
+    using Nancy.Core;
+
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddNancy(this IServiceCollection services)
