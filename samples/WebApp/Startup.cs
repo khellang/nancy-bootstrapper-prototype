@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Nancy.AspNet;
-
-namespace WebApp
+﻿namespace WebApp
 {
+    using Microsoft.AspNet.Builder;
+    using Microsoft.AspNet.Hosting;
+    using Microsoft.Extensions.DependencyInjection;
+    using Nancy.AspNet;
+
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
