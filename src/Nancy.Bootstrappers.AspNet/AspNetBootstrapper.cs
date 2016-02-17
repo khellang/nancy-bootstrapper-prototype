@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Nancy.Core;
-using Nancy.Core.Http;
-using Nancy.Core.Registration;
-
-namespace Nancy.Bootstrappers.AspNet
+﻿namespace Nancy.Bootstrappers.AspNet
 {
+    using System;
+    using Microsoft.Extensions.DependencyInjection;
+    using Nancy.Core;
+    using Nancy.Core.Http;
+    using Nancy.Core.Registration;
+
     public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IDisposableServiceProvider>
     {
         protected sealed override IServiceCollection CreateBuilder()
@@ -35,13 +35,13 @@ namespace Nancy.Bootstrappers.AspNet
 
         private sealed class Application : Application<IDisposableServiceProvider>
         {
+            private readonly IServiceScopeFactory scopeFactory;
+
             public Application(IDisposableServiceProvider provider, bool shouldDispose)
                 : base(provider, shouldDispose)
             {
-                ScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
+                this.scopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
             }
-
-            private IServiceScopeFactory ScopeFactory { get; }
 
             protected override IDisposableServiceProvider BeginRequestScope(HttpContext context, IDisposableServiceProvider provider)
             {
@@ -54,7 +54,7 @@ namespace Nancy.Bootstrappers.AspNet
                     return requestServices.AsDisposable(shouldDispose: false);
                 }
 
-                var requestScope = ScopeFactory.CreateScope();
+                var requestScope = this.scopeFactory.CreateScope();
 
                 var requestProvider = requestScope.ServiceProvider;
 

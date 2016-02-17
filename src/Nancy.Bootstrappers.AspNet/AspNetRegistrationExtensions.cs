@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
-using Nancy.Core.Registration;
-
-namespace Nancy.Bootstrappers.AspNet
+﻿namespace Nancy.Bootstrappers.AspNet
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Extensions.DependencyInjection;
+    using Nancy.Core.Registration;
+
     internal static class AspNetRegistrationExtensions
     {
         public static void AddRegistry(this IServiceCollection services, IContainerRegistry registry)

@@ -1,13 +1,13 @@
 ﻿{
-    "version": "1.0.0-*",
+  "version": "1.0.0-*",
 
-    "dependencies": {
-        "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
-        "Nancy.Core": { "target": "project" }
-    },
+  "dependencies": {
+    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+    "Nancy.Core": { "target": "project" }
+  },
 
-    "frameworks": {
-        "net451": { },
-        "dotnet5.4": { }
-    }
+  "frameworks": {
+    "net451": { },
+    "dotnet5.4": { }
+  }
 }

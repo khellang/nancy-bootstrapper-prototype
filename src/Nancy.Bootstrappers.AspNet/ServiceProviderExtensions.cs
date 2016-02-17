@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Nancy.Bootstrappers.AspNet
+﻿namespace Nancy.Bootstrappers.AspNet
 {
+    using System;
+
     internal static class ServiceProviderExtensions
     {
         public static IDisposableServiceProvider AsDisposable(this IServiceProvider provider, bool shouldDispose)
@@ -11,26 +11,26 @@ namespace Nancy.Bootstrappers.AspNet
 
         private class DisposableServiceProvider : IDisposableServiceProvider
         {
+            private readonly IServiceProvider provider;
+
+            private readonly bool shouldDispose;
+
             public DisposableServiceProvider(IServiceProvider provider, bool shouldDispose)
             {
-                Provider = provider;
-                ShouldDispose = shouldDispose;
+                this.provider = provider;
+                this.shouldDispose = shouldDispose;
             }
-
-            private IServiceProvider Provider { get; }
-
-            private bool ShouldDispose { get; }
 
             public object GetService(Type serviceType)
             {
-                return Provider.GetService(serviceType);
+                return this.provider.GetService(serviceType);
             }
 
             public void Dispose()
             {
-                if (ShouldDispose)
+                if (this.shouldDispose)
                 {
-                    (Provider as IDisposable)?.Dispose();
+                    (this.provider as IDisposable)?.Dispose();
                 }
             }
         }
