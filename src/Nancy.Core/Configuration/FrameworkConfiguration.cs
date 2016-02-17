@@ -32,6 +32,8 @@ namespace Nancy.Core.Configuration
 
         public IContainerRegistry GetRegistry(ITypeCatalog typeCatalog)
         {
+            Check.NotNull(typeCatalog, nameof(typeCatalog));
+
             var typeRegistrations = typeCatalog.GetRegistrations(this.typeRegistrationFactories);
 
             var collectionTypeRegistrations = typeCatalog.GetRegistrations(this.collectionTypeRegistrationFactories);

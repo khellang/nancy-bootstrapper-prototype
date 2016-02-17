@@ -3,7 +3,7 @@ namespace Nancy.Core.Http
     using System;
     using System.Collections;
 
-    public static class HttpUtility
+    internal static class HttpUtility
     {
         private const string Token =
             "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~";
@@ -13,6 +13,8 @@ namespace Nancy.Core.Http
 
         public static bool IsValidToken(string value)
         {
+            Check.NotNull(value, nameof(value));
+
             var values = Values.Value;
 
             foreach (var @char in value)

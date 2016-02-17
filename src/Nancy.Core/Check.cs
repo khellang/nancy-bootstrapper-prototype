@@ -2,9 +2,9 @@
 {
     using System;
 
-    internal static class Check
+    public static class Check
     {
-        public static void NotNull<T>(T value, string paramName) where T : class
+        public static void NotNull<T>(T value, string paramName)
         {
             if (value == null)
             {

@@ -8,10 +8,7 @@ namespace Nancy.Core.Http
     {
         public HttpMethod(string value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Check.NotNull(value, nameof(value));
 
             if (!HttpUtility.IsValidToken(value))
             {

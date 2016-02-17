@@ -14,20 +14,10 @@
             TArg arg,
             Func<TKey, TArg, TValue> valueFactory)
         {
-            if (dictionary == null)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            if (valueFactory == null)
-            {
-                throw new ArgumentNullException(nameof(valueFactory));
-            }
+            Check.NotNull(dictionary, nameof(dictionary));
+            Check.NotNull(key, nameof(key));
+            Check.NotNull(arg, nameof(arg));
+            Check.NotNull(valueFactory, nameof(valueFactory));
 
             while (true)
             {

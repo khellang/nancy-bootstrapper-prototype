@@ -23,11 +23,15 @@ namespace Nancy.Core.Configuration
 
         public void Use(Type implementationType)
         {
+            Check.NotNull(implementationType, nameof(implementationType));
+
             this.registration = new TypeRegistration(typeof(TService), implementationType, this.lifetime);
         }
 
         public TypeRegistration GetRegistration(ITypeCatalog typeCatalog)
         {
+            Check.NotNull(typeCatalog, nameof(typeCatalog));
+
             return this.registration
                 ?? ScanForCustomRegistration(typeCatalog, this.lifetime)
                     ?? GetDefaultRegistration(this.lifetime);

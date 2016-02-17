@@ -11,6 +11,8 @@
     {
         public static IApplicationBuilder UseNancy(this IApplicationBuilder builder)
         {
+            Check.NotNull(builder, nameof(builder));
+
             // We need to wrap the default ApplicationServices
             // because IServiceProvider is not implementing IDisposable.
             var provider = builder.ApplicationServices.AsDisposable(shouldDispose: false);

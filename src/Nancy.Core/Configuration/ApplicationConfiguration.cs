@@ -1,9 +1,13 @@
 namespace Nancy.Core.Configuration
 {
-    public class ApplicationConfiguration<TContainer> : IApplicationConfiguration<TContainer>
+    internal class ApplicationConfiguration<TContainer> : IApplicationConfiguration<TContainer>
+        where TContainer : class
     {
         public ApplicationConfiguration(TContainer container, IFrameworkConfiguration framework)
         {
+            Check.NotNull(container, nameof(container));
+            Check.NotNull(framework, nameof(framework));
+
             this.Container = container;
             this.Framework = framework;
         }

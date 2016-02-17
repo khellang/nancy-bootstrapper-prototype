@@ -28,6 +28,10 @@ namespace Nancy.AspNet
             IPlatformServices platformServices,
             IBootstrapper<IServiceCollection, IDisposableServiceProvider> bootstrapper)
         {
+            Check.NotNull(services, nameof(services));
+            Check.NotNull(platformServices, nameof(platformServices));
+            Check.NotNull(bootstrapper, nameof(bootstrapper));
+
             bootstrapper.Populate(services, platformServices);
 
             // Make sure we add the bootstrapper so it can be resolved in a call to `UseNancy`.

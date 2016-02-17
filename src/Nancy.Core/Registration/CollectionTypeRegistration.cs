@@ -8,6 +8,8 @@ namespace Nancy.Core.Registration
         public CollectionTypeRegistration(Type serviceType, IReadOnlyCollection<Type> implementationTypes, Lifetime lifetime)
             : base(serviceType, lifetime)
         {
+            Check.NotNull(implementationTypes, nameof(implementationTypes));
+
             this.ImplementationTypes = implementationTypes;
         }
 

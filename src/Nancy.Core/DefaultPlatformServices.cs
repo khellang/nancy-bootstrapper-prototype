@@ -9,7 +9,7 @@
         private static readonly Lazy<IPlatformServices> DefaultInstance =
             new Lazy<IPlatformServices>(() => new DefaultPlatformServices());
 
-        public DefaultPlatformServices()
+        private DefaultPlatformServices()
         {
             // TODO: If LibraryManager is null here, we should use DependencyContext.
             var libraryManager = PlatformServices.Default.LibraryManager;

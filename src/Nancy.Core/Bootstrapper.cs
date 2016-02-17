@@ -10,10 +10,13 @@ namespace Nancy.Core
     ///     application container and the framework as a whole.
     /// </summary>
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
-        where TContainer : IDisposable
+        where TContainer : class, IDisposable
+        where TBuilder : class
     {
         public IApplication InitializeApplication(IPlatformServices platformServices)
         {
+            Check.NotNull(platformServices, nameof(platformServices));
+
             // First, we need a container builder.
             // This step is a noop in bootstrappers without the builder/container split.
             var builder = this.CreateBuilder();
@@ -30,6 +33,9 @@ namespace Nancy.Core
 
         public void Populate(TBuilder builder, IPlatformServices platformServices)
         {
+            Check.NotNull(builder, nameof(builder));
+            Check.NotNull(platformServices, nameof(platformServices));
+
             var frameworkConfig = new FrameworkConfiguration();
 
             // We'll hang all configuration related stuff off this object.
@@ -58,6 +64,8 @@ namespace Nancy.Core
 
         public IApplication InitializeApplication(TContainer container)
         {
+            Check.NotNull(container, nameof(container));
+
             // In this case, we don't want to control the container
             // lifetime, because it's passed from outside. We don't own it.
             return this.InitializeApplication(container, shouldDispose: false);
@@ -95,7 +103,7 @@ namespace Nancy.Core
     ///     split, i.e. they allow appending to an existing container instance.
     /// </summary>
     public abstract class Bootstrapper<TContainer> : Bootstrapper<TContainer, TContainer>
-        where TContainer : IDisposable
+        where TContainer : class, IDisposable
     {
         protected sealed override TContainer CreateBuilder() => this.CreateContainer();
 

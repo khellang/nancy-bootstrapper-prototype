@@ -7,6 +7,8 @@ namespace Nancy.Core.Registration
         public InstanceRegistration(Type serviceType, object instance)
             : base(serviceType, Lifetime.Singleton)
         {
+            Check.NotNull(instance, nameof(instance));
+
             this.Instance = instance;
         }
 

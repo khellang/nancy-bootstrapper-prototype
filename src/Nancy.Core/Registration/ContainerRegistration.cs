@@ -6,6 +6,8 @@
     {
         protected ContainerRegistration(Type serviceType, Lifetime lifetime)
         {
+            Check.NotNull(serviceType, nameof(serviceType));
+
             this.ServiceType = serviceType;
             this.Lifetime = lifetime;
         }

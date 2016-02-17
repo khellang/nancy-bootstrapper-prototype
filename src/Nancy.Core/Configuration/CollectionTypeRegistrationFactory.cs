@@ -6,7 +6,7 @@ namespace Nancy.Core.Configuration
     using Nancy.Core.Registration;
     using Nancy.Core.Scanning;
 
-    public class CollectionTypeRegistrationFactory<TService> : ICollectionTypeRegistrationFactory<TService>
+    internal class CollectionTypeRegistrationFactory<TService> : ICollectionTypeRegistrationFactory<TService>
     {
         private readonly IReadOnlyCollection<Type> defaultImplementationTypes;
 
@@ -16,6 +16,8 @@ namespace Nancy.Core.Configuration
 
         public CollectionTypeRegistrationFactory(Lifetime lifetime, IReadOnlyCollection<Type> defaultImplementationTypes)
         {
+            Check.NotNull(defaultImplementationTypes, nameof(defaultImplementationTypes));
+
             this.lifetime = lifetime;
             this.defaultImplementationTypes = defaultImplementationTypes;
             this.implementationTypes = new List<Type>();
@@ -28,11 +30,15 @@ namespace Nancy.Core.Configuration
 
         public void Use(Type implementationType)
         {
+            Check.NotNull(implementationType, nameof(implementationType));
+
             this.implementationTypes.Add(implementationType);
         }
 
         public CollectionTypeRegistration GetRegistration(ITypeCatalog typeCatalog)
         {
+            Check.NotNull(typeCatalog, nameof(typeCatalog));
+
             return GetRegistration(this.implementationTypes, this.lifetime)
                 ?? ScanForCustomImplementations(typeCatalog, this.lifetime)
                     ?? GetDefaultRegistration(this.defaultImplementationTypes, this.lifetime);

@@ -7,6 +7,8 @@ namespace Nancy.Core.Registration
         public TypeRegistration(Type serviceType, Type implementationType, Lifetime lifetime)
             : base(serviceType, lifetime)
         {
+            Check.NotNull(implementationType, nameof(implementationType));
+
             this.ImplementationType = implementationType;
         }
 

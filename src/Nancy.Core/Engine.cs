@@ -10,6 +10,8 @@ namespace Nancy.Core
     {
         public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
+            Check.NotNull(context, nameof(context));
+
             var hellWorldBytes = Encoding.UTF8.GetBytes("Hello World!");
 
             context.Response.StatusCode = Ok;    //
