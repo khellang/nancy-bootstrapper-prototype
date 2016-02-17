@@ -1,9 +1,9 @@
-using Autofac;
-using Nancy.Bootstrappers.Autofac;
-using Nancy.Core.Configuration;
-
 namespace ConsoleApp
 {
+    using Autofac;
+    using Nancy.Bootstrappers.Autofac;
+    using Nancy.Core.Configuration;
+
     public class CustomBootstrapper : AutofacBootstrapper
     {
         protected override void ConfigureApplication(IApplicationConfiguration<ContainerBuilder> app)

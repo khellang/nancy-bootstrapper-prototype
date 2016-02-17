@@ -1,39 +1,39 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Nancy.Core;
-using Nancy.Core.Http;
-
 namespace ConsoleApp
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Nancy.Core;
+    using Nancy.Core.Http;
+
     public class CustomEngine : IEngine, IDisposable
     {
         public CustomEngine(IRequestService requestService, IEnumerable<ISerializer> serializers)
         {
-            System.Console.WriteLine("Created CustomEngine.");
+            Console.WriteLine("Created CustomEngine.");
 
-            RequestService = requestService;
-            Serializers = serializers;
+            this.RequestService = requestService;
+            this.Serializers = serializers;
         }
 
         private IRequestService RequestService { get; }
 
         private IEnumerable<ISerializer> Serializers { get; }
 
+        public void Dispose()
+        {
+            Console.WriteLine("Disposed CustomEngine.");
+        }
+
         public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
-            if (RequestService == null)
+            if (this.RequestService == null)
             {
                 throw new InvalidOperationException("RequestService should've been injected!");
             }
 
             return Task.FromResult(0);
-        }
-
-        public void Dispose()
-        {
-            System.Console.WriteLine("Disposed CustomEngine.");
         }
     }
 }

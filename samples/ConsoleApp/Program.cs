@@ -1,11 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Autofac;
-using Nancy.Core;
-using Nancy.Core.Http;
-
-namespace ConsoleApp
+﻿namespace ConsoleApp
 {
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Autofac;
+    using Nancy.Core;
+    using Nancy.Core.Http;
+
     public class Program
     {
         public static void Main(string[] args)

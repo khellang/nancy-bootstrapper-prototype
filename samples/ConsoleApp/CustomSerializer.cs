@@ -1,23 +1,23 @@
-using System;
-using Nancy.Core;
-
 namespace ConsoleApp
 {
+    using System;
+    using Nancy.Core;
+
     public class CustomSerializer : ISerializer, IDisposable
     {
         public CustomSerializer()
         {
-            System.Console.WriteLine("Created CustomSerializer.");
+            Console.WriteLine("Created CustomSerializer.");
+        }
+
+        public void Dispose()
+        {
+            Console.WriteLine("Disposed CustomSerializer.");
         }
 
         public object Deserialize(string value, Type type)
         {
             throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            System.Console.WriteLine("Disposed CustomSerializer.");
         }
 
         public string Serialize(object value)

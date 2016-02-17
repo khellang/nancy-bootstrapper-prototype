@@ -1,25 +1,25 @@
 {
-    "version": "2.0.0-*",
+  "version": "2.0.0-*",
 
-    "compilationOptions": {
-        "emitEntryPoint": true
-    },
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
 
-    "dependencies": {
-        "Nancy.Bootstrappers.Autofac": { "target": "project" },
-        "Nancy.Core": { "target": "project" }
-    },
+  "dependencies": {
+    "Nancy.Bootstrappers.Autofac": { "target": "project" },
+    "Nancy.Core": { "target": "project" }
+  },
 
-    "commands": {
-        "ConsoleApp": "ConsoleApp"
-    },
+  "commands": {
+    "ConsoleApp": "ConsoleApp"
+  },
 
-    "frameworks": {
-        "dnx451": { },
-        "dnxcore50": {
-            "dependencies": {
-                "System.Console": "4.0.0-beta-23516"
-            }
-        }
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": {
+      "dependencies": {
+        "System.Console": "4.0.0-beta-23516"
+      }
     }
+  }
 }
