@@ -7,7 +7,7 @@ namespace Nancy.Core
     public class DefaultPlatformServices : IPlatformServices
     {
         private static readonly Lazy<IPlatformServices> DefaultInstance =
-            new Lazy<IPlatformServices>(() => new DefaultPlatformServices()); 
+            new Lazy<IPlatformServices>(() => new DefaultPlatformServices());
 
         public DefaultPlatformServices()
         {
