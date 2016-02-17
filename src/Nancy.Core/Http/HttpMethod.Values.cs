@@ -15,5 +15,7 @@
         public static HttpMethod Head { get; } = "HEAD";
 
         public static HttpMethod Options { get; } = "OPTIONS";
+
+        // TODO: Do we want to generate these from a registry?
     }
 }
