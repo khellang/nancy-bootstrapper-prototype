@@ -2,6 +2,7 @@ namespace Nancy.Core.Configuration
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Nancy.Core.Registration;
     using Nancy.Core.Scanning;
 
@@ -50,9 +51,10 @@ namespace Nancy.Core.Configuration
         private static CollectionTypeRegistration ScanForCustomImplementations(ITypeCatalog typeCatalog, Lifetime lifetime)
         {
             var customImplementationTypes = typeCatalog
-                .GetTypesAssignableTo<TService>(ScanningStrategies.ExcludeNancy);
+                .GetTypesAssignableTo<TService>(ScanningStrategies.ExcludeNancy)
+                .ToArray();
 
-            if (customImplementationTypes.Count > 0)
+            if (customImplementationTypes.Length > 0)
             {
                 return new CollectionTypeRegistration(typeof(TService), customImplementationTypes, lifetime);
             }

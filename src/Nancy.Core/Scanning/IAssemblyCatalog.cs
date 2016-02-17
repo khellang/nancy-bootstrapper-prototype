@@ -5,6 +5,6 @@ namespace Nancy.Core.Scanning
 
     public interface IAssemblyCatalog
     {
-        IReadOnlyCollection<Assembly> GetAssemblies();
+        IEnumerable<Assembly> GetAssemblies();
     }
 }

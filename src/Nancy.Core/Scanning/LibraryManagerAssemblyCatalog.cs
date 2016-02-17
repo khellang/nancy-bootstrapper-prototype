@@ -1,33 +1,25 @@
 namespace Nancy.Core.Scanning
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
     using Microsoft.Extensions.PlatformAbstractions;
 
     public class LibraryManagerAssemblyCatalog : IAssemblyCatalog
     {
-        private readonly Lazy<IReadOnlyCollection<Assembly>> lazyAssemblies;
-
         private readonly ILibraryManager libraryManager;
 
         public LibraryManagerAssemblyCatalog(ILibraryManager libraryManager)
         {
+            Check.NotNull(libraryManager, nameof(libraryManager));
+
             this.libraryManager = libraryManager;
-            this.lazyAssemblies = new Lazy<IReadOnlyCollection<Assembly>>(this.GetAssemblies);
         }
 
-        IReadOnlyCollection<Assembly> IAssemblyCatalog.GetAssemblies()
-        {
-            return this.lazyAssemblies.Value;
-        }
-
-        private IReadOnlyCollection<Assembly> GetAssemblies()
+        public IEnumerable<Assembly> GetAssemblies()
         {
             var nancyAssembly = typeof(IEngine).GetTypeInfo().Assembly;
 
-            var assemblies = new HashSet<Assembly> { nancyAssembly };
+            yield return nancyAssembly;
 
             var nancyAssemblyName = nancyAssembly.GetName().Name;
 
@@ -37,11 +29,9 @@ namespace Nancy.Core.Scanning
             {
                 foreach (var assemblyName in referencingLibrary.Assemblies)
                 {
-                    assemblies.Add(Assembly.Load(assemblyName));
+                    yield return Assembly.Load(assemblyName);
                 }
             }
-
-            return assemblies.ToArray();
         }
     }
 }

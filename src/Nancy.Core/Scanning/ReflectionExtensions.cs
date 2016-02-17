@@ -7,8 +7,11 @@
     {
         public static bool IsAssignableTo(this TypeInfo sourceType, TypeInfo targetType)
         {
+            Check.NotNull(sourceType, nameof(sourceType));
+            Check.NotNull(targetType, nameof(targetType));
+
             return targetType.IsGenericTypeDefinition
-                ? targetType.IsAssignableToGenericTypeDefinition(targetType)
+                ? sourceType.IsAssignableToGenericTypeDefinition(targetType)
                 : targetType.IsAssignableFrom(sourceType);
         }
 

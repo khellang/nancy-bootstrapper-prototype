@@ -2,26 +2,28 @@ namespace Nancy.Core.Scanning
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
 
     public class TypeCatalog : ITypeCatalog
     {
-        private readonly IAssemblyCatalog assemblyCatalog;
+        private readonly Lazy<IReadOnlyCollection<Assembly>> assemblies;
 
         public TypeCatalog(IAssemblyCatalog assemblyCatalog)
         {
-            this.assemblyCatalog = assemblyCatalog;
+            Check.NotNull(assemblyCatalog, nameof(assemblyCatalog));
+
+            this.assemblies = new Lazy<IReadOnlyCollection<Assembly>>(() => assemblyCatalog.GetAssemblies().ToArray());
         }
 
-        public IReadOnlyCollection<Type> GetTypesAssignableTo(Type targetType, ScanningStrategy strategy)
+        public IEnumerable<Type> GetTypesAssignableTo(Type targetType, ScanningStrategy strategy)
         {
-            var assemblies = this.assemblyCatalog.GetAssemblies();
-
-            var result = new List<Type>();
+            Check.NotNull(targetType, nameof(targetType));
+            Check.NotNull(strategy, nameof(strategy));
 
             var targetTypeInfo = targetType.GetTypeInfo();
 
-            foreach (var assembly in assemblies)
+            foreach (var assembly in this.assemblies.Value)
             {
                 if (!strategy.Invoke(assembly))
                 {
@@ -32,14 +34,17 @@ namespace Nancy.Core.Scanning
                 {
                     var exportedTypeInfo = exportedType.GetTypeInfo();
 
-                    if (!exportedTypeInfo.IsAbstract && exportedTypeInfo.IsAssignableTo(targetTypeInfo))
+                    if (exportedTypeInfo.IsAbstract)
                     {
-                        result.Add(exportedType);
+                        continue;
+                    }
+
+                    if (exportedTypeInfo.IsAssignableTo(targetTypeInfo))
+                    {
+                        yield return exportedType;
                     }
                 }
             }
-
-            return result.ToArray();
         }
     }
 }
