@@ -4,6 +4,7 @@ namespace Nancy.Core
     using System.Threading;
     using System.Threading.Tasks;
     using Nancy.Core.Http;
+    using static Nancy.Core.Http.HttpStatusCode;
 
     public class Engine : IEngine
     {
@@ -11,7 +12,8 @@ namespace Nancy.Core
         {
             var hellWorldBytes = Encoding.UTF8.GetBytes("Hello World!");
 
-            context.Response.StatusCode = HttpStatusCode.Ok;
+            context.Response.StatusCode = Ok;    //
+            context.Response.StatusCode = 200;   // Pretty cool, eh?
 
             // TODO: Set Content-Type and Content-Length.
 
