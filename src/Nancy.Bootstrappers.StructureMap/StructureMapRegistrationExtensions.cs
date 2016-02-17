@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Nancy.Core.Registration;
-using StructureMap;
-using StructureMap.Pipeline;
-
-namespace Nancy.Bootstrappers.StructureMap
+﻿namespace Nancy.Bootstrappers.StructureMap
 {
+    using System;
+    using System.Collections.Generic;
+    using global::StructureMap;
+    using global::StructureMap.Pipeline;
+    using Nancy.Core.Registration;
+
     internal static class StructureMapRegistrationExtensions
     {
         public static void AddRegistry(this IProfileRegistry profileRegistry, IContainerRegistry registry)

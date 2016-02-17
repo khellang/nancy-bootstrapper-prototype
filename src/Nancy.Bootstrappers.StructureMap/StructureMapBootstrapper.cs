@@ -1,11 +1,11 @@
-﻿using Nancy.Core;
-using Nancy.Core.Http;
-using Nancy.Core.Registration;
-using StructureMap;
-using StructureMap.Pipeline;
-
-namespace Nancy.Bootstrappers.StructureMap
+﻿namespace Nancy.Bootstrappers.StructureMap
 {
+    using global::StructureMap;
+    using global::StructureMap.Pipeline;
+    using Nancy.Core;
+    using Nancy.Core.Http;
+    using Nancy.Core.Registration;
+
     public class StructureMapBootstrapper : Bootstrapper<IContainer>
     {
         protected sealed override IContainer CreateContainer()
