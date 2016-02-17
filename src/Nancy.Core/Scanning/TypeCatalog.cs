@@ -32,9 +32,7 @@ namespace Nancy.Core.Scanning
                 {
                     var exportedTypeInfo = exportedType.GetTypeInfo();
 
-                    // TODO: If targetTypeInfo is a generic type definition, should we look for closed types?
-
-                    if (!exportedTypeInfo.IsAbstract && targetTypeInfo.IsAssignableFrom(exportedTypeInfo))
+                    if (!exportedTypeInfo.IsAbstract && exportedTypeInfo.IsAssignableTo(targetTypeInfo))
                     {
                         result.Add(exportedType);
                     }
