@@ -1,11 +1,11 @@
-using Nancy.Core;
-using Nancy.Core.Http;
-using Nancy.Core.Registration;
-using SimpleInjector;
-using SimpleInjector.Extensions.ExecutionContextScoping;
-
 namespace Nancy.Bootstrappers.SimpleInjector
 {
+    using global::SimpleInjector;
+    using global::SimpleInjector.Extensions.ExecutionContextScoping;
+    using Nancy.Core;
+    using Nancy.Core.Http;
+    using Nancy.Core.Registration;
+
     public class SimpleInjectorBootstrapper : Bootstrapper<Container>
     {
         private static readonly ExecutionContextScopeLifestyle DefaultLifestyle = new ExecutionContextScopeLifestyle();

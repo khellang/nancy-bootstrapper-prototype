@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Nancy.Core.Registration;
-using SimpleInjector;
-
-namespace Nancy.Bootstrappers.SimpleInjector
+﻿namespace Nancy.Bootstrappers.SimpleInjector
 {
+    using System;
+    using System.Collections.Generic;
+    using global::SimpleInjector;
+    using Nancy.Core.Registration;
+
     internal static class SimpleInjectorRegistrationExtensions
     {
         public static void Register(this Container container, IContainerRegistry registry)
@@ -28,7 +28,7 @@ namespace Nancy.Bootstrappers.SimpleInjector
             {
                 var capacity = collectionTypeRegistration.ImplementationTypes.Count;
 
-                var convertedRegistrations = new List<global::SimpleInjector.Registration>(capacity);
+                var convertedRegistrations = new List<Registration>(capacity);
 
                 var lifestyle = collectionTypeRegistration.Lifetime.AsLifestyle();
 
