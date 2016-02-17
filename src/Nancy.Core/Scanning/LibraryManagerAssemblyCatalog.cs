@@ -1,5 +1,6 @@
 namespace Nancy.Core.Scanning
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -7,39 +8,36 @@ namespace Nancy.Core.Scanning
 
     public class LibraryManagerAssemblyCatalog : IAssemblyCatalog
     {
-        private static readonly string NancyLibraryName = ScanningStrategies.NancyAssemblyName;
+        private readonly Lazy<IReadOnlyCollection<Assembly>> lazyAssemblies;
 
         private readonly ILibraryManager libraryManager;
 
         public LibraryManagerAssemblyCatalog(ILibraryManager libraryManager)
         {
             this.libraryManager = libraryManager;
+            this.lazyAssemblies = new Lazy<IReadOnlyCollection<Assembly>>(this.GetAssemblies);
         }
 
-        public IReadOnlyCollection<Assembly> GetAssemblies(ScanningStrategy strategy)
+        IReadOnlyCollection<Assembly> IAssemblyCatalog.GetAssemblies()
         {
-            var assemblies = new HashSet<Assembly>();
+            return this.lazyAssemblies.Value;
+        }
 
-            var nancyLibrary = this.libraryManager.GetLibrary(NancyLibraryName);
+        private IReadOnlyCollection<Assembly> GetAssemblies()
+        {
+            var nancyAssembly = typeof(IEngine).GetTypeInfo().Assembly;
 
-            foreach (var assemblyName in nancyLibrary.Assemblies)
-            {
-                if (strategy.Invoke(assemblyName))
-                {
-                    assemblies.Add(Assembly.Load(assemblyName));
-                }
-            }
+            var assemblies = new HashSet<Assembly> { nancyAssembly };
 
-            var referencingLibraries = this.libraryManager.GetReferencingLibraries(NancyLibraryName);
+            var nancyAssemblyName = nancyAssembly.GetName().Name;
+
+            var referencingLibraries = this.libraryManager.GetReferencingLibraries(nancyAssemblyName);
 
             foreach (var referencingLibrary in referencingLibraries)
             {
                 foreach (var assemblyName in referencingLibrary.Assemblies)
                 {
-                    if (strategy.Invoke(assemblyName))
-                    {
-                        assemblies.Add(Assembly.Load(assemblyName));
-                    }
+                    assemblies.Add(Assembly.Load(assemblyName));
                 }
             }
 

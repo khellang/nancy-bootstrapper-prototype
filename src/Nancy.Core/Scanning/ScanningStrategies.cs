@@ -5,21 +5,17 @@
 
     public static class ScanningStrategies
     {
-        public static readonly string NancyAssemblyName = typeof(IEngine).GetTypeInfo().Assembly.GetName().Name;
+        public static readonly Assembly NancyAssembly = typeof(IEngine).GetTypeInfo().Assembly;
 
-        public static bool All(AssemblyName assemblyName)
-        {
-            return true;
-        }
+        public static ScanningStrategy All { get; } = assembly => true;
 
-        public static bool OnlyNancy(AssemblyName assemblyName)
-        {
-            return assemblyName.Name.Equals(NancyAssemblyName, StringComparison.Ordinal);
-        }
+        public static ScanningStrategy OnlyNancy { get; } = assembly => IsNancy(assembly);
 
-        public static bool ExcludeNancy(AssemblyName assemblyName)
+        public static ScanningStrategy ExcludeNancy { get; } = assembly => !IsNancy(assembly);
+
+        private static bool IsNancy(Assembly assembly)
         {
-            return !assemblyName.Name.Equals(NancyAssemblyName, StringComparison.Ordinal);
+            return assembly.Equals(NancyAssembly);
         }
     }
 }

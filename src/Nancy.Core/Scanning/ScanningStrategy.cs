@@ -2,5 +2,5 @@
 {
     using System.Reflection;
 
-    public delegate bool ScanningStrategy(AssemblyName assembly);
+    public delegate bool ScanningStrategy(Assembly assembly);
 }

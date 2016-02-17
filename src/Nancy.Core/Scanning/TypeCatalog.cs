@@ -1,32 +1,33 @@
 namespace Nancy.Core.Scanning
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Reflection;
 
     public class TypeCatalog : ITypeCatalog
     {
-        private readonly ConcurrentDictionary<ScanningStrategy, IReadOnlyCollection<Assembly>> assemblyCache;
-
         private readonly IAssemblyCatalog assemblyCatalog;
 
         public TypeCatalog(IAssemblyCatalog assemblyCatalog)
         {
             this.assemblyCatalog = assemblyCatalog;
-            this.assemblyCache = new ConcurrentDictionary<ScanningStrategy, IReadOnlyCollection<Assembly>>();
         }
 
         public IReadOnlyCollection<Type> GetTypesAssignableTo(Type targetType, ScanningStrategy strategy)
         {
-            var result = new List<Type>();
+            var assemblies = this.assemblyCatalog.GetAssemblies();
 
-            var assemblies = this.assemblyCache.GetOrAdd(strategy, this.assemblyCatalog, (s, c) => c.GetAssemblies(s));
+            var result = new List<Type>();
 
             var targetTypeInfo = targetType.GetTypeInfo();
 
             foreach (var assembly in assemblies)
             {
+                if (!strategy.Invoke(assembly))
+                {
+                    continue;
+                }
+
                 foreach (var exportedType in assembly.ExportedTypes)
                 {
                     var exportedTypeInfo = exportedType.GetTypeInfo();
