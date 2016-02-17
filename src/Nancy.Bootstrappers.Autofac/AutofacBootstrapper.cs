@@ -1,11 +1,11 @@
-using Autofac;
-using Autofac.Core.Lifetime;
-using Nancy.Core;
-using Nancy.Core.Http;
-using Nancy.Core.Registration;
-
 namespace Nancy.Bootstrappers.Autofac
 {
+    using global::Autofac;
+    using global::Autofac.Core.Lifetime;
+    using Nancy.Core;
+    using Nancy.Core.Http;
+    using Nancy.Core.Registration;
+
     public class AutofacBootstrapper : Bootstrapper<ContainerBuilder, ILifetimeScope>
     {
         protected sealed override ContainerBuilder CreateBuilder()

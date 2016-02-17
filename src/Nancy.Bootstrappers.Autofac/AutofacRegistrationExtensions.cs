@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using Autofac;
-using Autofac.Builder;
-using Nancy.Core.Registration;
-
 namespace Nancy.Bootstrappers.Autofac
 {
+    using System;
+    using System.Collections.Generic;
+    using global::Autofac;
+    using global::Autofac.Builder;
+    using Nancy.Core.Registration;
+
     internal static class AutofacRegistrationExtensions
     {
         public static void Register(this ContainerBuilder builder, IContainerRegistry registry)
