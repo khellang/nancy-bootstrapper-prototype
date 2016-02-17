@@ -1,8 +1,8 @@
-﻿using System;
-using System.Reflection;
-
-namespace Nancy.Core.Scanning
+﻿namespace Nancy.Core.Scanning
 {
+    using System;
+    using System.Reflection;
+
     public static class ScanningStrategies
     {
         public static readonly string NancyAssemblyName = typeof(IEngine).GetTypeInfo().Assembly.GetName().Name;

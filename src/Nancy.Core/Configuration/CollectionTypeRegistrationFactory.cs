@@ -1,40 +1,40 @@
-using System;
-using System.Collections.Generic;
-using Nancy.Core.Registration;
-using Nancy.Core.Scanning;
-
 namespace Nancy.Core.Configuration
 {
+    using System;
+    using System.Collections.Generic;
+    using Nancy.Core.Registration;
+    using Nancy.Core.Scanning;
+
     public class CollectionTypeRegistrationFactory<TService> : ICollectionTypeRegistrationFactory<TService>
     {
+        private readonly IReadOnlyCollection<Type> defaultImplementationTypes;
+
+        private readonly List<Type> implementationTypes;
+
+        private readonly Lifetime lifetime;
+
         public CollectionTypeRegistrationFactory(Lifetime lifetime, IReadOnlyCollection<Type> defaultImplementationTypes)
         {
-            Lifetime = lifetime;
-            DefaultImplementationTypes = defaultImplementationTypes;
-            ImplementationTypes = new List<Type>();
+            this.lifetime = lifetime;
+            this.defaultImplementationTypes = defaultImplementationTypes;
+            this.implementationTypes = new List<Type>();
         }
-
-        private Lifetime Lifetime { get; }
-
-        private IReadOnlyCollection<Type> DefaultImplementationTypes { get; }
-
-        private List<Type> ImplementationTypes { get; }
 
         public void Use<TImplementation>() where TImplementation : TService
         {
-            Use(typeof(TImplementation));
+            this.Use(typeof(TImplementation));
         }
 
         public void Use(Type implementationType)
         {
-            ImplementationTypes.Add(implementationType);
+            this.implementationTypes.Add(implementationType);
         }
 
         public CollectionTypeRegistration GetRegistration(ITypeCatalog typeCatalog)
         {
-            return GetRegistration(ImplementationTypes, Lifetime)
-                ?? ScanForCustomImplementations(typeCatalog, Lifetime)
-                ?? GetDefaultRegistration(DefaultImplementationTypes, Lifetime);
+            return GetRegistration(this.implementationTypes, this.lifetime)
+                ?? ScanForCustomImplementations(typeCatalog, this.lifetime)
+                    ?? GetDefaultRegistration(this.defaultImplementationTypes, this.lifetime);
         }
 
         private static CollectionTypeRegistration GetRegistration(IReadOnlyCollection<Type> implementationTypes, Lifetime lifetime)

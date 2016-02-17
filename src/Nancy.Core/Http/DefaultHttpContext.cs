@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using System.Security.Claims;
-
 namespace Nancy.Core.Http
 {
+    using System.Collections.Generic;
+    using System.Security.Claims;
+
     public class DefaultHttpContext : HttpContext
     {
         public override HttpRequest Request { get; }

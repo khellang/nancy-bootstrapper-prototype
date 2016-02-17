@@ -1,10 +1,10 @@
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Nancy.Core.Http;
-
 namespace Nancy.Core
 {
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Nancy.Core.Http;
+
     public class Engine : IEngine
     {
         public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Nancy.Core.Registration
+﻿namespace Nancy.Core.Registration
 {
+    using System.Collections.Generic;
+
     public interface IContainerRegistry
     {
         IReadOnlyCollection<TypeRegistration> TypeRegistrations { get; }

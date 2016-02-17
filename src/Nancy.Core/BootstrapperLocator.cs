@@ -1,22 +1,22 @@
-﻿using System;
-using System.Linq;
-using Nancy.Core.Scanning;
-
-namespace Nancy.Core
+﻿namespace Nancy.Core
 {
+    using System;
+    using System.Linq;
+    using Nancy.Core.Scanning;
+
     public class BootstrapperLocator : IBootstrapperLocator
     {
+        private readonly ITypeCatalog typeCatalog;
+
         public BootstrapperLocator(ITypeCatalog typeCatalog)
         {
-            TypeCatalog = typeCatalog;
+            this.typeCatalog = typeCatalog;
         }
-
-        private ITypeCatalog TypeCatalog { get; }
 
         public IBootstrapper GetBootstrapper()
         {
             // TODO: Should we throw if multiple types are found?
-            var bootstrapper = TypeCatalog
+            var bootstrapper = this.typeCatalog
                 .GetTypesAssignableTo<IBootstrapper>(ScanningStrategies.ExcludeNancy)
                 .FirstOrDefault();
 
@@ -27,7 +27,7 @@ namespace Nancy.Core
             }
 
             // TODO: Wrap potential exception with a better error message.
-            return (IBootstrapper) Activator.CreateInstance(bootstrapper);
+            return (IBootstrapper)Activator.CreateInstance(bootstrapper);
         }
     }
 }

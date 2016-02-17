@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.Extensions.PlatformAbstractions;
-using Nancy.Core.Scanning;
-
-namespace Nancy.Core
+﻿namespace Nancy.Core
 {
+    using System;
+    using Microsoft.Extensions.PlatformAbstractions;
+    using Nancy.Core.Scanning;
+
     public class DefaultPlatformServices : IPlatformServices
     {
         private static readonly Lazy<IPlatformServices> DefaultInstance =
@@ -16,9 +16,9 @@ namespace Nancy.Core
 
             // TODO: We need a fallback AssemblyCatalog for full framework. AppDomainAssemblyCatalog?
 
-            AssemblyCatalog = new LibraryManagerAssemblyCatalog(libraryManager);
-            TypeCatalog = new TypeCatalog(AssemblyCatalog);
-            BootstrapperLocator = new BootstrapperLocator(TypeCatalog);
+            this.AssemblyCatalog = new LibraryManagerAssemblyCatalog(libraryManager);
+            this.TypeCatalog = new TypeCatalog(this.AssemblyCatalog);
+            this.BootstrapperLocator = new BootstrapperLocator(this.TypeCatalog);
         }
 
         public static IPlatformServices Instance => DefaultInstance.Value;

@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using Nancy.Core.Configuration;
-using Nancy.Core.Registration;
-
 namespace Nancy.Core.Scanning
 {
+    using System;
+    using System.Collections.Generic;
+    using Nancy.Core.Configuration;
+    using Nancy.Core.Registration;
+
     public static class TypeCatalogExtensions
     {
         public static IReadOnlyCollection<Type> GetTypesAssignableTo<T>(this ITypeCatalog typeCatalog)

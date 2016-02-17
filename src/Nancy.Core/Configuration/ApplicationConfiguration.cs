@@ -4,8 +4,8 @@ namespace Nancy.Core.Configuration
     {
         public ApplicationConfiguration(TContainer container, IFrameworkConfiguration framework)
         {
-            Container = container;
-            Framework = framework;
+            this.Container = container;
+            this.Framework = framework;
         }
 
         public TContainer Container { get; }

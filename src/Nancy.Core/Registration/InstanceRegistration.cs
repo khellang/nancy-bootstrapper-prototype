@@ -1,13 +1,13 @@
-using System;
-
 namespace Nancy.Core.Registration
 {
+    using System;
+
     public class InstanceRegistration : ContainerRegistration
     {
         public InstanceRegistration(Type serviceType, object instance)
             : base(serviceType, Lifetime.Singleton)
         {
-            Instance = instance;
+            this.Instance = instance;
         }
 
         public object Instance { get; }

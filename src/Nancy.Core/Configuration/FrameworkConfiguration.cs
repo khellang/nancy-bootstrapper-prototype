@@ -1,24 +1,28 @@
-using System;
-using System.Collections.Generic;
-using Nancy.Core.Registration;
-using Nancy.Core.Scanning;
-
 namespace Nancy.Core.Configuration
 {
+    using System;
+    using System.Collections.Generic;
+    using Nancy.Core.Registration;
+    using Nancy.Core.Scanning;
+
     public class FrameworkConfiguration : IFrameworkConfiguration
     {
         private static readonly Type[] DefaultSerializerTypes = { typeof(JsonNetSerializer) };
 
+        private readonly List<IRegistrationFactory<CollectionTypeRegistration>> collectionTypeRegistrationFactories;
+
+        private readonly List<IRegistrationFactory<TypeRegistration>> typeRegistrationFactories;
+
         public FrameworkConfiguration()
         {
-            TypeRegistrationFactories = new List<IRegistrationFactory<TypeRegistration>>
+            this.typeRegistrationFactories = new List<IRegistrationFactory<TypeRegistration>>
             {
-                (Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.PerRequest))
+                (this.Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.PerRequest))
             };
 
-            CollectionTypeRegistrationFactories = new List<IRegistrationFactory<CollectionTypeRegistration>>
+            this.collectionTypeRegistrationFactories = new List<IRegistrationFactory<CollectionTypeRegistration>>
             {
-                (Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, DefaultSerializerTypes))
+                (this.Serializers = new CollectionTypeRegistrationFactory<ISerializer>(Lifetime.Singleton, DefaultSerializerTypes))
             };
         }
 
@@ -26,15 +30,11 @@ namespace Nancy.Core.Configuration
 
         public ICollectionTypeRegistrationFactory<ISerializer> Serializers { get; }
 
-        private List<IRegistrationFactory<TypeRegistration>> TypeRegistrationFactories { get; }
-
-        private List<IRegistrationFactory<CollectionTypeRegistration>> CollectionTypeRegistrationFactories { get; }
-
         public IContainerRegistry GetRegistry(ITypeCatalog typeCatalog)
         {
-            var typeRegistrations = typeCatalog.GetRegistrations(TypeRegistrationFactories);
+            var typeRegistrations = typeCatalog.GetRegistrations(this.typeRegistrationFactories);
 
-            var collectionTypeRegistrations = typeCatalog.GetRegistrations(CollectionTypeRegistrationFactories);
+            var collectionTypeRegistrations = typeCatalog.GetRegistrations(this.collectionTypeRegistrationFactories);
 
             return new ContainerRegistry(typeRegistrations, collectionTypeRegistrations);
         }

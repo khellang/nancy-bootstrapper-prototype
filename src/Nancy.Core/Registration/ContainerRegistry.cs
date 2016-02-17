@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Nancy.Core.Registration
+﻿namespace Nancy.Core.Registration
 {
+    using System.Collections.Generic;
+
     public class ContainerRegistry : IContainerRegistry
     {
         private static readonly TypeRegistration[] EmptyTypeRegistrations = new TypeRegistration[0];
@@ -14,9 +14,9 @@ namespace Nancy.Core.Registration
             IReadOnlyCollection<CollectionTypeRegistration> collectionTypeRegistrations = null,
             IReadOnlyCollection<InstanceRegistration> instanceRegistrations = null)
         {
-            TypeRegistrations = typeRegistrations ?? EmptyTypeRegistrations;
-            CollectionTypeRegistrations = collectionTypeRegistrations ?? EmptyCollectionTypeRegistrations;
-            InstanceRegistrations = instanceRegistrations ?? EmptyInstanceRegistrations;
+            this.TypeRegistrations = typeRegistrations ?? EmptyTypeRegistrations;
+            this.CollectionTypeRegistrations = collectionTypeRegistrations ?? EmptyCollectionTypeRegistrations;
+            this.InstanceRegistrations = instanceRegistrations ?? EmptyInstanceRegistrations;
         }
 
         public IReadOnlyCollection<TypeRegistration> TypeRegistrations { get; }

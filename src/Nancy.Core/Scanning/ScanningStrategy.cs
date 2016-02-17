@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-
-namespace Nancy.Core.Scanning
+﻿namespace Nancy.Core.Scanning
 {
+    using System.Reflection;
+
     public delegate bool ScanningStrategy(AssemblyName assembly);
 }

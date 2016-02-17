@@ -1,9 +1,9 @@
-using System;
-using System.Diagnostics;
-using System.Text;
-
 namespace Nancy.Core.Http
 {
+    using System;
+    using System.Diagnostics;
+    using System.Text;
+
     [DebuggerDisplay("{ToString(), nq}")]
     public abstract class Url
     {
@@ -23,15 +23,15 @@ namespace Nancy.Core.Http
 
         public abstract string QueryString { get; set; }
 
-        public bool IsHttps => string.Equals(Scheme, HttpsScheme, StringComparison.OrdinalIgnoreCase);
+        public bool IsHttps => string.Equals(this.Scheme, HttpsScheme, StringComparison.OrdinalIgnoreCase);
 
         public override string ToString()
         {
-            var scheme = Scheme;
-            var host = Host;
-            var pathBase = PathBase;
-            var path = Path;
-            var queryString = QueryString;
+            var scheme = this.Scheme;
+            var host = this.Host;
+            var pathBase = this.PathBase;
+            var path = this.Path;
+            var queryString = this.QueryString;
 
             // PERF: Pre-compute the length to allocate correctly in StringBuilder.
             var length = scheme.Length

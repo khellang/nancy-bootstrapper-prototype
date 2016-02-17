@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Claims;
-
-namespace Nancy.Core.Http
+﻿namespace Nancy.Core.Http
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Security.Claims;
+
     [DebuggerDisplay("{ToString(), nq}")]
     public abstract class HttpContext
     {
@@ -17,7 +17,7 @@ namespace Nancy.Core.Http
 
         public override string ToString()
         {
-            return $"{Request} -> {Response}";
+            return $"{this.Request} -> {this.Response}";
         }
     }
 }

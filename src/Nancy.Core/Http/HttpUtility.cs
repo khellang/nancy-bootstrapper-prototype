@@ -1,8 +1,8 @@
-using System;
-using System.Collections;
-
 namespace Nancy.Core.Http
 {
+    using System;
+    using System.Collections;
+
     public static class HttpUtility
     {
         private const string Token =
@@ -45,23 +45,23 @@ namespace Nancy.Core.Http
 
         private struct TokenValues
         {
+            private readonly BitArray bitArray;
+
+            private readonly int offset;
+
             public TokenValues(BitArray bitArray, int offset)
             {
-                BitArray = bitArray;
-                Offset = offset;
+                this.bitArray = bitArray;
+                this.offset = offset;
             }
-
-            private BitArray BitArray { get; }
-
-            private int Offset { get; }
 
             public bool IsValid(char value)
             {
-                var index = value - Offset;
+                var index = value - this.offset;
 
                 return index >= 0
-                    && index < BitArray.Length
-                    && BitArray[index];
+                    && index < this.bitArray.Length
+                    && this.bitArray[index];
             }
         }
     }

@@ -1,36 +1,36 @@
-using System;
-using System.Linq;
-using Nancy.Core.Registration;
-using Nancy.Core.Scanning;
-
 namespace Nancy.Core.Configuration
 {
+    using System;
+    using System.Linq;
+    using Nancy.Core.Registration;
+    using Nancy.Core.Scanning;
+
     public class TypeRegistrationFactory<TService, TDefaultImplementation> : ITypeRegistrationFactory<TService>
     {
+        private readonly Lifetime lifetime;
+
+        private TypeRegistration registration;
+
         public TypeRegistrationFactory(Lifetime lifetime)
         {
-            Lifetime = lifetime;
+            this.lifetime = lifetime;
         }
-
-        private Lifetime Lifetime { get; }
-
-        private TypeRegistration Registration { get; set; }
 
         public void Use<TImplementation>() where TImplementation : TService
         {
-            Use(typeof(TImplementation));
+            this.Use(typeof(TImplementation));
         }
 
         public void Use(Type implementationType)
         {
-            Registration = new TypeRegistration(typeof(TService), implementationType, Lifetime);
+            this.registration = new TypeRegistration(typeof(TService), implementationType, this.lifetime);
         }
 
         public TypeRegistration GetRegistration(ITypeCatalog typeCatalog)
         {
-            return Registration
-                ?? ScanForCustomRegistration(typeCatalog, Lifetime)
-                ?? GetDefaultRegistration(Lifetime);
+            return this.registration
+                ?? ScanForCustomRegistration(typeCatalog, this.lifetime)
+                    ?? GetDefaultRegistration(this.lifetime);
         }
 
         private static TypeRegistration ScanForCustomRegistration(ITypeCatalog typeCatalog, Lifetime lifetime)

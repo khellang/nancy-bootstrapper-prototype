@@ -1,14 +1,13 @@
-using System;
-using Nancy.Core.Configuration;
-using Nancy.Core.Registration;
-
 namespace Nancy.Core
 {
+    using System;
+    using Nancy.Core.Configuration;
+    using Nancy.Core.Registration;
+
     /// <summary>
-    /// The main base class for all bootstrappers.
-    ///
-    /// This is responsible for creating and configuring the
-    /// application container and the framework as a whole.
+    ///     The main base class for all bootstrappers.
+    ///     This is responsible for creating and configuring the
+    ///     application container and the framework as a whole.
     /// </summary>
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
         where TContainer : IDisposable
@@ -17,16 +16,16 @@ namespace Nancy.Core
         {
             // First, we need a container builder.
             // This step is a noop in bootstrappers without the builder/container split.
-            var builder = CreateBuilder();
+            var builder = this.CreateBuilder();
 
-            Populate(builder, platformServices);
+            this.Populate(builder, platformServices);
 
             // Once everything is registered, it's time to build the container.
             // This step is a noop in bootstrappers without the builder/container split.
-            var container = BuildContainer(builder);
+            var container = this.BuildContainer(builder);
 
             // Since we've built the container, we want to dispose it as well.
-            return InitializeApplication(container, shouldDispose: true);
+            return this.InitializeApplication(container, shouldDispose: true);
         }
 
         public void Populate(TBuilder builder, IPlatformServices platformServices)
@@ -40,12 +39,12 @@ namespace Nancy.Core
             // This is the main configuration point for the user.
             // Here you can register stuff in the container, swap out
             // Nancy services, change configuration etc.
-            ConfigureApplication(applicationConfig);
+            this.ConfigureApplication(applicationConfig);
 
             // Get platform services to register in the container.
             var platformRegistry = platformServices.GetRegistry();
 
-            Register(builder, platformRegistry);
+            this.Register(builder, platformRegistry);
 
             // Once the user has configured everything, we build a
             // "container registry", this contains all registrations
@@ -54,14 +53,14 @@ namespace Nancy.Core
 
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.
-            Register(builder, frameworkRegistry);
+            this.Register(builder, frameworkRegistry);
         }
 
         public IApplication InitializeApplication(TContainer container)
         {
             // In this case, we don't want to control the container
             // lifetime, because it's passed from outside. We don't own it.
-            return InitializeApplication(container, shouldDispose: false);
+            return this.InitializeApplication(container, shouldDispose: false);
         }
 
         private IApplication InitializeApplication(TContainer container, bool shouldDispose)
@@ -69,11 +68,11 @@ namespace Nancy.Core
             // When the container is built, we offer the bootstrapper
             // implementation a chance to validate the container configuration
             // This could prevent obvious configuration errors.
-            ValidateContainerConfiguration(container);
+            this.ValidateContainerConfiguration(container);
 
             // We finally ask the bootstrapper implementation to give us
             // an IApplication instance before returning it to the caller.
-            return CreateApplication(container, shouldDispose);
+            return this.CreateApplication(container, shouldDispose);
         }
 
         protected abstract TBuilder CreateBuilder();
@@ -92,13 +91,13 @@ namespace Nancy.Core
     }
 
     /// <summary>
-    /// A convenience bootstrapper base for containers without a builder/container
-    /// split, i.e. they allow appending to an existing container instance.
+    ///     A convenience bootstrapper base for containers without a builder/container
+    ///     split, i.e. they allow appending to an existing container instance.
     /// </summary>
     public abstract class Bootstrapper<TContainer> : Bootstrapper<TContainer, TContainer>
         where TContainer : IDisposable
     {
-        protected sealed override TContainer CreateBuilder() => CreateContainer();
+        protected sealed override TContainer CreateBuilder() => this.CreateContainer();
 
         protected sealed override TContainer BuildContainer(TContainer container) => container;
 

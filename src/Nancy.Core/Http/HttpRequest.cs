@@ -1,8 +1,8 @@
-using System.Diagnostics;
-using System.IO;
-
 namespace Nancy.Core.Http
 {
+    using System.Diagnostics;
+    using System.IO;
+
     [DebuggerDisplay("{ToString(), nq}")]
     public abstract class HttpRequest
     {
@@ -24,7 +24,7 @@ namespace Nancy.Core.Http
 
         public override string ToString()
         {
-            return $"{Method.ToString()} {Url} {Protocol}";
+            return $"{this.Method.ToString()} {this.Url} {this.Protocol}";
         }
     }
 }

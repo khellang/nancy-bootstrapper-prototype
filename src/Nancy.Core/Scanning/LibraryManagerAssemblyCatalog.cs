@@ -1,26 +1,26 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Microsoft.Extensions.PlatformAbstractions;
-
 namespace Nancy.Core.Scanning
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Microsoft.Extensions.PlatformAbstractions;
+
     public class LibraryManagerAssemblyCatalog : IAssemblyCatalog
     {
         private static readonly string NancyLibraryName = ScanningStrategies.NancyAssemblyName;
 
+        private readonly ILibraryManager libraryManager;
+
         public LibraryManagerAssemblyCatalog(ILibraryManager libraryManager)
         {
-            LibraryManager = libraryManager;
+            this.libraryManager = libraryManager;
         }
-
-        private ILibraryManager LibraryManager { get; }
 
         public IReadOnlyCollection<Assembly> GetAssemblies(ScanningStrategy strategy)
         {
             var assemblies = new HashSet<Assembly>();
 
-            var nancyLibrary = LibraryManager.GetLibrary(NancyLibraryName);
+            var nancyLibrary = this.libraryManager.GetLibrary(NancyLibraryName);
 
             foreach (var assemblyName in nancyLibrary.Assemblies)
             {
@@ -30,7 +30,7 @@ namespace Nancy.Core.Scanning
                 }
             }
 
-            var referencingLibraries = LibraryManager.GetReferencingLibraries(NancyLibraryName);
+            var referencingLibraries = this.libraryManager.GetReferencingLibraries(NancyLibraryName);
 
             foreach (var referencingLibrary in referencingLibraries)
             {

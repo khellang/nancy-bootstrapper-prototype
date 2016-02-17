@@ -1,7 +1,7 @@
-﻿using Nancy.Core.Scanning;
-
-namespace Nancy.Core
+﻿namespace Nancy.Core
 {
+    using Nancy.Core.Scanning;
+
     public interface IPlatformServices
     {
         IAssemblyCatalog AssemblyCatalog { get; }

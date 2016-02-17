@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Concurrent;
-
-namespace Nancy.Core
+﻿namespace Nancy.Core
 {
+    using System;
+    using System.Collections.Concurrent;
+
     /// <summary>
-    /// TODO: Remove this class when https://github.com/dotnet/corefx/pull/1783 is available.
+    ///     TODO: Remove this class when https://github.com/dotnet/corefx/pull/1783 is available.
     /// </summary>
     internal static class ConcurrentDictionaryExtensions
     {

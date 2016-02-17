@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Nancy.Core
+﻿namespace Nancy.Core
 {
+    using System;
+
     public interface ISerializer
     {
         string Serialize(object value);

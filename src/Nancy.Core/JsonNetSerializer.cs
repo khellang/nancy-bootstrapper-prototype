@@ -1,8 +1,8 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace Nancy.Core
+﻿namespace Nancy.Core
 {
+    using System;
+    using Newtonsoft.Json;
+
     public class JsonNetSerializer : ISerializer
     {
         public string Serialize(object value)

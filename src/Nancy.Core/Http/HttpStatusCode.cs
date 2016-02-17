@@ -1,8 +1,8 @@
-using System;
-using System.Diagnostics;
-
 namespace Nancy.Core.Http
 {
+    using System;
+    using System.Diagnostics;
+
     [DebuggerDisplay("{ToString(), nq}")]
     public partial struct HttpStatusCode : IEquatable<HttpStatusCode>
     {
@@ -14,24 +14,24 @@ namespace Nancy.Core.Http
                     Resources.Exception_InvalidHttpStatusCode, value), nameof(value));
             }
 
-            Value = value;
+            this.Value = value;
         }
 
         public int Value { get; }
 
         public bool Equals(HttpStatusCode other)
         {
-            return Value == other.Value;
+            return this.Value == other.Value;
         }
 
         public override bool Equals(object obj)
         {
-            return !ReferenceEquals(null, obj) && obj is HttpStatusCode && Equals((HttpStatusCode) obj);
+            return !ReferenceEquals(null, obj) && obj is HttpStatusCode && this.Equals((HttpStatusCode)obj);
         }
 
         public override int GetHashCode()
         {
-            return Value;
+            return this.Value;
         }
 
         public static bool operator ==(HttpStatusCode left, HttpStatusCode right)
@@ -51,7 +51,7 @@ namespace Nancy.Core.Http
 
         public override string ToString()
         {
-            return Value.ToString();
+            return this.Value.ToString();
         }
     }
 }

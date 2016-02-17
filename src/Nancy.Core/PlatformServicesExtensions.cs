@@ -1,7 +1,7 @@
-﻿using Nancy.Core.Registration;
-
-namespace Nancy.Core
+﻿namespace Nancy.Core
 {
+    using Nancy.Core.Registration;
+
     internal static class PlatformServicesExtensions
     {
         public static IContainerRegistry GetRegistry(this IPlatformServices platformServices)

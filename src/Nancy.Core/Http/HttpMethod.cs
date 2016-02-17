@@ -1,8 +1,8 @@
-using System;
-using System.Diagnostics;
-
 namespace Nancy.Core.Http
 {
+    using System;
+    using System.Diagnostics;
+
     [DebuggerDisplay("{ToString(), nq}")]
     public partial struct HttpMethod : IEquatable<HttpMethod>
     {
@@ -19,24 +19,24 @@ namespace Nancy.Core.Http
                     Resources.Exception_InvalidHttpMethodToken, value), nameof(value));
             }
 
-            Value = value;
+            this.Value = value;
         }
 
         public string Value { get; }
 
         public bool Equals(HttpMethod other)
         {
-            return string.Equals(Value, other.Value, StringComparison.Ordinal);
+            return string.Equals(this.Value, other.Value, StringComparison.Ordinal);
         }
 
         public override bool Equals(object obj)
         {
-            return !ReferenceEquals(null, obj) && obj is HttpMethod && Equals((HttpMethod) obj);
+            return !ReferenceEquals(null, obj) && obj is HttpMethod && this.Equals((HttpMethod)obj);
         }
 
         public override int GetHashCode()
         {
-            return StringComparer.OrdinalIgnoreCase.GetHashCode(Value);
+            return StringComparer.OrdinalIgnoreCase.GetHashCode(this.Value);
         }
 
         public static bool operator ==(HttpMethod left, HttpMethod right)
@@ -56,7 +56,7 @@ namespace Nancy.Core.Http
 
         public override string ToString()
         {
-            return Value;
+            return this.Value;
         }
     }
 }
