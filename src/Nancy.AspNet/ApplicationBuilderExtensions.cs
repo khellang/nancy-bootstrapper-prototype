@@ -1,5 +1,6 @@
 ﻿namespace Nancy.AspNet
 {
+    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Http;
@@ -17,9 +18,12 @@
             // because IServiceProvider is not implementing IDisposable.
             var provider = builder.ApplicationServices.AsDisposable(shouldDispose: false);
 
-            // We assume that the user has already called `AddNancy`
-            // in `ConfigureServices`, otherwise this will fail.
-            var bootstrapper = provider.GetRequiredService<IBootstrapper<IDisposableServiceProvider>>();
+            var bootstrapper = provider.GetService<IBootstrapper<IDisposableServiceProvider>>();
+
+            if (bootstrapper == null)
+            {
+                throw new InvalidOperationException(Resources.Exception_MustCallAddNancy);
+            }
 
             var application = bootstrapper.InitializeApplication(provider);
 
