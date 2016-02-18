@@ -33,7 +33,7 @@
             }
         }
 
-        protected sealed override IApplication CreateApplication(IContainer container, bool shouldDispose)
+        protected sealed override IApplication<IContainer> CreateApplication(IContainer container, bool shouldDispose)
         {
             return new Application(container, shouldDispose);
         }

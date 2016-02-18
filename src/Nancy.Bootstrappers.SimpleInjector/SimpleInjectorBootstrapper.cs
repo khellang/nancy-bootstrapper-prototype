@@ -29,7 +29,7 @@ namespace Nancy.Bootstrappers.SimpleInjector
             container.Verify(VerificationOption.VerifyOnly);
         }
 
-        protected sealed override IApplication CreateApplication(Container container, bool shouldDispose)
+        protected sealed override IApplication<Container> CreateApplication(Container container, bool shouldDispose)
         {
             return new Application(container, shouldDispose);
         }

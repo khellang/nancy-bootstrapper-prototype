@@ -9,4 +9,9 @@ namespace Nancy.Core
     {
         Task HandleRequest(HttpContext context, CancellationToken cancellationToken);
     }
+
+    public interface IApplication<out TContainer> : IApplication
+    {
+        TContainer Container { get; }
+    }
 }

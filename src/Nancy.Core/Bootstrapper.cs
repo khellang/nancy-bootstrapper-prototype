@@ -64,7 +64,7 @@ namespace Nancy.Core
             return this;
         }
 
-        public IApplication InitializeApplication(TContainer container)
+        public IApplication<TContainer> InitializeApplication(TContainer container)
         {
             Check.NotNull(container, nameof(container));
 
@@ -73,7 +73,7 @@ namespace Nancy.Core
             return this.InitializeApplication(container, shouldDispose: false);
         }
 
-        private IApplication InitializeApplication(TContainer container, bool shouldDispose)
+        private IApplication<TContainer> InitializeApplication(TContainer container, bool shouldDispose)
         {
             // When the container is built, we offer the bootstrapper
             // implementation a chance to validate the container configuration
@@ -97,7 +97,7 @@ namespace Nancy.Core
 
         protected abstract void ValidateContainerConfiguration(TContainer container);
 
-        protected abstract IApplication CreateApplication(TContainer container, bool shouldDispose);
+        protected abstract IApplication<TContainer> CreateApplication(TContainer container, bool shouldDispose);
     }
 
     /// <summary>

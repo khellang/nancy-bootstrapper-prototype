@@ -28,7 +28,7 @@
             // Not supported.
         }
 
-        protected sealed override IApplication CreateApplication(IDisposableServiceProvider provider, bool shouldDispose)
+        protected sealed override IApplication<IDisposableServiceProvider> CreateApplication(IDisposableServiceProvider provider, bool shouldDispose)
         {
             return new Application(provider, shouldDispose);
         }

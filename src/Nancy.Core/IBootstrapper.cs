@@ -5,12 +5,12 @@ namespace Nancy.Core
         IApplication InitializeApplication(IPlatformServices platformServices);
     }
 
-    public interface IBootstrapper<in TContainer> : IBootstrapper
+    public interface IBootstrapper<TContainer> : IBootstrapper
     {
-        IApplication InitializeApplication(TContainer container);
+        IApplication<TContainer> InitializeApplication(TContainer container);
     }
 
-    public interface IBootstrapper<in TBuilder, in TContainer> : IBootstrapper<TContainer>
+    public interface IBootstrapper<in TBuilder, TContainer> : IBootstrapper<TContainer>
     {
         IBootstrapper<TContainer> Populate(TBuilder builder, IPlatformServices platformServices);
     }

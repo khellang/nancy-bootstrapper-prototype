@@ -5,29 +5,29 @@ namespace Nancy.Core
     using System.Threading.Tasks;
     using Nancy.Core.Http;
 
-    public abstract class Application<TContainer, TScope> : IApplication
+    public abstract class Application<TContainer, TScope> : IApplication<TContainer>
         where TContainer : class, IDisposable
         where TScope : class, IDisposable
     {
-        private readonly TContainer container;
-
         private readonly bool shouldDispose;
 
         protected Application(TContainer container, bool shouldDispose)
         {
             Check.NotNull(container, nameof(container));
 
-            this.container = container;
+            this.Container = container;
             this.shouldDispose = shouldDispose;
         }
+
+        public TContainer Container { get; }
 
         public async Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
             Check.NotNull(context, nameof(context));
 
-            using (var scope = this.BeginRequestScope(context, this.container))
+            using (var scope = this.BeginRequestScope(context, this.Container))
             {
-                var engine = this.ComposeEngine(this.container, scope);
+                var engine = this.ComposeEngine(this.Container, scope);
 
                 await engine.HandleRequest(context, cancellationToken).ConfigureAwait(false);
             }
@@ -37,7 +37,7 @@ namespace Nancy.Core
         {
             if (this.shouldDispose)
             {
-                this.container.Dispose();
+                this.Container.Dispose();
             }
         }
 
@@ -56,8 +56,6 @@ namespace Nancy.Core
 
         protected sealed override IEngine ComposeEngine(TContainer container, TContainer scope)
         {
-            Check.NotNull(scope, nameof(scope));
-
             return this.ComposeEngine(scope);
         }
 
