@@ -31,7 +31,7 @@ namespace Nancy.Core
             return this.InitializeApplication(container, shouldDispose: true);
         }
 
-        public void Populate(TBuilder builder, IPlatformServices platformServices)
+        public IBootstrapper<TContainer> Populate(TBuilder builder, IPlatformServices platformServices)
         {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(platformServices, nameof(platformServices));
@@ -60,6 +60,8 @@ namespace Nancy.Core
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.
             this.Register(builder, frameworkRegistry);
+
+            return this;
         }
 
         public IApplication InitializeApplication(TContainer container)

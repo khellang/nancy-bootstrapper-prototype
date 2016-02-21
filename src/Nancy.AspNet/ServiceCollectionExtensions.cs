@@ -31,12 +31,10 @@ namespace Nancy.AspNet
             // We still need to provide a way to configure the application. This
             // is done by passing a delegate to a special inline bootstrapper.
 
-            var bootstrapper = new InlineAspNetBootstrapper(configure);
-
-            bootstrapper.Populate(services, platformServices);
+            var bootstrapper = new InlineAspNetBootstrapper(configure).Populate(services, platformServices);
 
             // Make sure we add the bootstrapper so it can be resolved in a call to `UseNancy`.
-            return services.AddInstance<IBootstrapper<IDisposableServiceProvider>>(bootstrapper);
+            return services.AddInstance(bootstrapper);
         }
 
         private class InlineAspNetBootstrapper : AspNetBootstrapper

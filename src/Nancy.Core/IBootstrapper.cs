@@ -12,6 +12,6 @@ namespace Nancy.Core
 
     public interface IBootstrapper<in TBuilder, in TContainer> : IBootstrapper<TContainer>
     {
-        void Populate(TBuilder builder, IPlatformServices platformServices);
+        IBootstrapper<TContainer> Populate(TBuilder builder, IPlatformServices platformServices);
     }
 }
