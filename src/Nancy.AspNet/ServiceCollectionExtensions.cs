@@ -10,7 +10,7 @@ namespace Nancy.AspNet
     {
         public static IServiceCollection AddNancy(this IServiceCollection services)
         {
-            return AddNancy(services, null);
+            return services.AddNancy(configure: null);
         }
 
         public static IServiceCollection AddNancy(this IServiceCollection services,
