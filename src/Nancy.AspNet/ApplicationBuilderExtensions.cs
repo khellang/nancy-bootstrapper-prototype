@@ -5,6 +5,7 @@
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Http;
     using Microsoft.Extensions.DependencyInjection;
+    using Nancy.AspNet.Http;
     using Nancy.Bootstrappers.AspNet;
     using Nancy.Core;
 

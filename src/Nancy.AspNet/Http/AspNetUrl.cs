@@ -1,9 +1,9 @@
-﻿namespace Nancy.AspNet
+﻿namespace Nancy.AspNet.Http
 {
     using Microsoft.AspNet.Http.Features;
     using Nancy.Core.Http;
 
-    internal class AspNetUrl : Url
+    internal sealed class AspNetUrl : Url
     {
         private readonly IHttpRequestFeature request;
 
@@ -45,8 +45,6 @@
 
         public void CopyFrom(Url url)
         {
-            // If the user sets a new URL, we need to copy over the values.
-
             this.Scheme = url.Scheme;
             this.Host = url.Host;
             this.PathBase = url.PathBase;

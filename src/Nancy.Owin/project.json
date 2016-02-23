@@ -1,0 +1,12 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Nancy.Core": { "target": "project" },
+    "Owin": "1.0.0"
+  },
+
+  "frameworks": {
+    "net451": { }
+  }
+}

@@ -1,11 +1,11 @@
-﻿namespace Nancy.AspNet
+﻿namespace Nancy.AspNet.Http
 {
     using System.Collections.Generic;
     using System.Security.Claims;
     using Microsoft.AspNet.Http.Features;
     using Nancy.Core.Http;
 
-    internal class AspNetHttpContext : HttpContext
+    internal sealed class AspNetHttpContext : HttpContext
     {
         private readonly Microsoft.AspNet.Http.HttpContext context;
 

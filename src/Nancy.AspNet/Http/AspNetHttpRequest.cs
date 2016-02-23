@@ -1,10 +1,10 @@
-﻿namespace Nancy.AspNet
+﻿namespace Nancy.AspNet.Http
 {
     using System.IO;
     using Microsoft.AspNet.Http.Features;
     using Nancy.Core.Http;
 
-    internal class AspNetHttpRequest : HttpRequest
+    internal sealed class AspNetHttpRequest : HttpRequest
     {
         private readonly IHttpRequestFeature request;
 
