@@ -7,6 +7,7 @@ namespace Nancy.Owin
     using System.Threading;
     using Nancy.Core;
     using Nancy.Owin.Http;
+
     using MidFunc = Func<
         Func<IDictionary<string, object>, Task>,
         Func<IDictionary<string, object>, Task>>;
@@ -15,6 +16,8 @@ namespace Nancy.Owin
     {
         public static MidFunc Create(IApplication application)
         {
+            Check.NotNull(application, nameof(application));
+
             return next => environment =>
             {
                 var httpContext = new OwinHttpContext(environment);
