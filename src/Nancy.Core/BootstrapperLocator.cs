@@ -30,47 +30,49 @@
             return (IBootstrapper) Activator.CreateInstance(type);
         }
 
-        private static Type GetBootstrapperType(Type[] types)
+        private static Type GetBootstrapperType(IList<Type> types)
         {
-            if (types.Length == 0)
+            if (types.Count == 0)
             {
                 // TODO: Return default bootstrapper.
                 throw new InvalidOperationException("Could not locate a bootstrapper implementation.");
             }
 
-            if (types.Length == 1)
+            if (types.Count == 1)
             {
                 return types[0];
             }
 
-            Type type;
-            if (TryFindMostDerivedBootstrapperType(types, out type))
+            var candidateTypes = GetCandidateTypes(types);
+
+            if (candidateTypes.Count == 1)
             {
-                return type;
+                return candidateTypes[0];
             }
 
-            var message = GenerateMultipleBootstrappersMessage(types);
+            var message = GenerateMultipleBootstrappersMessage(candidateTypes);
 
             throw new InvalidOperationException(message);
         }
 
-        private static bool TryFindMostDerivedBootstrapperType(Type[] types, out Type type)
+        private static IList<Type> GetCandidateTypes(IList<Type> types)
         {
             var baseTypes = GetBaseTypes(types);
 
-            var candidates = types.Except(baseTypes).ToArray();
+            var candidateTypes = new List<Type>();
 
-            if (candidates.Length == 1)
+            foreach (var type in types)
             {
-                type = candidates[0];
-                return true;
+                if (!baseTypes.Contains(type))
+                {
+                    candidateTypes.Add(type);
+                }
             }
 
-            type = null;
-            return false;
+            return candidateTypes;
         }
 
-        private static IEnumerable<Type> GetBaseTypes(IEnumerable<Type> types)
+        private static ISet<Type> GetBaseTypes(IEnumerable<Type> types)
         {
             var baseTypes = new HashSet<Type>();
 

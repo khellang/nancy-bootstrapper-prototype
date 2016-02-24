@@ -7,7 +7,6 @@ namespace Nancy.Core.Scanning
     using Nancy.Core.Configuration;
     using Nancy.Core.Registration;
 
-    [DebuggerStepThrough]
     public static class TypeCatalogExtensions
     {
         public static Type GetFirstTypeAssignableTo<T>(this ITypeCatalog typeCatalog)
