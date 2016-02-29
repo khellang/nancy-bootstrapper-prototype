@@ -6,12 +6,16 @@ namespace Nancy.AspNet.Http
 
     internal sealed class AspNetHttpResponse : HttpResponse
     {
-        private readonly IHttpResponseFeature response;
+        private readonly Microsoft.AspNet.Http.HttpResponse response;
 
-        public AspNetHttpResponse(HttpContext context, IHttpResponseFeature response)
+        private readonly IHttpResponseFeature responseFeature;
+
+        public AspNetHttpResponse(HttpContext context, Microsoft.AspNet.Http.HttpResponse response)
         {
             this.Context = context;
             this.response = response;
+            this.responseFeature = response.HttpContext.Features.Get<IHttpResponseFeature>();
+            this.Headers = new AspNetHeaderDictionary(response.Headers);
         }
 
         public override HttpContext Context { get; }
@@ -24,8 +28,22 @@ namespace Nancy.AspNet.Http
 
         public override string ReasonPhrase
         {
-            get { return this.response.ReasonPhrase; }
-            set { this.response.ReasonPhrase = value; }
+            get { return this.responseFeature.ReasonPhrase; }
+            set { this.responseFeature.ReasonPhrase = value; }
+        }
+
+        public override IHeaderDictionary Headers { get; }
+
+        public override long? ContentLength
+        {
+            get { return this.response.ContentLength; }
+            set { this.response.ContentLength = value; }
+        }
+
+        public override string ContentType
+        {
+            get { return this.response.ContentType; }
+            set { this.response.ContentType = value; }
         }
 
         public override Stream Body

@@ -12,7 +12,12 @@ namespace Nancy.Core.Http
 
         public abstract string ReasonPhrase { get; set; }
 
-        // TODO: Headers (Specialize Content-Type and Content-Length?)
+        public abstract IHeaderDictionary Headers { get; }
+
+        public abstract long? ContentLength { get; set; }
+
+        // TODO: Create and use MediaRange type
+        public abstract string ContentType { get; set; }
 
         public abstract Stream Body { get; set; }
 

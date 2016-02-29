@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Security.Claims;
-    using Microsoft.AspNet.Http.Features;
     using Nancy.Core.Http;
 
     internal sealed class AspNetHttpContext : HttpContext
@@ -13,7 +12,7 @@
         {
             this.context = context;
             this.Request = new AspNetHttpRequest(this, context.Request);
-            this.Response = new AspNetHttpResponse(this, context.Features.Get<IHttpResponseFeature>());
+            this.Response = new AspNetHttpResponse(this, context.Response);
         }
 
         public override HttpRequest Request { get; }

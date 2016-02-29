@@ -12,6 +12,9 @@
         {
             this.Context = context;
             this.environment = environment;
+
+            var owinHeaders = environment.Get<IDictionary<string, string[]>>(Constants.ResponseHeaders);
+            this.Headers = new OwinHeaderDictionary(owinHeaders);
         }
 
         public override HttpContext Context { get; }
@@ -26,6 +29,20 @@
         {
             get { return this.environment.Get<string>(Constants.ResponseReasonPhrase); }
             set { this.environment.Set(Constants.ResponseReasonPhrase, value); }
+        }
+
+        public override IHeaderDictionary Headers { get; }
+
+        public override long? ContentLength
+        {
+            get { return this.Headers.GetContentLength(); }
+            set { this.Headers.SetContentLength(value); }
+        }
+
+        public override string ContentType
+        {
+            get { return this.Headers.GetSingleValue(HttpHeaderNames.ContentType); }
+            set { this.Headers.SetSingleValue(HttpHeaderNames.ContentType, value); }
         }
 
         public override Stream Body
