@@ -33,7 +33,7 @@ namespace ConsoleApp
                 throw new InvalidOperationException("RequestService should've been injected!");
             }
 
-            return Task.FromResult(0);
+            return Tasks.CompletedTask;
         }
     }
 }

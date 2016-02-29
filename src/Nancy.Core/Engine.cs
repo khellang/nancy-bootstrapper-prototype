@@ -10,7 +10,7 @@ namespace Nancy.Core
         {
             Check.NotNull(context, nameof(context));
 
-            return Task.FromResult(0);
+            return Tasks.CompletedTask;
         }
     }
 }
