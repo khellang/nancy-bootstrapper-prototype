@@ -58,7 +58,7 @@
         {
             var queryString = environment.Get<string>(Constants.RequestQueryString);
 
-            if (!string.IsNullOrEmpty(queryString))
+            if (!string.IsNullOrWhiteSpace(queryString))
             {
                 // We expect the query string to start with a '?'.
                 return string.Concat('?', queryString);
@@ -69,7 +69,7 @@
 
         private static void SetQueryString(IDictionary<string, object> environment, string queryString)
         {
-            if (!string.IsNullOrEmpty(queryString))
+            if (!string.IsNullOrWhiteSpace(queryString))
             {
                 if (queryString[0] == '?')
                 {
