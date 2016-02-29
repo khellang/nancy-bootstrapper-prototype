@@ -1,9 +1,15 @@
 ﻿namespace Nancy.Owin
 {
+    using System;
     using System.Collections.Generic;
 
     internal static class OwinHeaderDictionaryExtensions
     {
+        public static T ParseSingleValue<T>(this IDictionary<string, string[]> headers, string name, Func<string, T> parser)
+        {
+            return parser.Invoke(headers.GetSingleValue(name));
+        }
+
         public static string GetSingleValue(this IDictionary<string, string[]> headers, string name)
         {
             string[] values;

@@ -20,9 +20,8 @@
 
         public override string Host
         {
-            // TODO: Keep this as-is?
-            get { return this.request.Headers["Host"]; }
-            set { this.request.Headers["Host"] = value; }
+            get { return this.request.Host.Value; }
+            set { this.request.Host = new HostString(value); }
         }
 
         public override string PathBase

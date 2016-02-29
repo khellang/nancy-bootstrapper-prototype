@@ -18,10 +18,13 @@ namespace Nancy.Core.Http
         // TODO: Split out port?
         public abstract string Host { get; set; }
 
+        // TODO: Create and use PathString type?
         public abstract string PathBase { get; set; }
 
+        // TODO: Create and use PathString type?
         public abstract string Path { get; set; }
 
+        // TODO: Create and use QueryString type?
         public abstract string QueryString { get; set; }
 
         public bool IsHttps => string.Equals(this.Scheme, HttpsScheme, StringComparison.OrdinalIgnoreCase);

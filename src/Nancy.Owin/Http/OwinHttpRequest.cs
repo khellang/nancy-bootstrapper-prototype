@@ -1,6 +1,7 @@
 ﻿namespace Nancy.Owin.Http
 {
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using Nancy.Core.Http;
 
@@ -43,19 +44,54 @@
 
         public override IHeaderDictionary Headers { get; }
 
-        // TODO: Implement Content-Length parsing.
-        public override long? ContentLength { get; set; }
+        public override long? ContentLength
+        {
+            get { return GetContentLength(this.Headers); }
+            set { SetContentLength(this.Headers, value); }
+        }
 
         public override string ContentType
         {
-            get { return this.Headers.GetSingleValue("Content-Type"); }
-            set { this.Headers.SetSingleValue("Content-Type", value); }
+            get { return this.Headers.GetSingleValue(HttpHeaderNames.ContentType); }
+            set { this.Headers.SetSingleValue(HttpHeaderNames.ContentType, value); }
         }
 
         public override Stream Body
         {
             get { return this.environment.Get<Stream>(Constants.RequestBody); }
             set { this.environment.Set(Constants.RequestBody, value); }
+        }
+
+        private static long? GetContentLength(IHeaderDictionary headers)
+        {
+            return headers.ParseSingleValue<long?>(HttpHeaderNames.ContentLength, value =>
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    return null;
+                }
+
+                const NumberStyles styles = NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite;
+
+                long parsedValue;
+                if (long.TryParse(value, styles, CultureInfo.InvariantCulture, out parsedValue))
+                {
+                    return parsedValue;
+                }
+
+                return null;
+            });
+        }
+
+        private static void SetContentLength(IHeaderDictionary headers, long? value)
+        {
+            if (value.HasValue)
+            {
+                headers.SetSingleValue(HttpHeaderNames.ContentLength, value.Value.ToString(CultureInfo.InvariantCulture));
+                return;
+            }
+
+            headers.Remove(HttpHeaderNames.ContentLength);
         }
     }
 }

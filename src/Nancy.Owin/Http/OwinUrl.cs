@@ -23,8 +23,8 @@
 
         public override string Host
         {
-            get { return this.request.Headers.GetSingleValue("Host"); }
-            set { this.request.Headers.SetSingleValue("Host", value); }
+            get { return this.request.Headers.GetSingleValue(HttpHeaderNames.Host); }
+            set { this.request.Headers.SetSingleValue(HttpHeaderNames.Host, value); }
         }
 
         public override string PathBase
