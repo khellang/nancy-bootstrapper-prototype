@@ -45,10 +45,10 @@
             set { this.request.ContentLength = value; }
         }
 
-        public override string ContentType
+        public override MediaRange ContentType
         {
             get { return this.request.ContentType; }
-            set { this.request.ContentType = value; }
+            set { this.request.ContentType = value.ToString(); }
         }
 
         public override Stream Body

@@ -6,16 +6,8 @@ namespace Nancy.Core.Http
     [DebuggerDisplay("{ToString(), nq}")]
     public partial struct HttpMethod : IEquatable<HttpMethod>
     {
-        public HttpMethod(string value)
+        private HttpMethod(string value)
         {
-            Check.NotNull(value, nameof(value));
-
-            if (!HttpUtility.IsValidToken(value))
-            {
-                throw new ArgumentException(string.Format(
-                    Resources.Exception_InvalidHttpMethodToken, value), nameof(value));
-            }
-
             this.Value = value;
         }
 
@@ -48,7 +40,7 @@ namespace Nancy.Core.Http
 
         public static implicit operator HttpMethod(string value)
         {
-            return new HttpMethod(value);
+            return FromString(value);
         }
 
         public override string ToString()

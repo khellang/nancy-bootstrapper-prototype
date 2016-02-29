@@ -40,10 +40,10 @@ namespace Nancy.AspNet.Http
             set { this.response.ContentLength = value; }
         }
 
-        public override string ContentType
+        public override MediaRange ContentType
         {
             get { return this.response.ContentType; }
-            set { this.response.ContentType = value; }
+            set { this.response.ContentType = value.ToString(); }
         }
 
         public override Stream Body

@@ -39,10 +39,10 @@
             set { this.Headers.SetContentLength(value); }
         }
 
-        public override string ContentType
+        public override MediaRange ContentType
         {
             get { return this.Headers.GetSingleValue(HttpHeaderNames.ContentType); }
-            set { this.Headers.SetSingleValue(HttpHeaderNames.ContentType, value); }
+            set { this.Headers.SetSingleValue(HttpHeaderNames.ContentType, value.ToString()); }
         }
 
         public override Stream Body

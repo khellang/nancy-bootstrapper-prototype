@@ -16,8 +16,7 @@ namespace Nancy.Core.Http
 
         public abstract long? ContentLength { get; set; }
 
-        // TODO: Create and use MediaRange type
-        public abstract string ContentType { get; set; }
+        public abstract MediaRange ContentType { get; set; }
 
         public abstract Stream Body { get; set; }
 
