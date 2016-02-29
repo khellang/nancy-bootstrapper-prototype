@@ -14,7 +14,11 @@
         {
             this.Context = context;
             this.environment = environment;
+
             this.owinUrl = new OwinUrl(this, environment);
+
+            var owinHeaders = environment.Get<IDictionary<string, string[]>>(Constants.RequestHeaders);
+            this.Headers = new OwinHeaderDictionary(owinHeaders);
         }
 
         public override HttpContext Context { get; }
@@ -35,6 +39,17 @@
         {
             get { return this.environment.Get<string>(Constants.RequestProtocol); }
             set { this.environment.Set(Constants.RequestProtocol, value); }
+        }
+
+        public override IHeaderDictionary Headers { get; }
+
+        // TODO: Implement Content-Length parsing.
+        public override long? ContentLength { get; set; }
+
+        public override string ContentType
+        {
+            get { return this.Headers.GetSingleValue("Content-Type"); }
+            set { this.Headers.SetSingleValue("Content-Type", value); }
         }
 
         public override Stream Body

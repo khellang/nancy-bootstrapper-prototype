@@ -1,13 +1,13 @@
 ﻿namespace Nancy.AspNet.Http
 {
-    using Microsoft.AspNet.Http.Features;
+    using Microsoft.AspNet.Http;
     using Nancy.Core.Http;
 
     internal sealed class AspNetUrl : Url
     {
-        private readonly IHttpRequestFeature request;
+        private readonly Microsoft.AspNet.Http.HttpRequest request;
 
-        public AspNetUrl(IHttpRequestFeature request)
+        public AspNetUrl(Microsoft.AspNet.Http.HttpRequest request)
         {
             this.request = request;
         }
@@ -39,8 +39,8 @@
 
         public override string QueryString
         {
-            get { return this.request.QueryString; }
-            set { this.request.QueryString = value; }
+            get { return this.request.QueryString.Value; }
+            set { this.request.QueryString = new QueryString(value); }
         }
 
         public void CopyFrom(Url url)

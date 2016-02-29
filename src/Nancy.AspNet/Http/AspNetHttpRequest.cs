@@ -1,20 +1,20 @@
 ﻿namespace Nancy.AspNet.Http
 {
     using System.IO;
-    using Microsoft.AspNet.Http.Features;
     using Nancy.Core.Http;
 
     internal sealed class AspNetHttpRequest : HttpRequest
     {
-        private readonly IHttpRequestFeature request;
+        private readonly Microsoft.AspNet.Http.HttpRequest request;
 
         private readonly AspNetUrl aspNetUrl;
 
-        public AspNetHttpRequest(HttpContext context, IHttpRequestFeature request)
+        public AspNetHttpRequest(HttpContext context, Microsoft.AspNet.Http.HttpRequest request)
         {
             this.Context = context;
             this.request = request;
             this.aspNetUrl = new AspNetUrl(request);
+            this.Headers = new AspNetHeaderDictionary(request.Headers);
         }
 
         public override HttpContext Context { get; }
@@ -35,6 +35,20 @@
         {
             get { return this.request.Protocol; }
             set { this.request.Protocol = value; }
+        }
+
+        public override IHeaderDictionary Headers { get; }
+
+        public override long? ContentLength
+        {
+            get { return this.request.ContentLength; }
+            set { this.request.ContentLength = value; }
+        }
+
+        public override string ContentType
+        {
+            get { return this.request.ContentType; }
+            set { this.request.ContentType = value; }
         }
 
         public override Stream Body

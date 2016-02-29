@@ -12,7 +12,7 @@
         public AspNetHttpContext(Microsoft.AspNet.Http.HttpContext context)
         {
             this.context = context;
-            this.Request = new AspNetHttpRequest(this, context.Features.Get<IHttpRequestFeature>());
+            this.Request = new AspNetHttpRequest(this, context.Request);
             this.Response = new AspNetHttpResponse(this, context.Features.Get<IHttpResponseFeature>());
         }
 

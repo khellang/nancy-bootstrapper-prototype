@@ -21,8 +21,11 @@
             set { this.environment.Set(Constants.RequestScheme, value); }
         }
 
-        // TODO: Get host header from request.
-        public override string Host { get; set; }
+        public override string Host
+        {
+            get { return this.request.Headers.GetSingleValue("Host"); }
+            set { this.request.Headers.SetSingleValue("Host", value); }
+        }
 
         public override string PathBase
         {
@@ -38,8 +41,8 @@
 
         public override string QueryString
         {
-            get { return this.environment.Get<string>(Constants.RequestQueryString); }
-            set { this.environment.Set(Constants.RequestQueryString, value); }
+            get { return GetQueryString(this.environment); }
+            set { SetQueryString(this.environment, value); }
         }
 
         public void CopyFrom(Url url)
@@ -49,6 +52,33 @@
             this.PathBase = url.PathBase;
             this.Path = url.Path;
             this.QueryString = url.QueryString;
+        }
+
+        private static string GetQueryString(IDictionary<string, object> environment)
+        {
+            var queryString = environment.Get<string>(Constants.RequestQueryString);
+
+            if (!string.IsNullOrEmpty(queryString))
+            {
+                // We expect the query string to start with a '?'.
+                return string.Concat('?', queryString);
+            }
+
+            return queryString;
+        }
+
+        private static void SetQueryString(IDictionary<string, object> environment, string queryString)
+        {
+            if (!string.IsNullOrEmpty(queryString))
+            {
+                if (queryString[0] == '?')
+                {
+                    // We don't want to store the query string with a leading '?' in OWIN.
+                    queryString = queryString.Substring(1);
+                }
+            }
+
+            environment.Set(Constants.RequestQueryString, queryString);
         }
     }
 }

@@ -14,7 +14,11 @@ namespace Nancy.Core.Http
 
         public abstract string Protocol { get; set; }
 
-        // TODO: Headers (Specialize Content-Type and Content-Length?)
+        public abstract IHeaderDictionary Headers { get; }
+
+        public abstract long? ContentLength { get; set; }
+
+        public abstract string ContentType { get; set; }
 
         public abstract Stream Body { get; set; }
 

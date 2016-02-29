@@ -1,7 +1,7 @@
 ﻿namespace OwinApp
 {
     using System;
-    using System.Text;
+    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
     using Autofac;
@@ -44,15 +44,15 @@
 
         private class CustomEngine : IEngine
         {
-            public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
+            public async Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
             {
-                var hellWorldBytes = Encoding.UTF8.GetBytes("Hello World!");
-
                 context.Response.StatusCode = HttpStatusCode.Ok;
 
-                // TODO: Set Content-Type and Content-Length.
-
-                return context.Response.Body.WriteAsync(hellWorldBytes, 0, hellWorldBytes.Length, cancellationToken);
+                using (var writer = new StreamWriter(context.Response.Body))
+                {
+                    await writer.WriteLineAsync(context.Request.Url.ToString());
+                    await writer.FlushAsync();
+                }
             }
         }
     }
