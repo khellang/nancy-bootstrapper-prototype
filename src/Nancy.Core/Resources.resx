@@ -120,6 +120,9 @@
   <data name="Exception_BootstrapperActivation" xml:space="preserve">
     <value>Could not create an instance of {0}. See inner exceptions for details.</value>
   </data>
+  <data name="Exception_EngineComposition" xml:space="preserve">
+    <value>Could not compose the Nancy engine. See inner exceptions for details.</value>
+  </data>
   <data name="Exception_InvalidHttpMethodToken" xml:space="preserve">
     <value>{0} is not a valid HTTP method token.</value>
   </data>

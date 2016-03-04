@@ -21,16 +21,11 @@ namespace Nancy.Core
 
         public TContainer Container { get; }
 
-        public async Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
+        public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
             Check.NotNull(context, nameof(context));
 
-            using (var scope = this.BeginRequestScope(context, this.Container))
-            {
-                var engine = this.ComposeEngine(this.Container, scope);
-
-                await engine.HandleRequest(context, cancellationToken).ConfigureAwait(false);
-            }
+            return this.HandleRequestInternal(context, cancellationToken);
         }
 
         public void Dispose()
@@ -44,6 +39,28 @@ namespace Nancy.Core
         protected abstract TScope BeginRequestScope(HttpContext context, TContainer container);
 
         protected abstract IEngine ComposeEngine(TContainer container, TScope scope);
+
+        private async Task HandleRequestInternal(HttpContext context, CancellationToken cancellationToken)
+        {
+            using (var scope = this.BeginRequestScope(context, this.Container))
+            {
+                var engine = this.TryComposeEngine(this.Container, scope);
+
+                await engine.HandleRequest(context, cancellationToken).ConfigureAwait(false);
+            }
+        }
+
+        private IEngine TryComposeEngine(TContainer container, TScope scope)
+        {
+            try
+            {
+                return this.ComposeEngine(container, scope);
+            }
+            catch (Exception ex)
+            {
+                throw new EngineCompositionException(Resources.Exception_EngineComposition, ex);
+            }
+        }
     }
 
     public abstract class Application<TContainer> : Application<TContainer, TContainer>

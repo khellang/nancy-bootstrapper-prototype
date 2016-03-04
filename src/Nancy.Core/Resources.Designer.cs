@@ -69,6 +69,15 @@ namespace Nancy.Core {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Could not compose the Nancy engine. See inner exceptions for details..
+        /// </summary>
+        internal static string Exception_EngineComposition {
+            get {
+                return ResourceManager.GetString("Exception_EngineComposition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to {0} is not a valid HTTP method token..
         /// </summary>
         internal static string Exception_InvalidHttpMethodToken {
