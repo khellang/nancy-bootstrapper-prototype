@@ -50,7 +50,6 @@
                 {
                     // We want to reuse the existing request services instead
                     // of creating a new Nancy-specific scope if we can.
-
                     return requestServices.AsDisposable(shouldDispose: false);
                 }
 
