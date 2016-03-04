@@ -66,7 +66,7 @@
             var locator = GetLocator(typeof(FakeBootstrapperWithoutEmptyConstructor));
 
             // When, Then
-            Assert.Throws<MissingMethodException>(() => locator.GetBootstrapper());
+            Assert.Throws<BootstrapperActivationException>(() => locator.GetBootstrapper());
         }
 
         private static IBootstrapperLocator GetLocator(params Type[] types)
