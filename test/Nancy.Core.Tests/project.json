@@ -1,4 +1,8 @@
 ﻿{
+  "compilationOptions": {
+    "warningsAsErrors": true
+  },
+
   "dependencies": {
     "Nancy.Core": { "target": "project" },
     "xunit": "2.1.0",
