@@ -1,4 +1,4 @@
-﻿namespace Nancy.Owin.Http
+﻿namespace Nancy.Owin
 {
     using System.Globalization;
     using Nancy.Core.Http;

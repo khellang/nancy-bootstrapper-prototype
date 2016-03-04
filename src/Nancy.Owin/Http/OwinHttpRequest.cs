@@ -1,7 +1,6 @@
 ﻿namespace Nancy.Owin.Http
 {
     using System.Collections.Generic;
-    using System.Globalization;
     using System.IO;
     using Nancy.Core.Http;
 
