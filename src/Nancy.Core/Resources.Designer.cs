@@ -60,7 +60,16 @@ namespace Nancy.Core {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to &apos;{0}&apos; is not a valid HTTP method token..
+        ///    Looks up a localized string similar to Could not create an instance of {0}. See inner exceptions for details..
+        /// </summary>
+        internal static string Exception_BootstrapperActivation {
+            get {
+                return ResourceManager.GetString("Exception_BootstrapperActivation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to {0} is not a valid HTTP method token..
         /// </summary>
         internal static string Exception_InvalidHttpMethodToken {
             get {
@@ -69,7 +78,7 @@ namespace Nancy.Core {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to &apos;{0}&apos; is not a valid HTTP status code..
+        ///    Looks up a localized string similar to {0} is not a valid HTTP status code..
         /// </summary>
         internal static string Exception_InvalidHttpStatusCode {
             get {

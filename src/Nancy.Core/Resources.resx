@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Exception_BootstrapperActivation" xml:space="preserve">
+    <value>Could not create an instance of {0}. See inner exceptions for details.</value>
+  </data>
   <data name="Exception_InvalidHttpMethodToken" xml:space="preserve">
-    <value>'{0}' is not a valid HTTP method token.</value>
+    <value>{0} is not a valid HTTP method token.</value>
   </data>
   <data name="Exception_InvalidHttpStatusCode" xml:space="preserve">
-    <value>'{0}' is not a valid HTTP status code.</value>
+    <value>{0} is not a valid HTTP status code.</value>
   </data>
 </root>

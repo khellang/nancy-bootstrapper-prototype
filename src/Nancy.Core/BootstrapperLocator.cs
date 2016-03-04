@@ -26,8 +26,15 @@
 
             var type = GetBootstrapperType(types);
 
-            // TODO: Wrap potential exception with a better error message.
-            return (IBootstrapper) Activator.CreateInstance(type);
+            try
+            {
+                return (IBootstrapper) Activator.CreateInstance(type);
+            }
+            catch (Exception ex)
+            {
+                throw new BootstrapperActivationException(
+                    string.Format(Resources.Exception_BootstrapperActivation, type.FullName), ex);
+            }
         }
 
         private static Type GetBootstrapperType(IList<Type> types)
