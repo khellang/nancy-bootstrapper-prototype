@@ -23,6 +23,11 @@ namespace Nancy.Core.Scanning
 
             var targetTypeInfo = targetType.GetTypeInfo();
 
+            return GetTypesAssignableToInternal(targetTypeInfo, strategy);
+        }
+
+        private IEnumerable<Type> GetTypesAssignableToInternal(TypeInfo typeInfo, ScanningStrategy strategy)
+        {
             foreach (var assembly in this.assemblies.Value)
             {
                 if (!strategy.Invoke(assembly))
@@ -39,7 +44,7 @@ namespace Nancy.Core.Scanning
                         continue;
                     }
 
-                    if (exportedTypeInfo.IsAssignableTo(targetTypeInfo))
+                    if (exportedTypeInfo.IsAssignableTo(typeInfo))
                     {
                         yield return exportedType;
                     }

@@ -16,6 +16,9 @@
 
         public IEnumerable<Type> GetTypesAssignableTo(Type type, ScanningStrategy strategy)
         {
+            Check.NotNull(type, nameof(type));
+            Check.NotNull(strategy, nameof(strategy));
+
             var typeInfo = type.GetTypeInfo();
 
             foreach (var catalogType in this.types)
