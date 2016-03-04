@@ -1,6 +1,11 @@
 ﻿{
   "version": "1.0.0-*",
 
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "xmlDoc": true
+  },
+
   "dependencies": {
     "Autofac": "4.0.0-rc1-177",
     "Nancy.Core": { "target": "project" }

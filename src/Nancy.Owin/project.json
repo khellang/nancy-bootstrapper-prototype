@@ -1,6 +1,11 @@
 ﻿{
   "version": "1.0.0-*",
 
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "xmlDoc": true
+  },
+
   "dependencies": {
     "Nancy.Core": { "target": "project" },
     "Owin": "1.0.0"

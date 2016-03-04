@@ -1,6 +1,11 @@
 ﻿{
   "version": "1.0.0-*",
 
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "xmlDoc": true
+  },
+
   "dependencies": {
     "Microsoft.AspNet.Http": "1.0.0-rc1-final",
     "Nancy.Bootstrappers.AspNetCore": { "target": "project" }

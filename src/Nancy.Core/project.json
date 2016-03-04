@@ -1,6 +1,11 @@
 ﻿{
   "version": "1.0.0-*",
 
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "xmlDoc": true
+  },
+
   "dependencies": {
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
     "Newtonsoft.Json": "8.0.1"
