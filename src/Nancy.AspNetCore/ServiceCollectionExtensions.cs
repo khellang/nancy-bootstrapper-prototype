@@ -1,8 +1,8 @@
-namespace Nancy.AspNet
+namespace Nancy.AspNetCore
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
-    using Nancy.Bootstrappers.AspNet;
+    using Nancy.Bootstrappers.AspNetCore;
     using Nancy.Core;
     using Nancy.Core.Configuration;
 

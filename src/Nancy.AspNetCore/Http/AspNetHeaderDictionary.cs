@@ -1,4 +1,4 @@
-﻿namespace Nancy.AspNet.Http
+﻿namespace Nancy.AspNetCore.Http
 {
     using System.Collections;
     using System.Collections.Generic;

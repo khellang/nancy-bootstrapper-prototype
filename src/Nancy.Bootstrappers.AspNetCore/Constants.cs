@@ -1,4 +1,4 @@
-﻿namespace Nancy.Bootstrappers.AspNet
+﻿namespace Nancy.Bootstrappers.AspNetCore
 {
     internal class Constants
     {

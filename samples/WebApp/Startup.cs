@@ -3,7 +3,7 @@
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
     using Microsoft.Extensions.DependencyInjection;
-    using Nancy.AspNet;
+    using Nancy.AspNetCore;
 
     public class Startup
     {

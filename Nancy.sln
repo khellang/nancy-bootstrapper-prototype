@@ -12,7 +12,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApp", "samples\WebApp\We
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{8EAF21DF-341F-45E5-ABBC-79053ACC4CED}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.AspNet", "src\Nancy.Bootstrappers.AspNet\Nancy.Bootstrappers.AspNet.xproj", "{B5D319B5-9DF6-488D-837F-9C56FA3D2B70}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.AspNetCore", "src\Nancy.Bootstrappers.AspNetCore\Nancy.Bootstrappers.AspNetCore.xproj", "{B5D319B5-9DF6-488D-837F-9C56FA3D2B70}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.Autofac", "src\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.xproj", "{799249C2-08AF-4F83-A2FC-58686AF999B1}"
 EndProject
@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.StructureMap", "src\Nancy.Bootstrappers.StructureMap\Nancy.Bootstrappers.StructureMap.xproj", "{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.AspNet", "src\Nancy.AspNet\Nancy.AspNet.xproj", "{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.AspNetCore", "src\Nancy.AspNetCore\Nancy.AspNetCore.xproj", "{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Owin", "src\Nancy.Owin\Nancy.Owin.xproj", "{8F3B0303-1B24-4322-AEC3-96A4A806EB97}"
 EndProject

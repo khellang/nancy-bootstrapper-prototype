@@ -1,12 +1,12 @@
-﻿namespace Nancy.AspNet
+﻿namespace Nancy.AspNetCore
 {
     using System;
     using System.Threading.Tasks;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Http;
     using Microsoft.Extensions.DependencyInjection;
-    using Nancy.AspNet.Http;
-    using Nancy.Bootstrappers.AspNet;
+    using Nancy.AspNetCore.Http;
+    using Nancy.Bootstrappers.AspNetCore;
     using Nancy.Core;
 
     public static class ApplicationBuilderExtensions

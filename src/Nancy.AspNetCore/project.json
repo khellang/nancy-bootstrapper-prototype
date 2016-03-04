@@ -3,7 +3,7 @@
 
   "dependencies": {
     "Microsoft.AspNet.Http": "1.0.0-rc1-final",
-    "Nancy.Bootstrappers.AspNet": { "target": "project" }
+    "Nancy.Bootstrappers.AspNetCore": { "target": "project" }
   },
 
   "frameworks": {

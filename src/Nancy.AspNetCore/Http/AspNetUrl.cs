@@ -1,4 +1,4 @@
-﻿namespace Nancy.AspNet.Http
+﻿namespace Nancy.AspNetCore.Http
 {
     using Microsoft.AspNet.Http;
     using Nancy.Core.Http;
