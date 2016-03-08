@@ -42,7 +42,7 @@
         {
             foreach (var registration in registrations)
             {
-                services.AddInstance(registration.ServiceType, registration.Instance);
+                services.AddSingleton(registration.ServiceType, registration.Instance);
             }
         }
 

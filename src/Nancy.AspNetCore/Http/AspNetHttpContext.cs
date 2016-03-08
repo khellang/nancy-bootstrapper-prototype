@@ -6,9 +6,9 @@
 
     internal sealed class AspNetHttpContext : HttpContext
     {
-        private readonly Microsoft.AspNet.Http.HttpContext context;
+        private readonly Microsoft.AspNetCore.Http.HttpContext context;
 
-        public AspNetHttpContext(Microsoft.AspNet.Http.HttpContext context)
+        public AspNetHttpContext(Microsoft.AspNetCore.Http.HttpContext context)
         {
             this.context = context;
             this.Request = new AspNetHttpRequest(this, context.Request);

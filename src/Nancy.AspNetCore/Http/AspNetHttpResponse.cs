@@ -1,16 +1,16 @@
 namespace Nancy.AspNetCore.Http
 {
     using System.IO;
-    using Microsoft.AspNet.Http.Features;
+    using Microsoft.AspNetCore.Http.Features;
     using Nancy.Core.Http;
 
     internal sealed class AspNetHttpResponse : HttpResponse
     {
-        private readonly Microsoft.AspNet.Http.HttpResponse response;
+        private readonly Microsoft.AspNetCore.Http.HttpResponse response;
 
         private readonly IHttpResponseFeature responseFeature;
 
-        public AspNetHttpResponse(HttpContext context, Microsoft.AspNet.Http.HttpResponse response)
+        public AspNetHttpResponse(HttpContext context, Microsoft.AspNetCore.Http.HttpResponse response)
         {
             this.Context = context;
             this.response = response;

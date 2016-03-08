@@ -12,12 +12,16 @@
   },
 
   "frameworks": {
-    "dotnet5.4": {
+    "net451": { },
+    "netstandard1.3": {
+      "imports": [
+        "dnxcore50",
+        "portable-net451+win8"
+      ],
       "dependencies": {
         "System.Collections.Concurrent": "4.0.11-beta-23516",
         "System.Security.Claims": "4.0.1-beta-23516"
       }
-    },
-    "net451": { }
+    }
   }
 }

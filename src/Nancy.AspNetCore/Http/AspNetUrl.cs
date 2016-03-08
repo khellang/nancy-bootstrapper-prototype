@@ -1,13 +1,13 @@
 ﻿namespace Nancy.AspNetCore.Http
 {
-    using Microsoft.AspNet.Http;
+    using Microsoft.AspNetCore.Http;
     using Nancy.Core.Http;
 
     internal sealed class AspNetUrl : Url
     {
-        private readonly Microsoft.AspNet.Http.HttpRequest request;
+        private readonly Microsoft.AspNetCore.Http.HttpRequest request;
 
-        public AspNetUrl(Microsoft.AspNet.Http.HttpRequest request)
+        public AspNetUrl(Microsoft.AspNetCore.Http.HttpRequest request)
         {
             this.request = request;
         }

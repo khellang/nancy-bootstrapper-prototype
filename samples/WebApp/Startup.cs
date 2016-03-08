@@ -1,7 +1,7 @@
 ﻿namespace WebApp
 {
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Hosting;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
     using Nancy.AspNetCore;
 
@@ -19,7 +19,13 @@
 
         public static void Main(string[] args)
         {
-            WebApplication.Run<Startup>(args);
+            new WebHostBuilder()
+                .UseServer("Microsoft.AspNetCore.Server.Kestrel")
+                .UseDefaultConfiguration(args)
+                .UseEnvironment("Development")
+                .UseStartup<Startup>()
+                .Build()
+                .Run();
         }
     }
 }

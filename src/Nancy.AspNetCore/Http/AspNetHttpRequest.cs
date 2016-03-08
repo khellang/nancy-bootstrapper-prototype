@@ -5,11 +5,11 @@
 
     internal sealed class AspNetHttpRequest : HttpRequest
     {
-        private readonly Microsoft.AspNet.Http.HttpRequest request;
+        private readonly Microsoft.AspNetCore.Http.HttpRequest request;
 
         private readonly AspNetUrl aspNetUrl;
 
-        public AspNetHttpRequest(HttpContext context, Microsoft.AspNet.Http.HttpRequest request)
+        public AspNetHttpRequest(HttpContext context, Microsoft.AspNetCore.Http.HttpRequest request)
         {
             this.Context = context;
             this.request = request;

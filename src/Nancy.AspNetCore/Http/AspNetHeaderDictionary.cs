@@ -8,9 +8,9 @@
 
     internal class AspNetHeaderDictionary : IHeaderDictionary
     {
-        private readonly Microsoft.AspNet.Http.IHeaderDictionary headers;
+        private readonly Microsoft.AspNetCore.Http.IHeaderDictionary headers;
 
-        public AspNetHeaderDictionary(Microsoft.AspNet.Http.IHeaderDictionary headers)
+        public AspNetHeaderDictionary(Microsoft.AspNetCore.Http.IHeaderDictionary headers)
         {
             this.headers = headers;
         }

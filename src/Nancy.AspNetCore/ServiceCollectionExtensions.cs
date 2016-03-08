@@ -34,7 +34,7 @@ namespace Nancy.AspNetCore
                 .Populate(services, platformServices);
 
             // Make sure we add the bootstrapper so it can be resolved in a call to `UseNancy`.
-            return services.AddInstance(bootstrapper);
+            return services.AddSingleton(bootstrapper);
         }
 
         private class InlineAspNetBootstrapper : AspNetBootstrapper

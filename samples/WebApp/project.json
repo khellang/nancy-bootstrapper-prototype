@@ -8,17 +8,30 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
     "Nancy.AspNetCore": { "target": "project" }
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
+    "WebApp": "WebApp"
   },
 
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
+    "net451": { },
+    "dnx451": {
+      "compilationOptions": {
+        "define": [ "NET451" ]
+      }
+    },
+    "netstandardapp1.5": {
+      "imports": [
+        "dnxcore50",
+        "portable-net451+win8"
+      ],
+      "dependencies": {
+        "NETStandard.Library": "1.0.0-*"
+      }
+    }
   },
 
   "exclude": [

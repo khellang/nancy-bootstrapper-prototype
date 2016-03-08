@@ -7,12 +7,17 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNet.Http": "1.0.0-rc1-final",
+    "Microsoft.AspNetCore.Http": "1.0.0-*",
     "Nancy.Bootstrappers.AspNetCore": { "target": "project" }
   },
 
   "frameworks": {
-    "dotnet5.4": { },
-    "net451": { }
+    "net451": { },
+    "netstandard1.3": {
+      "imports": [
+        "dnxcore50",
+        "portable-net451+win8"
+      ]
+    }
   }
 }
