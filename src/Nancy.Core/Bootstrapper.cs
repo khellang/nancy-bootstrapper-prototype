@@ -1,6 +1,5 @@
 namespace Nancy.Core
 {
-    using System;
     using Nancy.Core.Configuration;
     using Nancy.Core.Registration;
 
@@ -10,8 +9,6 @@ namespace Nancy.Core
     ///     application container and the framework as a whole.
     /// </summary>
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
-        where TContainer : class, IDisposable
-        where TBuilder : class
     {
         public IApplication InitializeApplication(IPlatformServices platformServices)
         {
@@ -105,7 +102,6 @@ namespace Nancy.Core
     ///     split, i.e. they allow appending to an existing container instance.
     /// </summary>
     public abstract class Bootstrapper<TContainer> : Bootstrapper<TContainer, TContainer>
-        where TContainer : class, IDisposable
     {
         protected sealed override TContainer CreateBuilder() => this.CreateContainer();
 

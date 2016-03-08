@@ -19,7 +19,7 @@
             // because IServiceProvider is not implementing IDisposable.
             var provider = builder.ApplicationServices.AsDisposable(shouldDispose: false);
 
-            var bootstrapper = provider.GetService<IBootstrapper<IDisposableServiceProvider>>();
+            var bootstrapper = provider.GetService<IBootstrapper<IServiceProvider>>();
 
             if (bootstrapper == null)
             {

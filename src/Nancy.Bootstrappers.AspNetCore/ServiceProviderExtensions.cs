@@ -4,12 +4,12 @@
 
     internal static class ServiceProviderExtensions
     {
-        public static IDisposableServiceProvider AsDisposable(this IServiceProvider provider, bool shouldDispose)
+        public static IServiceProvider AsDisposable(this IServiceProvider provider, bool shouldDispose)
         {
             return new DisposableServiceProvider(provider, shouldDispose);
         }
 
-        private class DisposableServiceProvider : IDisposableServiceProvider
+        private class DisposableServiceProvider : IServiceProvider, IDisposable
         {
             private readonly IServiceProvider provider;
 

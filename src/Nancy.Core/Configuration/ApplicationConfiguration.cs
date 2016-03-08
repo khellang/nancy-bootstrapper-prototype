@@ -1,7 +1,6 @@
 namespace Nancy.Core.Configuration
 {
     internal class ApplicationConfiguration<TContainer> : IApplicationConfiguration<TContainer>
-        where TContainer : class
     {
         public ApplicationConfiguration(TContainer container, IFrameworkConfiguration framework)
         {

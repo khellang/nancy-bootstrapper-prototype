@@ -6,8 +6,6 @@ namespace Nancy.Core
     using Nancy.Core.Http;
 
     public abstract class Application<TContainer, TScope> : IApplication<TContainer>
-        where TContainer : class, IDisposable
-        where TScope : class, IDisposable
     {
         private readonly bool shouldDispose;
 
@@ -32,7 +30,7 @@ namespace Nancy.Core
         {
             if (this.shouldDispose)
             {
-                this.Container.Dispose();
+                TryDispose(this.Container);
             }
         }
 
@@ -42,15 +40,21 @@ namespace Nancy.Core
 
         private async Task HandleRequestInternal(HttpContext context, CancellationToken cancellationToken)
         {
-            using (var scope = this.BeginRequestScope(context, this.Container))
+            var scope = this.BeginRequestScope(context, this.Container);
+
+            try
             {
-                var engine = this.TryComposeEngine(this.Container, scope);
+                var engine = this.ComposeEngineSafely(this.Container, scope);
 
                 await engine.HandleRequest(context, cancellationToken).ConfigureAwait(false);
             }
+            finally
+            {
+                TryDispose(scope);
+            }
         }
 
-        private IEngine TryComposeEngine(TContainer container, TScope scope)
+        private IEngine ComposeEngineSafely(TContainer container, TScope scope)
         {
             try
             {
@@ -61,10 +65,14 @@ namespace Nancy.Core
                 throw new EngineCompositionException(Resources.Exception_EngineComposition, ex);
             }
         }
+
+        private static void TryDispose(object @object)
+        {
+            (@object as IDisposable)?.Dispose();
+        }
     }
 
     public abstract class Application<TContainer> : Application<TContainer, TContainer>
-        where TContainer : class, IDisposable
     {
         protected Application(TContainer container, bool shouldDispose)
             : base(container, shouldDispose)
