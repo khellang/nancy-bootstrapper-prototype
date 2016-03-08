@@ -1,27 +1,22 @@
 ﻿namespace Nancy.Core
 {
-    using System;
+    using System.Reflection;
+    using Microsoft.Extensions.DependencyModel;
     using Microsoft.Extensions.PlatformAbstractions;
     using Nancy.Core.Scanning;
 
     public class DefaultPlatformServices : IPlatformServices
     {
-        private static readonly Lazy<IPlatformServices> DefaultInstance =
-            new Lazy<IPlatformServices>(() => new DefaultPlatformServices());
-
-        private DefaultPlatformServices()
+        public DefaultPlatformServices(IApplicationEnvironment environment)
         {
-            // TODO: If LibraryManager is null here, we should use DependencyContext.
-            var libraryManager = PlatformServices.Default.LibraryManager;
+            var assemblyName = new AssemblyName(environment.ApplicationName);
+            var assembly = Assembly.Load(assemblyName);
+            var context = DependencyContext.Load(assembly);
 
-            // TODO: We need a fallback AssemblyCatalog for full framework. AppDomainAssemblyCatalog?
-
-            this.AssemblyCatalog = new LibraryManagerAssemblyCatalog(libraryManager);
+            this.AssemblyCatalog = new DependencyContextAssemblyCatalog(assembly, context);
             this.TypeCatalog = new TypeCatalog(this.AssemblyCatalog);
             this.BootstrapperLocator = new BootstrapperLocator(this.TypeCatalog);
         }
-
-        public static IPlatformServices Instance => DefaultInstance.Value;
 
         public IAssemblyCatalog AssemblyCatalog { get; }
 
