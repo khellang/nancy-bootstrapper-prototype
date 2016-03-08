@@ -46,10 +46,7 @@
         {
             public async Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
             {
-                context.Response.StatusCode = 200;
                 context.Response.StatusCode = HttpStatusCode.Ok;
-
-                context.Response.ContentType = "application/vnd.github.v3.raw+json; charset=utf-8";
                 context.Response.ContentType = MediaRange.ApplicationJson;
 
                 using (var writer = new StreamWriter(context.Response.Body))
