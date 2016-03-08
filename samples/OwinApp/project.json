@@ -20,10 +20,6 @@
 
   "frameworks": {
     "net451": { },
-    "dnx451": {
-      "compilationOptions": {
-        "define": [ "NET451" ]
-      }
-    }
+    "dnx451": { }
   }
 }
