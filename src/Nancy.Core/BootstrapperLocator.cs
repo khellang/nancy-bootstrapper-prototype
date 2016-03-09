@@ -87,12 +87,10 @@
             {
                 var baseType = type.GetTypeInfo().BaseType;
 
-                if (baseType == null)
+                if (baseType != null)
                 {
-                    continue;
+                    baseTypes.Add(baseType);
                 }
-
-                baseTypes.Add(baseType);
             }
 
             return baseTypes;

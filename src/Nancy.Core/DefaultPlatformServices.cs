@@ -9,6 +9,8 @@
     {
         public DefaultPlatformServices(IApplicationEnvironment environment)
         {
+            Check.NotNull(environment, nameof(environment));
+
             var assemblyName = new AssemblyName(environment.ApplicationName);
             var assembly = Assembly.Load(assemblyName);
             var context = DependencyContext.Load(assembly);

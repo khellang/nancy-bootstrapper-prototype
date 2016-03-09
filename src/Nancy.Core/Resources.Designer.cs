@@ -78,7 +78,7 @@ namespace Nancy.Core {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to {0} is not a valid HTTP method token..
+        ///    Looks up a localized string similar to &apos;{0}&apos; is not a valid HTTP method token..
         /// </summary>
         internal static string Exception_InvalidHttpMethodToken {
             get {
@@ -87,7 +87,7 @@ namespace Nancy.Core {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to {0} is not a valid HTTP status code..
+        ///    Looks up a localized string similar to &apos;{0}&apos; is not a valid HTTP status code..
         /// </summary>
         internal static string Exception_InvalidHttpStatusCode {
             get {

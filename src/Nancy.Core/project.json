@@ -8,8 +8,7 @@
   },
 
   "dependencies": {
-    "Microsoft.Extensions.DependencyModel": "1.0.0-*",
-    "Newtonsoft.Json": "8.0.2"
+    "Microsoft.Extensions.DependencyModel": "1.0.0-*"
   },
 
   "frameworks": {
@@ -20,7 +19,6 @@
         "portable-net451+win8"
       ],
       "dependencies": {
-        "System.Collections.Concurrent": "4.0.12-*",
         "System.Security.Claims": "4.0.1-*"
       }
     }

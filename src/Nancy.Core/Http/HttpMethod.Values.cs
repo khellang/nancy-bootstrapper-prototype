@@ -43,7 +43,7 @@
 
             var trimmedValue = value.Trim();
 
-            if (!HttpUtility.IsValidToken(trimmedValue))
+            if (trimmedValue.Length == 0 || !HttpUtility.IsValidToken(trimmedValue))
             {
                 throw new ArgumentException(string.Format(
                     Resources.Exception_InvalidHttpMethodToken, trimmedValue), nameof(value));

@@ -1,6 +1,5 @@
 ﻿namespace Nancy.Core.Scanning
 {
-    using System;
     using System.Reflection;
 
     public static class ScanningStrategies

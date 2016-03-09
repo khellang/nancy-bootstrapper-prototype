@@ -41,7 +41,7 @@
                 return false;
             }
 
-            return baseTypeInfo.IsAssignableTo(genericTypeDefinition);
+            return baseTypeInfo.IsAssignableToGenericTypeDefinition(genericTypeDefinition);
         }
 
         private static bool MatchesGenericTypeDefinition(this TypeInfo sourceType, TypeInfo genericTypeDefinition)

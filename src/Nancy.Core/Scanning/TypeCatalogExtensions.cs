@@ -2,28 +2,11 @@ namespace Nancy.Core.Scanning
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
     using Nancy.Core.Configuration;
     using Nancy.Core.Registration;
 
     public static class TypeCatalogExtensions
     {
-        public static Type GetFirstTypeAssignableTo<T>(this ITypeCatalog typeCatalog)
-        {
-            return typeCatalog.GetFirstTypeAssignableTo(typeof(T));
-        }
-
-        public static Type GetFirstTypeAssignableTo(this ITypeCatalog typeCatalog, Type type)
-        {
-            return typeCatalog.GetFirstTypeAssignableTo(type, ScanningStrategies.All);
-        }
-
-        public static Type GetFirstTypeAssignableTo(this ITypeCatalog typeCatalog, Type type, ScanningStrategy strategy)
-        {
-            return typeCatalog.GetTypesAssignableTo(type, strategy).FirstOrDefault();
-        }
-
         public static IEnumerable<Type> GetTypesAssignableTo<T>(this ITypeCatalog typeCatalog)
         {
             return typeCatalog.GetTypesAssignableTo(typeof(T));
