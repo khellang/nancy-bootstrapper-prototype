@@ -13,8 +13,14 @@ namespace Nancy.Core.Configuration
 
         private readonly List<IRegistrationFactory<TypeRegistration>> typeRegistrationFactories;
 
-        public FrameworkConfiguration()
+        private readonly ITypeCatalog typeCatalog;
+
+        public FrameworkConfiguration(ITypeCatalog typeCatalog)
         {
+            Check.NotNull(typeCatalog, nameof(typeCatalog));
+
+            this.typeCatalog = typeCatalog;
+
             this.typeRegistrationFactories = new List<IRegistrationFactory<TypeRegistration>>
             {
                 (this.Engine = new TypeRegistrationFactory<IEngine, Engine>(Lifetime.PerRequest))
@@ -30,13 +36,11 @@ namespace Nancy.Core.Configuration
 
         public ICollectionTypeRegistrationFactory<ISerializer> Serializers { get; }
 
-        public IContainerRegistry GetRegistry(ITypeCatalog typeCatalog)
+        public IContainerRegistry GetRegistry()
         {
-            Check.NotNull(typeCatalog, nameof(typeCatalog));
+            var typeRegistrations = this.typeCatalog.GetRegistrations(this.typeRegistrationFactories);
 
-            var typeRegistrations = typeCatalog.GetRegistrations(this.typeRegistrationFactories);
-
-            var collectionTypeRegistrations = typeCatalog.GetRegistrations(this.collectionTypeRegistrationFactories);
+            var collectionTypeRegistrations = this.typeCatalog.GetRegistrations(this.collectionTypeRegistrationFactories);
 
             return new ContainerRegistry(typeRegistrations, collectionTypeRegistrations);
         }

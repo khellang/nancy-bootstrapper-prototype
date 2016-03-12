@@ -33,7 +33,9 @@ namespace Nancy.Core
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(platformServices, nameof(platformServices));
 
-            var frameworkConfig = new FrameworkConfiguration();
+            var typeCatalog = platformServices.TypeCatalog;
+
+            var frameworkConfig = new FrameworkConfiguration(typeCatalog);
 
             // We'll hang all configuration related stuff off this object.
             // Everything will be pre-configured with Nancy defaults.
@@ -52,7 +54,7 @@ namespace Nancy.Core
             // Once the user has configured everything, we build a
             // "container registry", this contains all registrations
             // for framework services.
-            var frameworkRegistry = frameworkConfig.GetRegistry(platformServices.TypeCatalog);
+            var frameworkRegistry = frameworkConfig.GetRegistry();
 
             // We then call out to the bootstrapper implementation
             // to register all the registrations in the registry.
