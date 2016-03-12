@@ -20,7 +20,8 @@
 
         protected sealed override IServiceProvider BuildContainer(IServiceCollection services)
         {
-            return services.BuildServiceProvider().AsDisposable(shouldDispose: true);
+            // Make sure we wrap the instance we create in a disposable.
+            return services.BuildServiceProvider().AsDisposable();
         }
 
         protected sealed override void ValidateContainerConfiguration(IServiceProvider container)
@@ -50,14 +51,14 @@
                 {
                     // We want to reuse the existing request services instead
                     // of creating a new Nancy-specific scope if we can.
-                    return requestServices.AsDisposable(shouldDispose: false);
+                    return requestServices;
                 }
 
                 var requestScope = this.scopeFactory.CreateScope();
 
                 var requestProvider = requestScope.ServiceProvider;
 
-                return requestProvider.AsDisposable(shouldDispose: true);
+                return requestProvider.AsDisposable();
             }
 
             protected override IEngine ComposeEngine(IServiceProvider provider)

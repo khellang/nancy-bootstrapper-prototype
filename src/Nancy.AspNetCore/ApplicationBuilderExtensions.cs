@@ -15,9 +15,7 @@
         {
             Check.NotNull(builder, nameof(builder));
 
-            // We need to wrap the default ApplicationServices
-            // because IServiceProvider is not implementing IDisposable.
-            var provider = builder.ApplicationServices.AsDisposable(shouldDispose: false);
+            var provider = builder.ApplicationServices;
 
             var bootstrapper = provider.GetService<IBootstrapper<IServiceProvider>>();
 

@@ -4,21 +4,18 @@
 
     internal static class ServiceProviderExtensions
     {
-        public static IServiceProvider AsDisposable(this IServiceProvider provider, bool shouldDispose)
+        public static IServiceProvider AsDisposable(this IServiceProvider provider)
         {
-            return new DisposableServiceProvider(provider, shouldDispose);
+            return new DisposableServiceProvider(provider);
         }
 
         private class DisposableServiceProvider : IServiceProvider, IDisposable
         {
             private readonly IServiceProvider provider;
 
-            private readonly bool shouldDispose;
-
-            public DisposableServiceProvider(IServiceProvider provider, bool shouldDispose)
+            public DisposableServiceProvider(IServiceProvider provider)
             {
                 this.provider = provider;
-                this.shouldDispose = shouldDispose;
             }
 
             public object GetService(Type serviceType)
@@ -28,10 +25,7 @@
 
             public void Dispose()
             {
-                if (this.shouldDispose)
-                {
-                    (this.provider as IDisposable)?.Dispose();
-                }
+                (this.provider as IDisposable)?.Dispose();
             }
         }
     }
