@@ -22,7 +22,6 @@
             new WebHostBuilder()
                 .UseServer("Microsoft.AspNetCore.Server.Kestrel")
                 .UseDefaultConfiguration(args)
-                .UseEnvironment("Development")
                 .UseStartup<Startup>()
                 .Build()
                 .Run();
