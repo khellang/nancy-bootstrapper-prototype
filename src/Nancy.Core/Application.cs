@@ -34,13 +34,19 @@ namespace Nancy.Core
             }
         }
 
+        protected virtual bool TryGetExistingScope(HttpContext context, out TScope provider)
+        {
+            provider = default(TScope);
+            return false;
+        }
+
         protected abstract TScope BeginRequestScope(HttpContext context, TContainer container);
 
         protected abstract IEngine ComposeEngine(TContainer container, TScope scope);
 
         private async Task HandleRequestInternal(HttpContext context, CancellationToken cancellationToken)
         {
-            var scope = this.BeginRequestScope(context, this.Container);
+            var scope = this.GetRequestScope(context);
 
             try
             {
@@ -52,6 +58,17 @@ namespace Nancy.Core
             {
                 TryDispose(scope);
             }
+        }
+
+        private TScope GetRequestScope(HttpContext context)
+        {
+            TScope scope;
+            if (this.TryGetExistingScope(context, out scope))
+            {
+                return scope;
+            }
+
+            return this.BeginRequestScope(context, this.Container);
         }
 
         private IEngine ComposeEngineSafely(TContainer container, TScope scope)

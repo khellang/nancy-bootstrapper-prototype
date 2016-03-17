@@ -21,7 +21,7 @@
         protected sealed override IServiceProvider BuildContainer(IServiceCollection services)
         {
             // Make sure we wrap the instance we create in a disposable.
-            return services.BuildServiceProvider().AsDisposable();
+            return services.BuildServiceProvider();
         }
 
         protected sealed override void ValidateContainerConfiguration(IServiceProvider container)
@@ -34,7 +34,7 @@
             return new Application(provider, shouldDispose);
         }
 
-        private sealed class Application : Application<IServiceProvider>
+        private sealed class Application : Application<IServiceProvider, IServiceScope>
         {
             private readonly IServiceScopeFactory scopeFactory;
 
@@ -44,44 +44,49 @@
                 this.scopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
             }
 
-            protected override IServiceProvider BeginRequestScope(HttpContext context, IServiceProvider provider)
-            {
-                IServiceProvider requestServices;
-                if (TryGetRequestServices(context, out requestServices))
-                {
-                    // We want to reuse the existing request services instead
-                    // of creating a new Nancy-specific scope if we can.
-                    return requestServices;
-                }
-
-                var requestScope = this.scopeFactory.CreateScope();
-
-                var requestProvider = requestScope.ServiceProvider;
-
-                return requestProvider.AsDisposable();
-            }
-
-            protected override IEngine ComposeEngine(IServiceProvider provider)
-            {
-                return provider.GetRequiredService<IEngine>();
-            }
-
-            private static bool TryGetRequestServices(HttpContext context, out IServiceProvider requestServices)
+            protected override bool TryGetExistingScope(HttpContext context, out IServiceScope provider)
             {
                 object value;
                 // If we're running in ASP.NET, this should be set by the Nancy middleware.
                 if (context.Items.TryGetValue(Constants.AspNetRequestServices, out value))
                 {
                     var services = value as IServiceProvider;
+
                     if (services != null)
                     {
-                        requestServices = services;
+                        provider = new ExistingServiceScope(services);
                         return true;
                     }
                 }
 
-                requestServices = null;
+                provider = null;
                 return false;
+            }
+
+            protected override IServiceScope BeginRequestScope(HttpContext context, IServiceProvider provider)
+            {
+                return this.scopeFactory.CreateScope();
+            }
+
+            protected override IEngine ComposeEngine(IServiceProvider container, IServiceScope scope)
+            {
+                return scope.ServiceProvider.GetRequiredService<IEngine>();
+            }
+
+            private class ExistingServiceScope : IServiceScope
+            {
+                public ExistingServiceScope(IServiceProvider provider)
+                {
+                    this.ServiceProvider = provider;
+                }
+
+                public IServiceProvider ServiceProvider { get; }
+
+                public void Dispose()
+                {
+                    // We don't want to dispose the request
+                    // scope created by the ASP.NET host.
+                }
             }
         }
     }
