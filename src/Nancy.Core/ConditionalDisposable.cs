@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ConditionalDisposable<T> : IDisposable
+    public class ConditionalDisposable<T> : IDisposable where T : IDisposable
     {
         private readonly bool shouldDispose;
 
@@ -20,7 +20,7 @@
         {
             if (this.shouldDispose)
             {
-                (this.Value as IDisposable)?.Dispose();
+                this.Value.Dispose();
             }
         }
     }

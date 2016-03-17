@@ -1,5 +1,6 @@
 namespace Nancy.Core
 {
+    using System;
     using Nancy.Core.Configuration;
     using Nancy.Core.Registration;
 
@@ -9,6 +10,7 @@ namespace Nancy.Core
     ///     application container and the framework as a whole.
     /// </summary>
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
+        where TContainer : IDisposable
     {
         public IApplication InitializeApplication(IPlatformServices platformServices)
         {
@@ -25,7 +27,7 @@ namespace Nancy.Core
             var container = this.BuildContainer(builder);
 
             // Since we've built the container, we want to dispose it as well.
-            var disposable = new ConditionalDisposable<TContainer>(container, shouldDispose: true);
+            var disposable = container.AsConditionalDisposable(shouldDispose: true);
 
             return this.InitializeApplication(disposable);
         }
@@ -71,7 +73,7 @@ namespace Nancy.Core
 
             // In this case, we don't want to control the container
             // lifetime, because it's passed from outside. We don't own it.
-            var disposable = new ConditionalDisposable<TContainer>(container, shouldDispose: true);
+            var disposable = container.AsConditionalDisposable(shouldDispose: true);
 
             return this.InitializeApplication(disposable);
         }
@@ -108,6 +110,7 @@ namespace Nancy.Core
     ///     split, i.e. they allow appending to an existing container instance.
     /// </summary>
     public abstract class Bootstrapper<TContainer> : Bootstrapper<TContainer, TContainer>
+        where TContainer : IDisposable
     {
         protected sealed override TContainer CreateBuilder() => this.CreateContainer();
 

@@ -6,7 +6,7 @@
     using Nancy.Core.Http;
     using Nancy.Core.Registration;
 
-    public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IServiceProvider>
+    public class AspNetBootstrapper : Bootstrapper<IServiceCollection, IDisposableServiceProvider>
     {
         protected sealed override IServiceCollection CreateBuilder()
         {
@@ -18,26 +18,26 @@
             services.AddRegistry(registry);
         }
 
-        protected sealed override IServiceProvider BuildContainer(IServiceCollection services)
+        protected sealed override IDisposableServiceProvider BuildContainer(IServiceCollection services)
         {
-            return services.BuildServiceProvider();
+            return services.BuildServiceProvider().AsDisposable();
         }
 
-        protected sealed override void ValidateContainerConfiguration(IServiceProvider container)
+        protected sealed override void ValidateContainerConfiguration(IDisposableServiceProvider container)
         {
             // Not supported.
         }
 
-        protected sealed override IApplication<IServiceProvider> CreateApplication(ConditionalDisposable<IServiceProvider> provider)
+        protected sealed override IApplication<IDisposableServiceProvider> CreateApplication(ConditionalDisposable<IDisposableServiceProvider> provider)
         {
             return new Application(provider);
         }
 
-        private sealed class Application : Application<IServiceProvider, IServiceScope>
+        private sealed class Application : Application<IDisposableServiceProvider, IServiceScope>
         {
             private readonly IServiceScopeFactory scopeFactory;
 
-            public Application(ConditionalDisposable<IServiceProvider> provider) : base(provider)
+            public Application(ConditionalDisposable<IDisposableServiceProvider> provider) : base(provider)
             {
                 this.scopeFactory = provider.Value.GetRequiredService<IServiceScopeFactory>();
             }
@@ -61,12 +61,12 @@
                 return false;
             }
 
-            protected override IServiceScope BeginRequestScope(HttpContext context, IServiceProvider provider)
+            protected override IServiceScope BeginRequestScope(HttpContext context, IDisposableServiceProvider provider)
             {
                 return this.scopeFactory.CreateScope();
             }
 
-            protected override IEngine ComposeEngine(IServiceProvider container, IServiceScope scope)
+            protected override IEngine ComposeEngine(IDisposableServiceProvider container, IServiceScope scope)
             {
                 return scope.ServiceProvider.GetRequiredService<IEngine>();
             }

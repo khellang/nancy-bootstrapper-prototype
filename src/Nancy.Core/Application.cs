@@ -6,6 +6,8 @@ namespace Nancy.Core
     using Nancy.Core.Http;
 
     public abstract class Application<TContainer, TScope> : IApplication<TContainer>
+        where TContainer : IDisposable
+        where TScope : IDisposable
     {
         protected Application(ConditionalDisposable<TContainer> container)
         {
@@ -52,17 +54,17 @@ namespace Nancy.Core
 
         private ConditionalDisposable<TScope> GetRequestScope(HttpContext context)
         {
-            TScope scope;
-            if (this.TryGetExistingScope(context, out scope))
+            TScope existingScope;
+            if (this.TryGetExistingScope(context, out existingScope))
             {
                 // We don't want to dispose an existing scope, that's out of our control.
-                return new ConditionalDisposable<TScope>(scope, shouldDispose: false);
+                return existingScope.AsConditionalDisposable(shouldDispose: false);
             }
 
-            var newScope = this.BeginRequestScope(context, this.Container.Value);
+            var scope = this.BeginRequestScope(context, this.Container.Value);
 
             // We've created this scope, make sure we dispose it.
-            return new ConditionalDisposable<TScope>(newScope, shouldDispose: true);
+            return scope.AsConditionalDisposable(shouldDispose: true);
         }
 
         private IEngine ComposeEngineSafely(TContainer container, TScope scope)
@@ -79,6 +81,7 @@ namespace Nancy.Core
     }
 
     public abstract class Application<TContainer> : Application<TContainer, TContainer>
+        where TContainer : IDisposable
     {
         protected Application(ConditionalDisposable<TContainer> container) : base(container)
         {
