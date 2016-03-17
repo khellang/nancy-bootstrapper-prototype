@@ -38,7 +38,7 @@ namespace Nancy.Core
             return false;
         }
 
-        protected abstract TScope BeginRequestScope(TContainer container);
+        protected abstract TScope BeginRequestScope(HttpContext context, TContainer container);
 
         protected abstract IEngine ComposeEngine(TContainer container, TScope scope);
 
@@ -61,7 +61,7 @@ namespace Nancy.Core
                 return existingScope.AsConditionalDisposable(shouldDispose: false);
             }
 
-            var scope = this.BeginRequestScope(this.Container.Value);
+            var scope = this.BeginRequestScope(context, this.Container.Value);
 
             // We've created this scope, make sure we dispose it.
             return scope.AsConditionalDisposable(shouldDispose: true);

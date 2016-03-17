@@ -61,7 +61,7 @@
                 return false;
             }
 
-            protected override IServiceScope BeginRequestScope(IDisposableServiceProvider provider)
+            protected override IServiceScope BeginRequestScope(HttpContext context, IDisposableServiceProvider provider)
             {
                 return this.scopeFactory.CreateScope();
             }
