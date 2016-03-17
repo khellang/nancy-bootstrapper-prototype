@@ -7,17 +7,16 @@ namespace Nancy.Core
 
     public abstract class Application<TContainer, TScope> : IApplication<TContainer>
     {
-        private readonly bool shouldDispose;
-
-        protected Application(TContainer container, bool shouldDispose)
+        protected Application(ConditionalDisposable<TContainer> container)
         {
             Check.NotNull(container, nameof(container));
 
             this.Container = container;
-            this.shouldDispose = shouldDispose;
         }
 
-        public TContainer Container { get; }
+        TContainer IApplication<TContainer>.Container => this.Container.Value;
+
+        private ConditionalDisposable<TContainer> Container { get; }
 
         public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
@@ -28,10 +27,7 @@ namespace Nancy.Core
 
         public void Dispose()
         {
-            if (this.shouldDispose)
-            {
-                TryDispose(this.Container);
-            }
+            this.Container.Dispose();
         }
 
         protected virtual bool TryGetExistingScope(HttpContext context, out TScope provider)
@@ -46,29 +42,27 @@ namespace Nancy.Core
 
         private async Task HandleRequestInternal(HttpContext context, CancellationToken cancellationToken)
         {
-            var scope = this.GetRequestScope(context);
-
-            try
+            using (var scope = this.GetRequestScope(context))
             {
-                var engine = this.ComposeEngineSafely(this.Container, scope);
+                var engine = this.ComposeEngineSafely(this.Container.Value, scope.Value);
 
                 await engine.HandleRequest(context, cancellationToken).ConfigureAwait(false);
             }
-            finally
-            {
-                TryDispose(scope);
-            }
         }
 
-        private TScope GetRequestScope(HttpContext context)
+        private ConditionalDisposable<TScope> GetRequestScope(HttpContext context)
         {
             TScope scope;
             if (this.TryGetExistingScope(context, out scope))
             {
-                return scope;
+                // We don't want to dispose an existing scope, that's out of our control.
+                return new ConditionalDisposable<TScope>(scope, shouldDispose: false);
             }
 
-            return this.BeginRequestScope(context, this.Container);
+            var newScope = this.BeginRequestScope(context, this.Container.Value);
+
+            // We've created this scope, make sure we dispose it.
+            return new ConditionalDisposable<TScope>(newScope, shouldDispose: true);
         }
 
         private IEngine ComposeEngineSafely(TContainer container, TScope scope)
@@ -82,17 +76,11 @@ namespace Nancy.Core
                 throw new EngineCompositionException(Resources.Exception_EngineComposition, ex);
             }
         }
-
-        private static void TryDispose(object @object)
-        {
-            (@object as IDisposable)?.Dispose();
-        }
     }
 
     public abstract class Application<TContainer> : Application<TContainer, TContainer>
     {
-        protected Application(TContainer container, bool shouldDispose)
-            : base(container, shouldDispose)
+        protected Application(ConditionalDisposable<TContainer> container) : base(container)
         {
         }
 

@@ -28,19 +28,18 @@
             // Not supported.
         }
 
-        protected sealed override IApplication<IServiceProvider> CreateApplication(IServiceProvider provider, bool shouldDispose)
+        protected sealed override IApplication<IServiceProvider> CreateApplication(ConditionalDisposable<IServiceProvider> provider)
         {
-            return new Application(provider, shouldDispose);
+            return new Application(provider);
         }
 
         private sealed class Application : Application<IServiceProvider, IServiceScope>
         {
             private readonly IServiceScopeFactory scopeFactory;
 
-            public Application(IServiceProvider provider, bool shouldDispose)
-                : base(provider, shouldDispose)
+            public Application(ConditionalDisposable<IServiceProvider> provider) : base(provider)
             {
-                this.scopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
+                this.scopeFactory = provider.Value.GetRequiredService<IServiceScopeFactory>();
             }
 
             protected override bool TryGetExistingScope(HttpContext context, out IServiceScope provider)

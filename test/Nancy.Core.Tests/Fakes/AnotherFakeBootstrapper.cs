@@ -12,7 +12,7 @@
         {
         }
 
-        protected override IApplication<AnotherFakeContainer> CreateApplication(AnotherFakeContainer container, bool shouldDispose)
+        protected override IApplication<AnotherFakeContainer> CreateApplication(ConditionalDisposable<AnotherFakeContainer> container)
         {
             return null;
         }

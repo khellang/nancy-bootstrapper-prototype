@@ -33,15 +33,14 @@
             }
         }
 
-        protected sealed override IApplication<IContainer> CreateApplication(IContainer container, bool shouldDispose)
+        protected sealed override IApplication<IContainer> CreateApplication(ConditionalDisposable<IContainer> container)
         {
-            return new Application(container, shouldDispose);
+            return new Application(container);
         }
 
         private sealed class Application : Application<IContainer>
         {
-            public Application(IContainer container, bool shouldDispose)
-                : base(container, shouldDispose)
+            public Application(ConditionalDisposable<IContainer> container) : base(container)
             {
             }
 

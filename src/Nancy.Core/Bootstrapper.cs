@@ -25,7 +25,9 @@ namespace Nancy.Core
             var container = this.BuildContainer(builder);
 
             // Since we've built the container, we want to dispose it as well.
-            return this.InitializeApplication(container, shouldDispose: true);
+            var disposable = new ConditionalDisposable<TContainer>(container, shouldDispose: true);
+
+            return this.InitializeApplication(disposable);
         }
 
         public IBootstrapper<TContainer> Populate(TBuilder builder, IPlatformServices platformServices)
@@ -69,19 +71,21 @@ namespace Nancy.Core
 
             // In this case, we don't want to control the container
             // lifetime, because it's passed from outside. We don't own it.
-            return this.InitializeApplication(container, shouldDispose: false);
+            var disposable = new ConditionalDisposable<TContainer>(container, shouldDispose: true);
+
+            return this.InitializeApplication(disposable);
         }
 
-        private IApplication<TContainer> InitializeApplication(TContainer container, bool shouldDispose)
+        private IApplication<TContainer> InitializeApplication(ConditionalDisposable<TContainer> container)
         {
             // When the container is built, we offer the bootstrapper
             // implementation a chance to validate the container configuration
             // This could prevent obvious configuration errors.
-            this.ValidateContainerConfiguration(container);
+            this.ValidateContainerConfiguration(container.Value);
 
             // We finally ask the bootstrapper implementation to give us
             // an IApplication instance before returning it to the caller.
-            return this.CreateApplication(container, shouldDispose);
+            return this.CreateApplication(container);
         }
 
         protected abstract TBuilder CreateBuilder();
@@ -96,7 +100,7 @@ namespace Nancy.Core
 
         protected abstract void ValidateContainerConfiguration(TContainer container);
 
-        protected abstract IApplication<TContainer> CreateApplication(TContainer container, bool shouldDispose);
+        protected abstract IApplication<TContainer> CreateApplication(ConditionalDisposable<TContainer> container);
     }
 
     /// <summary>
