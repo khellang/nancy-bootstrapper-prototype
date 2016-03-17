@@ -20,7 +20,6 @@
 
         protected sealed override IServiceProvider BuildContainer(IServiceCollection services)
         {
-            // Make sure we wrap the instance we create in a disposable.
             return services.BuildServiceProvider();
         }
 
