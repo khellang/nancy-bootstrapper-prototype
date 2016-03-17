@@ -3,7 +3,6 @@
     using global::StructureMap;
     using global::StructureMap.Pipeline;
     using Nancy.Core;
-    using Nancy.Core.Http;
     using Nancy.Core.Registration;
 
     public class StructureMapBootstrapper : Bootstrapper<IContainer>
@@ -44,7 +43,7 @@
             {
             }
 
-            protected override IContainer BeginRequestScope(HttpContext context, IContainer container)
+            protected override IContainer BeginRequestScope(IContainer container)
             {
                 return container.GetNestedContainer();
             }

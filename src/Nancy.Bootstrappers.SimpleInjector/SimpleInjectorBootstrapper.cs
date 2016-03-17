@@ -3,7 +3,6 @@ namespace Nancy.Bootstrappers.SimpleInjector
     using global::SimpleInjector;
     using global::SimpleInjector.Extensions.ExecutionContextScoping;
     using Nancy.Core;
-    using Nancy.Core.Http;
     using Nancy.Core.Registration;
 
     public class SimpleInjectorBootstrapper : Bootstrapper<Container>
@@ -40,7 +39,7 @@ namespace Nancy.Bootstrappers.SimpleInjector
             {
             }
 
-            protected override Scope BeginRequestScope(HttpContext context, Container container)
+            protected override Scope BeginRequestScope(Container container)
             {
                 return container.BeginExecutionContextScope();
             }

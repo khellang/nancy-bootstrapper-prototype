@@ -3,7 +3,6 @@ namespace Nancy.Bootstrappers.Autofac
     using global::Autofac;
     using global::Autofac.Core.Lifetime;
     using Nancy.Core;
-    using Nancy.Core.Http;
     using Nancy.Core.Registration;
 
     public class AutofacBootstrapper : Bootstrapper<ContainerBuilder, ILifetimeScope>
@@ -39,7 +38,7 @@ namespace Nancy.Bootstrappers.Autofac
             {
             }
 
-            protected override ILifetimeScope BeginRequestScope(HttpContext context, ILifetimeScope lifetimeScope)
+            protected override ILifetimeScope BeginRequestScope(ILifetimeScope lifetimeScope)
             {
                 return lifetimeScope.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
             }
