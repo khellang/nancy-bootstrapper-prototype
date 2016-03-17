@@ -42,7 +42,7 @@
                 this.scopeFactory = provider.Value.GetRequiredService<IServiceScopeFactory>();
             }
 
-            protected override bool TryGetExistingScope(HttpContext context, out IServiceScope provider)
+            protected override bool TryGetExistingScope(HttpContext context, out IServiceScope scope)
             {
                 object value;
                 // If we're running in ASP.NET, this should be set by the Nancy middleware.
@@ -52,12 +52,12 @@
 
                     if (services != null)
                     {
-                        provider = new ExistingServiceScope(services);
+                        scope = new ExistingServiceScope(services);
                         return true;
                     }
                 }
 
-                provider = null;
+                scope = null;
                 return false;
             }
 

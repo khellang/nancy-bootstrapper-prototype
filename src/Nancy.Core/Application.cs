@@ -32,9 +32,9 @@ namespace Nancy.Core
             this.Container.Dispose();
         }
 
-        protected virtual bool TryGetExistingScope(HttpContext context, out TScope provider)
+        protected virtual bool TryGetExistingScope(HttpContext context, out TScope scope)
         {
-            provider = default(TScope);
+            scope = default(TScope);
             return false;
         }
 
