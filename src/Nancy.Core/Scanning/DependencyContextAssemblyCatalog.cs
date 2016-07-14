@@ -31,19 +31,18 @@ namespace Nancy.Core.Scanning
             if (this.dependencyContext == null)
             {
                 yield return this.entryAssembly;
+                yield break;
             }
-            else
-            {
-                foreach (var library in this.dependencyContext.RuntimeLibraries)
-                {
-                    if (IsReferencingNancy(library))
-                    {
-                        var assemblyNames = library.GetDefaultAssemblyNames(this.dependencyContext);
 
-                        foreach (var assemblyName in assemblyNames)
-                        {
-                            yield return Assembly.Load(assemblyName);
-                        }
+            foreach (var library in this.dependencyContext.RuntimeLibraries)
+            {
+                if (IsReferencingNancy(library))
+                {
+                    var assemblyNames = library.GetDefaultAssemblyNames(this.dependencyContext);
+
+                    foreach (var assemblyName in assemblyNames)
+                    {
+                        yield return Assembly.Load(assemblyName);
                     }
                 }
             }

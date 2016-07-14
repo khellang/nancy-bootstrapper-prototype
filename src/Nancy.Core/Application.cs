@@ -16,7 +16,7 @@ namespace Nancy.Core
             this.Container = container;
         }
 
-        TContainer IApplication<TContainer>.Container => this.Container.Value;
+        TContainer IApplication<TContainer>.Container => this.Container;
 
         private ConditionalDisposable<TContainer> Container { get; }
 
@@ -46,7 +46,7 @@ namespace Nancy.Core
         {
             using (var scope = this.GetRequestScope(context))
             {
-                var engine = this.ComposeEngineSafely(this.Container.Value, scope.Value);
+                var engine = this.ComposeEngineSafely(this.Container, scope);
 
                 await engine.HandleRequest(context, cancellationToken).ConfigureAwait(false);
             }
@@ -61,7 +61,7 @@ namespace Nancy.Core
                 return existingScope.AsConditionalDisposable(shouldDispose: false);
             }
 
-            var scope = this.BeginRequestScope(context, this.Container.Value);
+            var scope = this.BeginRequestScope(context, this.Container);
 
             // We've created this scope, make sure we dispose it.
             return scope.AsConditionalDisposable(shouldDispose: true);

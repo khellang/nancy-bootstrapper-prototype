@@ -83,7 +83,7 @@ namespace Nancy.Core
             // When the container is built, we offer the bootstrapper
             // implementation a chance to validate the container configuration
             // This could prevent obvious configuration errors.
-            this.ValidateContainerConfiguration(container.Value);
+            this.ValidateContainerConfiguration(container);
 
             // We finally ask the bootstrapper implementation to give us
             // an IApplication instance before returning it to the caller.

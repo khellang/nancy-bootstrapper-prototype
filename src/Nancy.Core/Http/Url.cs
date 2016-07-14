@@ -15,7 +15,7 @@ namespace Nancy.Core.Http
 
         public abstract string Scheme { get; set; }
 
-        // TODO: Split out port?
+        // TODO: Split out port? Create and use HostString type?
         public abstract string Host { get; set; }
 
         // TODO: Create and use PathString type?
