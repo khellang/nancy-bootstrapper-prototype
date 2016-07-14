@@ -15,7 +15,7 @@ namespace Nancy.AspNetCore
         }
 
         public static IServiceCollection AddNancy(this IServiceCollection services,
-            IApplicationEnvironment environment)
+            ApplicationEnvironment environment)
         {
             return services.AddNancy(environment, configure => { /* ignore */ });
         }
@@ -27,7 +27,7 @@ namespace Nancy.AspNetCore
         }
 
         public static IServiceCollection AddNancy(this IServiceCollection services,
-            IApplicationEnvironment environment,
+            ApplicationEnvironment environment,
             Action<IApplicationConfiguration> configure)
         {
             Check.NotNull(environment, nameof(environment));
@@ -61,12 +61,14 @@ namespace Nancy.AspNetCore
 
             public InlineAspNetBootstrapper(Action<IApplicationConfiguration> configure)
             {
+                Check.NotNull(configure, nameof(configure));
+
                 this.configure = configure;
             }
 
             protected override void ConfigureApplication(IApplicationConfiguration<IServiceCollection> app)
             {
-                this.configure?.Invoke(app);
+                this.configure.Invoke(app);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "compilationOptions": {
+  "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
     "warningsAsErrors": true
@@ -12,10 +12,6 @@
     "Microsoft.Owin.Hosting": "3.0.1",
     "Nancy.Bootstrappers.Autofac": { "target": "project" },
     "Nancy.Owin": { "target": "project" }
-  },
-
-  "commands": {
-    "OwinApp": "OwinApp"
   },
 
   "frameworks": {

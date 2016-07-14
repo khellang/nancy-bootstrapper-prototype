@@ -1,24 +1,19 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "compilationOptions": {
+  "buildOptions": {
     "nowarn": [ "CS1591" ],
     "warningsAsErrors": true,
     "xmlDoc": true
   },
 
   "dependencies": {
-    "Autofac": "4.0.0-rc1-177",
+    "Autofac": "4.0.0-rc3-293",
     "Nancy.Core": { "target": "project" }
   },
 
   "frameworks": {
     "net451": { },
-    "netstandard1.3": {
-      "imports": [
-        "dnxcore50",
-        "portable-net451+win8"
-      ]
-    }
+    "netstandard1.6": { }
   }
 }

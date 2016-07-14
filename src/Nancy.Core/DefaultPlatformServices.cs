@@ -7,7 +7,7 @@
 
     public class DefaultPlatformServices : IPlatformServices
     {
-        public DefaultPlatformServices(IApplicationEnvironment environment)
+        public DefaultPlatformServices(ApplicationEnvironment environment)
         {
             Check.NotNull(environment, nameof(environment));
 

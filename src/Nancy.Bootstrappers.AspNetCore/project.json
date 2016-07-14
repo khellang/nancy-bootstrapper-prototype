@@ -1,29 +1,23 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "compilationOptions": {
+  "buildOptions": {
     "nowarn": [ "CS1591" ],
     "warningsAsErrors": true,
     "xmlDoc": true
   },
 
   "dependencies": {
-    "Microsoft.Extensions.DependencyInjection": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0",
     "Nancy.Core": { "target": "project" }
   },
 
   "frameworks": {
     "net451": {
       "frameworkAssemblies": {
-        "System.ComponentModel": "",
-        "System.Runtime": ""
+        "System.Runtime": { "type": "build" }
       }
     },
-    "netstandard1.3": {
-      "imports": [
-        "dnxcore50",
-        "portable-net451+win8"
-      ]
-    }
+    "netstandard1.6": { }
   }
 }

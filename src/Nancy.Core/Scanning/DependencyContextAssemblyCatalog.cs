@@ -35,9 +35,11 @@ namespace Nancy.Core.Scanning
                 {
                     if (IsReferencingNancy(library))
                     {
-                        foreach (var assembly in library.Assemblies)
+                        var assemblyNames = library.GetDefaultAssemblyNames(this.dependencyContext);
+
+                        foreach (var assemblyName in assemblyNames)
                         {
-                            yield return Assembly.Load(assembly.Name);
+                            yield return Assembly.Load(assemblyName);
                         }
                     }
                 }

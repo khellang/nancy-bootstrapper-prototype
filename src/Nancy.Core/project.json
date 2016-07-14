@@ -1,25 +1,22 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "compilationOptions": {
+  "buildOptions": {
     "nowarn": [ "CS1591" ],
     "warningsAsErrors": true,
     "xmlDoc": true
   },
 
   "dependencies": {
-    "Microsoft.Extensions.DependencyModel": "1.0.0-*"
+    "Microsoft.Extensions.DependencyModel": "1.0.0",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0"
   },
 
   "frameworks": {
     "net451": { },
-    "netstandard1.3": {
-      "imports": [
-        "dnxcore50",
-        "portable-net451+win8"
-      ],
+    "netstandard1.6": {
       "dependencies": {
-        "System.Security.Claims": "4.0.1-*"
+        "System.Security.Claims": "4.0.1"
       }
     }
   }

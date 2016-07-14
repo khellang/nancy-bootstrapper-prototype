@@ -1,7 +1,7 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "compilationOptions": {
+  "buildOptions": {
     "nowarn": [ "CS1591" ],
     "warningsAsErrors": true,
     "xmlDoc": true
@@ -9,15 +9,14 @@
 
   "dependencies": {
     "Nancy.Core": { "target": "project" },
-    "structuremap": "4.0.0.315"
+    "structuremap": "4.2.0.402"
   },
 
   "frameworks": {
     "net451": { },
-    "netstandard1.3": {
+    "netstandard1.6": {
       "imports": [
-        "dnxcore50",
-        "portable-net451+win8"
+        "dnxcore50"
       ]
     }
   }

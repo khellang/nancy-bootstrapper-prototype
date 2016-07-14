@@ -73,7 +73,7 @@ namespace Nancy.Core
 
             // In this case, we don't want to control the container
             // lifetime, because it's passed from outside. We don't own it.
-            var disposable = container.AsConditionalDisposable(shouldDispose: true);
+            var disposable = container.AsConditionalDisposable(shouldDispose: false);
 
             return this.InitializeApplication(disposable);
         }

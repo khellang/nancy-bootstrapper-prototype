@@ -1,41 +1,39 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "compilationOptions": {
+  "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "compile": {
+      "exclude": [
+        "wwwroot",
+        "node_modules"
+      ]
+    }
   },
 
   "dependencies": {
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Nancy.AspNetCore": { "target": "project" }
-  },
-
-  "commands": {
-    "WebApp": "WebApp"
   },
 
   "frameworks": {
     "net451": { },
-    "netstandardapp1.5": {
-      "imports": [
-        "dnxcore50",
-        "portable-net451+win8"
-      ],
+    "netcoreapp1.0": {
       "dependencies": {
-        "NETStandard.Library": "1.0.0-*"
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        }
       }
     }
   },
 
-  "exclude": [
-    "wwwroot",
-    "node_modules"
-  ],
-
-  "publishExclude": [
-    "**.user",
-    "**.vspscc"
-  ]
+  "publishOptions": {
+    "exclude": [
+      "**.user",
+      "**.vspscc"
+    ]
+  }
 }

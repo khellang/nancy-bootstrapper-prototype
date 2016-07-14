@@ -15,9 +15,9 @@
         {
             Check.NotNull(builder, nameof(builder));
 
-            var provider = builder.ApplicationServices;
+            var provider = builder.ApplicationServices.AsDisposable();
 
-            var bootstrapper = provider.GetService<IBootstrapper<IServiceProvider>>();
+            var bootstrapper = provider.GetService<IBootstrapper<IDisposableServiceProvider>>();
 
             if (bootstrapper == null)
             {

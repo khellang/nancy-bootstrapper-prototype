@@ -11,7 +11,7 @@
             return app.UseNancy(PlatformServices.Default.Application);
         }
 
-        public static IAppBuilder UseNancy(this IAppBuilder app, IApplicationEnvironment environment)
+        public static IAppBuilder UseNancy(this IAppBuilder app, ApplicationEnvironment environment)
         {
             Check.NotNull(environment, nameof(environment));
 
@@ -34,7 +34,7 @@
             return app.UseNancy(bootstrapper, PlatformServices.Default.Application);
         }
 
-        public static IAppBuilder UseNancy(this IAppBuilder app, IBootstrapper bootstrapper, IApplicationEnvironment environment)
+        public static IAppBuilder UseNancy(this IAppBuilder app, IBootstrapper bootstrapper, ApplicationEnvironment environment)
         {
             Check.NotNull(environment, nameof(environment));
 

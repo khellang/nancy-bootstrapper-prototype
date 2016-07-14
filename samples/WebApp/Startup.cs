@@ -1,28 +1,22 @@
 ﻿namespace WebApp
 {
+    using System;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
     using Nancy.AspNetCore;
 
-    public class Startup
+    public class Startup : IStartup
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddNancy();
-        }
+        public IServiceProvider ConfigureServices(IServiceCollection services) => services.AddNancy().BuildServiceProvider();
 
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseNancy();
-        }
+        public void Configure(IApplicationBuilder app) => app.UseNancy();
 
         public static void Main(string[] args)
         {
             new WebHostBuilder()
-                .UseServer("Microsoft.AspNetCore.Server.Kestrel")
-                .UseDefaultConfiguration(args)
                 .UseStartup<Startup>()
+                .UseKestrel()
                 .Build()
                 .Run();
         }
