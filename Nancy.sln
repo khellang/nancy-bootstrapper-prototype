@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Core", "src\Nancy.Core\Nancy.Core.xproj", "{87C7C329-1824-4AC7-AF25-3D06068A01F6}"
 EndProject
@@ -8,7 +8,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ConsoleApp", "samples\Conso
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7ED0C780-05ED-4EFF-9BB2-98E6497979EB}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApp", "samples\WebApp\WebApp.xproj", "{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetApp", "samples\AspNetApp\AspNetApp.xproj", "{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{8EAF21DF-341F-45E5-ABBC-79053ACC4CED}"
 EndProject

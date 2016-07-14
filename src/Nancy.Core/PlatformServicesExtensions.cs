@@ -4,15 +4,17 @@
 
     internal static class PlatformServicesExtensions
     {
-        public static IContainerRegistry GetRegistry(this IPlatformServices platformServices)
+        public static IContainerRegistry GetRegistry(this IPlatform platform)
         {
-            Check.NotNull(platformServices, nameof(platformServices));
+            Check.NotNull(platform, nameof(platform));
 
-            var bootstrapperLocator = platformServices.BootstrapperLocator.AsInstanceRegistration();
-            var assemblyCatalog = platformServices.AssemblyCatalog.AsInstanceRegistration();
-            var typeCatalog = platformServices.TypeCatalog.AsInstanceRegistration();
-
-            var registrations = new[] { bootstrapperLocator, assemblyCatalog, typeCatalog };
+            var registrations = new[]
+            {
+                platform.BootstrapperLocator.AsInstanceRegistration(),
+                platform.AssemblyCatalog.AsInstanceRegistration(),
+                platform.TypeCatalog.AsInstanceRegistration(),
+                platform.AsInstanceRegistration()
+            };
 
             return new ContainerRegistry(instanceRegistrations: registrations);
         }

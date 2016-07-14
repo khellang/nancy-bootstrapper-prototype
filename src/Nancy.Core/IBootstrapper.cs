@@ -6,8 +6,8 @@ namespace Nancy.Core
         /// Initializes the application.
         /// This method creates an internal container with all the required services.
         /// </summary>
-        /// <param name="platformServices">The platform services.</param>
-        IApplication InitializeApplication(IPlatformServices platformServices);
+        /// <param name="platform">The platform services.</param>
+        IApplication InitializeApplication(IPlatform platform);
     }
 
     public interface IBootstrapper<TContainer> : IBootstrapper
@@ -27,7 +27,7 @@ namespace Nancy.Core
         /// Populates the specified container builder with the required services.
         /// </summary>
         /// <param name="builder">The container builder.</param>
-        /// <param name="platformServices">The platform services.</param>
-        IBootstrapper<TContainer> Populate(TBuilder builder, IPlatformServices platformServices);
+        /// <param name="platform">The platform services.</param>
+        IBootstrapper<TContainer> Populate(TBuilder builder, IPlatform platform);
     }
 }

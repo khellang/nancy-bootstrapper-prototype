@@ -5,6 +5,8 @@
 
     internal static class HeaderDictionaryExtensions
     {
+        private const NumberStyles ContentLengthNumberStyle = NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite;
+
         public static long? GetContentLength(this IHeaderDictionary headers)
         {
             return headers.ParseSingleValue<long?>(HttpHeaderNames.ContentLength, value =>
@@ -14,10 +16,8 @@
                     return null;
                 }
 
-                const NumberStyles styles = NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite;
-
                 long parsedValue;
-                if (long.TryParse(value, styles, CultureInfo.InvariantCulture, out parsedValue))
+                if (long.TryParse(value, ContentLengthNumberStyle, CultureInfo.InvariantCulture, out parsedValue))
                 {
                     return parsedValue;
                 }

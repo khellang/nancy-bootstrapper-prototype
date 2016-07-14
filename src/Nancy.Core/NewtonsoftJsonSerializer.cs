@@ -3,7 +3,7 @@
     using System;
     using Newtonsoft.Json;
 
-    public class JsonNetSerializer : ISerializer
+    public class NewtonsoftJsonSerializer : ISerializer
     {
         public string Serialize(object value)
         {

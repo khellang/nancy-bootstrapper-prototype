@@ -7,7 +7,7 @@ namespace Nancy.Core.Configuration
 
     public class FrameworkConfiguration : IFrameworkConfiguration
     {
-        private static readonly Type[] DefaultSerializerTypes = { typeof(JsonNetSerializer) };
+        private static readonly Type[] DefaultSerializerTypes = { typeof(NewtonsoftJsonSerializer) };
 
         private readonly List<IRegistrationFactory<CollectionTypeRegistration>> collectionTypeRegistrationFactories;
 

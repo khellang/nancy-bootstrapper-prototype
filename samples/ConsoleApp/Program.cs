@@ -18,18 +18,18 @@
         {
             var environment = PlatformServices.Default.Application;
 
-            var platformServices = new DefaultPlatformServices(environment);
+            var platform = new DefaultPlatform(environment);
 
-            await LocatedBootstrapper(platformServices);
+            await LocatedBootstrapper(platform);
 
-            await ExistingBootstrapper(platformServices);
+            await ExistingBootstrapper(platform);
         }
 
-        private static async Task LocatedBootstrapper(IPlatformServices platformServices)
+        private static async Task LocatedBootstrapper(IPlatform platform)
         {
-            var bootstrapper = platformServices.BootstrapperLocator.GetBootstrapper();
+            var bootstrapper = platform.BootstrapperLocator.GetBootstrapper();
 
-            using (var application = bootstrapper.InitializeApplication(platformServices))
+            using (var application = bootstrapper.InitializeApplication(platform))
             {
                 var context = new DefaultHttpContext();
 
@@ -37,7 +37,7 @@
             }
         }
 
-        private static async Task ExistingBootstrapper(IPlatformServices platformServices)
+        private static async Task ExistingBootstrapper(IPlatform platform)
         {
             var bootstrapper = new CustomBootstrapper();
 
@@ -45,7 +45,7 @@
 
             // Register stuff in the container...
 
-            bootstrapper.Populate(builder, platformServices);
+            bootstrapper.Populate(builder, platform);
 
             var container = builder.Build();
 

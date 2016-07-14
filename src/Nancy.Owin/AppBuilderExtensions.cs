@@ -15,18 +15,18 @@
         {
             Check.NotNull(environment, nameof(environment));
 
-            var platformServices = new DefaultPlatformServices(environment);
+            var platform = new DefaultPlatform(environment);
 
-            return app.UseNancy(platformServices);
+            return app.UseNancy(platform);
         }
 
-        public static IAppBuilder UseNancy(this IAppBuilder app, IPlatformServices platformServices)
+        public static IAppBuilder UseNancy(this IAppBuilder app, IPlatform platform)
         {
-            Check.NotNull(platformServices, nameof(platformServices));
+            Check.NotNull(platform, nameof(platform));
 
-            var bootstrapper = platformServices.BootstrapperLocator.GetBootstrapper();
+            var bootstrapper = platform.BootstrapperLocator.GetBootstrapper();
 
-            return app.UseNancy(bootstrapper, platformServices);
+            return app.UseNancy(bootstrapper, platform);
         }
 
         public static IAppBuilder UseNancy(this IAppBuilder app, IBootstrapper bootstrapper)
@@ -38,17 +38,17 @@
         {
             Check.NotNull(environment, nameof(environment));
 
-            var platformServices = new DefaultPlatformServices(environment);
+            var platform = new DefaultPlatform(environment);
 
-            return app.UseNancy(bootstrapper, platformServices);
+            return app.UseNancy(bootstrapper, platform);
         }
 
-        public static IAppBuilder UseNancy(this IAppBuilder app, IBootstrapper bootstrapper, IPlatformServices platformServices)
+        public static IAppBuilder UseNancy(this IAppBuilder app, IBootstrapper bootstrapper, IPlatform platform)
         {
-            Check.NotNull(platformServices, nameof(platformServices));
+            Check.NotNull(platform, nameof(platform));
             Check.NotNull(bootstrapper, nameof(bootstrapper));
 
-            var application = bootstrapper.InitializeApplication(platformServices);
+            var application = bootstrapper.InitializeApplication(platform);
 
             return app.UseNancy(application);
         }

@@ -32,24 +32,24 @@ namespace Nancy.AspNetCore
         {
             Check.NotNull(environment, nameof(environment));
 
-            var platformServices = new DefaultPlatformServices(environment);
+            var platform = new DefaultPlatform(environment);
 
-            return services.AddNancy(platformServices, configure);
+            return services.AddNancy(platform, configure);
         }
 
         public static IServiceCollection AddNancy(this IServiceCollection services,
-            IPlatformServices platformServices,
+            IPlatform platform,
             Action<IApplicationConfiguration> configure)
         {
             Check.NotNull(services, nameof(services));
-            Check.NotNull(platformServices, nameof(platformServices));
+            Check.NotNull(platform, nameof(platform));
             Check.NotNull(configure, nameof(configure));
 
             // For ASP.NET it only makes sense to use the AspNetBootstrapper since it handles container
             // customization etc. Therefore we hide away the whole bootstrapper concept.
             // We still need to provide a way to configure the application. This
             // is done by passing a delegate to a special inline bootstrapper.
-            var bootstrapper = new InlineAspNetBootstrapper(configure).Populate(services, platformServices);
+            var bootstrapper = new InlineAspNetBootstrapper(configure).Populate(services, platform);
 
             // Make sure we add the bootstrapper so it can be resolved in a call to `UseNancy`.
             return services.AddSingleton(bootstrapper);

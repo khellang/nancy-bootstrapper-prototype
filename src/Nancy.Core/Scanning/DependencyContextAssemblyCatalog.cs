@@ -4,6 +4,7 @@ namespace Nancy.Core.Scanning
     using System.Linq;
     using System.Reflection;
     using Microsoft.Extensions.DependencyModel;
+    using Microsoft.Extensions.PlatformAbstractions;
 
     public class DependencyContextAssemblyCatalog : IAssemblyCatalog
     {
@@ -13,12 +14,14 @@ namespace Nancy.Core.Scanning
 
         private readonly DependencyContext dependencyContext;
 
-        public DependencyContextAssemblyCatalog(Assembly entryAssembly, DependencyContext dependencyContext)
+        public DependencyContextAssemblyCatalog(ApplicationEnvironment environment)
         {
-            Check.NotNull(entryAssembly, nameof(entryAssembly));
+            Check.NotNull(environment, nameof(environment));
 
-            this.entryAssembly = entryAssembly;
-            this.dependencyContext = dependencyContext;
+            var assemblyName = new AssemblyName(environment.ApplicationName);
+
+            this.entryAssembly = Assembly.Load(assemblyName);
+            this.dependencyContext = DependencyContext.Load(this.entryAssembly);
         }
 
         public IEnumerable<Assembly> GetAssemblies()

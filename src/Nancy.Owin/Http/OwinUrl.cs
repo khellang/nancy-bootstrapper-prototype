@@ -69,13 +69,10 @@
 
         private static void SetQueryString(IDictionary<string, object> environment, string queryString)
         {
-            if (!string.IsNullOrWhiteSpace(queryString))
+            if (!string.IsNullOrWhiteSpace(queryString) && queryString[0] == '?')
             {
-                if (queryString[0] == '?')
-                {
-                    // We don't want to store the query string with a leading '?' in OWIN.
-                    queryString = queryString.Substring(1);
-                }
+                // We don't want to store the query string with a leading '?' in OWIN.
+                queryString = queryString.Substring(1);
             }
 
             environment.Set(Constants.RequestQueryString, queryString);
