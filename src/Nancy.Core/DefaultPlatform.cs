@@ -1,21 +1,32 @@
 ﻿namespace Nancy.Core
 {
-    using Microsoft.Extensions.PlatformAbstractions;
+#if NET451
+    using System;
+#else
+    using System.Reflection;
+#endif
     using Nancy.Core.Scanning;
 
     public class DefaultPlatform : IPlatform
     {
-        public DefaultPlatform(ApplicationEnvironment environment)
+        private DefaultPlatform(IAssemblyCatalog assemblyCatalog)
         {
-            Check.NotNull(environment, nameof(environment));
-
-            this.Environment = environment;
-            this.AssemblyCatalog = new DependencyContextAssemblyCatalog(environment);
+            this.AssemblyCatalog = assemblyCatalog;
             this.TypeCatalog = new TypeCatalog(this.AssemblyCatalog);
             this.BootstrapperLocator = new BootstrapperLocator(this.TypeCatalog);
         }
 
-        public ApplicationEnvironment Environment { get; }
+        static DefaultPlatform()
+        {
+#if NET451
+            var assemblyCatalog = new AppDomainAssemblyCatalog(AppDomain.CurrentDomain);
+#else
+            var assemblyCatalog = new DependencyContextAssemblyCatalog(Assembly.GetEntryAssembly());
+#endif
+            Instance = new DefaultPlatform(assemblyCatalog);
+        }
+
+        public static IPlatform Instance { get; }
 
         public IAssemblyCatalog AssemblyCatalog { get; }
 

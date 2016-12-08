@@ -7,16 +7,12 @@
     "xmlDoc": true
   },
 
-  "dependencies": {
-    "Microsoft.Extensions.DependencyModel": "1.0.0",
-    "Microsoft.Extensions.PlatformAbstractions": "1.0.0"
-  },
-
   "frameworks": {
     "net451": { },
     "netstandard1.6": {
       "dependencies": {
-        "System.Security.Claims": "4.0.1"
+        "System.Security.Claims": "4.0.1",
+        "Microsoft.Extensions.DependencyModel": "1.0.0"
       }
     }
   }

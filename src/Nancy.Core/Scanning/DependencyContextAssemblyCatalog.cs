@@ -1,10 +1,10 @@
+#if !NET451
 namespace Nancy.Core.Scanning
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Microsoft.Extensions.DependencyModel;
-    using Microsoft.Extensions.PlatformAbstractions;
 
     public class DependencyContextAssemblyCatalog : IAssemblyCatalog
     {
@@ -14,13 +14,9 @@ namespace Nancy.Core.Scanning
 
         private readonly DependencyContext dependencyContext;
 
-        public DependencyContextAssemblyCatalog(ApplicationEnvironment environment)
+        public DependencyContextAssemblyCatalog(Assembly entryAssembly)
         {
-            Check.NotNull(environment, nameof(environment));
-
-            var assemblyName = new AssemblyName(environment.ApplicationName);
-
-            this.entryAssembly = Assembly.Load(assemblyName);
+            this.entryAssembly = entryAssembly;
             this.dependencyContext = DependencyContext.Load(this.entryAssembly);
         }
 
@@ -54,3 +50,4 @@ namespace Nancy.Core.Scanning
         }
     }
 }
+#endif

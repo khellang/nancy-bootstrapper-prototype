@@ -2,7 +2,6 @@ namespace Nancy.AspNetCore
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.PlatformAbstractions;
     using Nancy.Bootstrappers.AspNetCore;
     using Nancy.Core;
     using Nancy.Core.Configuration;
@@ -11,30 +10,13 @@ namespace Nancy.AspNetCore
     {
         public static IServiceCollection AddNancy(this IServiceCollection services)
         {
-            return services.AddNancy(PlatformServices.Default.Application);
-        }
-
-        public static IServiceCollection AddNancy(this IServiceCollection services,
-            ApplicationEnvironment environment)
-        {
-            return services.AddNancy(environment, configure => { /* ignore */ });
+            return services.AddNancy(configure => { /* ignore */ });
         }
 
         public static IServiceCollection AddNancy(this IServiceCollection services,
             Action<IApplicationConfiguration> configure)
         {
-            return AddNancy(services, PlatformServices.Default.Application, configure);
-        }
-
-        public static IServiceCollection AddNancy(this IServiceCollection services,
-            ApplicationEnvironment environment,
-            Action<IApplicationConfiguration> configure)
-        {
-            Check.NotNull(environment, nameof(environment));
-
-            var platform = new DefaultPlatform(environment);
-
-            return services.AddNancy(platform, configure);
+            return services.AddNancy(DefaultPlatform.Instance, configure);
         }
 
         public static IServiceCollection AddNancy(this IServiceCollection services,

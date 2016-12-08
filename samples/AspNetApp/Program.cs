@@ -1,5 +1,6 @@
 ﻿namespace WebApp
 {
+    using System;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
@@ -19,11 +20,11 @@
                 .Run();
         }
 
-        private class Startup
+        private class Startup : IStartup
         {
-            public void ConfigureServices(IServiceCollection services)
+            public IServiceProvider ConfigureServices(IServiceCollection services)
             {
-                services.AddNancy();
+                return services.AddNancy().BuildServiceProvider();
             }
 
             public void Configure(IApplicationBuilder app)

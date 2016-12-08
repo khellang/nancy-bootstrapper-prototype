@@ -3,7 +3,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Autofac;
-    using Microsoft.Extensions.PlatformAbstractions;
     using Nancy.Core;
     using Nancy.Core.Http;
 
@@ -16,9 +15,7 @@
 
         private static async Task MainAsync(string[] args)
         {
-            var environment = PlatformServices.Default.Application;
-
-            var platform = new DefaultPlatform(environment);
+            var platform = DefaultPlatform.Instance;
 
             await LocatedBootstrapper(platform);
 
