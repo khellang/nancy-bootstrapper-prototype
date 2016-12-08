@@ -23,7 +23,7 @@ namespace Nancy.Core.Scanning
 
             var targetTypeInfo = targetType.GetTypeInfo();
 
-            return GetTypesAssignableToInternal(targetTypeInfo, strategy);
+            return this.GetTypesAssignableToInternal(targetTypeInfo, strategy);
         }
 
         private IEnumerable<Type> GetTypesAssignableToInternal(TypeInfo typeInfo, ScanningStrategy strategy)

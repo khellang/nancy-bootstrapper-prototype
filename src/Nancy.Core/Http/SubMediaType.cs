@@ -87,7 +87,7 @@
 
             if (this.Suffix.HasValue)
             {
-                builder.Append('+').Append(Suffix);
+                builder.Append('+').Append(this.Suffix);
             }
 
             return builder.ToString();
