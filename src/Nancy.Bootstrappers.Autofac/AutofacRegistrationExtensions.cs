@@ -66,7 +66,7 @@ namespace Nancy.Bootstrappers.Autofac
                 case Lifetime.Singleton:
                     return builder.SingleInstance();
                 case Lifetime.PerRequest:
-                    return builder.InstancePerLifetimeScope();
+                    return builder.InstancePerRequest();
                 case Lifetime.Transient:
                     return builder.InstancePerDependency();
                 default:
