@@ -2,6 +2,7 @@
 {
     using System;
     using Microsoft.Owin.Hosting;
+    using Nancy.Bootstrappers.Autofac;
     using Owin;
     using Nancy.Owin;
 
@@ -20,7 +21,7 @@
 
         private static void Configuration(IAppBuilder app)
         {
-            app.UseNancy();
+            app.UseNancy(new AutofacBootstrapper());
         }
     }
 }
