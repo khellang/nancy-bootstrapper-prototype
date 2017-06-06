@@ -28,18 +28,13 @@
             {
                 var capacity = collectionTypeRegistration.ImplementationTypes.Count;
 
-                var convertedRegistrations = new List<Registration>(capacity);
-
                 var lifestyle = collectionTypeRegistration.Lifetime.AsLifestyle();
+
+                var convertedRegistrations = new List<Registration>(capacity);
 
                 foreach (var implementationType in collectionTypeRegistration.ImplementationTypes)
                 {
-                    var converted = lifestyle.CreateRegistration(
-                        collectionTypeRegistration.ServiceType,
-                        implementationType,
-                        container);
-
-                    convertedRegistrations.Add(converted);
+                    convertedRegistrations.Add(lifestyle.CreateRegistration(implementationType, container));
                 }
 
                 container.RegisterCollection(collectionTypeRegistration.ServiceType, convertedRegistrations);

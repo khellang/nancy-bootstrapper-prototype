@@ -1,14 +1,14 @@
 namespace Nancy.Bootstrappers.SimpleInjector
 {
     using global::SimpleInjector;
-    using global::SimpleInjector.Extensions.ExecutionContextScoping;
+    using global::SimpleInjector.Lifestyles;
     using Nancy.Core;
     using Nancy.Core.Http;
     using Nancy.Core.Registration;
 
     public class SimpleInjectorBootstrapper : Bootstrapper<Container>
     {
-        private static readonly ExecutionContextScopeLifestyle DefaultLifestyle = new ExecutionContextScopeLifestyle();
+        private static readonly AsyncScopedLifestyle DefaultLifestyle = new AsyncScopedLifestyle();
 
         protected sealed override Container CreateContainer()
         {
@@ -42,7 +42,7 @@ namespace Nancy.Bootstrappers.SimpleInjector
 
             protected override Scope BeginRequestScope(HttpContext context, Container container)
             {
-                return container.BeginExecutionContextScope();
+                return AsyncScopedLifestyle.BeginScope(container);
             }
 
             protected override IEngine ComposeEngine(Container container, Scope scope)

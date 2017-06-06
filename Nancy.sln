@@ -1,39 +1,38 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Core", "src\Nancy.Core\Nancy.Core.xproj", "{87C7C329-1824-4AC7-AF25-3D06068A01F6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7ED0C780-05ED-4EFF-9BB2-98E6497979EB}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetApp", "samples\AspNetApp\AspNetApp.xproj", "{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{8EAF21DF-341F-45E5-ABBC-79053ACC4CED}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.AspNetCore", "src\Nancy.Bootstrappers.AspNetCore\Nancy.Bootstrappers.AspNetCore.xproj", "{B5D319B5-9DF6-488D-837F-9C56FA3D2B70}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.Autofac", "src\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.xproj", "{799249C2-08AF-4F83-A2FC-58686AF999B1}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.SimpleInjector", "src\Nancy.Bootstrappers.SimpleInjector\Nancy.Bootstrappers.SimpleInjector.xproj", "{1C57294C-18C1-4699-AFE2-440DF822DC31}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{715FCFA8-0A24-4DBF-88AD-854DBE5E957D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		global.json = global.json
 		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.StructureMap", "src\Nancy.Bootstrappers.StructureMap\Nancy.Bootstrappers.StructureMap.xproj", "{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.AspNetCore", "src\Nancy.AspNetCore\Nancy.AspNetCore.xproj", "{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Owin", "src\Nancy.Owin\Nancy.Owin.xproj", "{8F3B0303-1B24-4322-AEC3-96A4A806EB97}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OwinApp", "samples\OwinApp\OwinApp.xproj", "{538BC3D2-C098-4A9C-8456-9CA9FA6AE050}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Core.Tests", "test\Nancy.Core.Tests\Nancy.Core.Tests.xproj", "{906074B6-9828-46F0-B7DD-379749DFE393}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A4D31C87-A400-401E-A748-10C50461A187}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.Core", "src\Nancy.Core\Nancy.Core.csproj", "{87C7C329-1824-4AC7-AF25-3D06068A01F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetApp", "samples\AspNetApp\AspNetApp.csproj", "{DE9452D9-F5F5-415B-BFD1-AFAEB34CB813}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.Bootstrappers.AspNetCore", "src\Nancy.Bootstrappers.AspNetCore\Nancy.Bootstrappers.AspNetCore.csproj", "{B5D319B5-9DF6-488D-837F-9C56FA3D2B70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.Bootstrappers.Autofac", "src\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.csproj", "{799249C2-08AF-4F83-A2FC-58686AF999B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.Bootstrappers.SimpleInjector", "src\Nancy.Bootstrappers.SimpleInjector\Nancy.Bootstrappers.SimpleInjector.csproj", "{1C57294C-18C1-4699-AFE2-440DF822DC31}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.Bootstrappers.StructureMap", "src\Nancy.Bootstrappers.StructureMap\Nancy.Bootstrappers.StructureMap.csproj", "{EEC117F5-9B98-4B44-83AD-AF81A87A2FE3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.AspNetCore", "src\Nancy.AspNetCore\Nancy.AspNetCore.csproj", "{34046ECF-3720-4EB0-B2B6-84D096DEBF7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.Owin", "src\Nancy.Owin\Nancy.Owin.csproj", "{8F3B0303-1B24-4322-AEC3-96A4A806EB97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwinApp", "samples\OwinApp\OwinApp.csproj", "{538BC3D2-C098-4A9C-8456-9CA9FA6AE050}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.Core.Tests", "test\Nancy.Core.Tests\Nancy.Core.Tests.csproj", "{906074B6-9828-46F0-B7DD-379749DFE393}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
