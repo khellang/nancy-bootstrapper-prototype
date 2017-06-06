@@ -11,19 +11,16 @@
         {
             const string url = "http://localhost:5000";
 
-            using (WebApp.Start<Startup>(url))
+            using (WebApp.Start(url, Configuration))
             {
                 Console.WriteLine($"Listening at {url}...");
                 Console.ReadLine();
             }
         }
 
-        private class Startup
+        private static void Configuration(IAppBuilder app)
         {
-            public void Configuration(IAppBuilder app)
-            {
-                app.UseNancy();
-            }
+            app.UseNancy();
         }
     }
 }

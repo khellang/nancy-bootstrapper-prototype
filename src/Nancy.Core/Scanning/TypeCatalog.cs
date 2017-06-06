@@ -30,6 +30,11 @@ namespace Nancy.Core.Scanning
         {
             foreach (var assembly in this.assemblies.Value)
             {
+                if (assembly.IsDynamic)
+                {
+                    continue;
+                }
+
                 if (!strategy.Invoke(assembly))
                 {
                     continue;
