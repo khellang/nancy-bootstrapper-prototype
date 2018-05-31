@@ -28,7 +28,7 @@
             // Not supported.
         }
 
-        protected sealed override IApplication<IDisposableServiceProvider> CreateApplication(ConditionalDisposable<IDisposableServiceProvider> provider)
+        protected sealed override IApplication<IDisposableServiceProvider> CreateApplication(Disposable<IDisposableServiceProvider> provider)
         {
             return new Application(provider);
         }
@@ -37,20 +37,17 @@
         {
             private readonly IServiceScopeFactory scopeFactory;
 
-            public Application(ConditionalDisposable<IDisposableServiceProvider> provider) : base(provider)
+            public Application(Disposable<IDisposableServiceProvider> provider) : base(provider)
             {
-                this.scopeFactory = provider.Value.GetRequiredService<IServiceScopeFactory>();
+                this.scopeFactory = provider.Instance.GetRequiredService<IServiceScopeFactory>();
             }
 
             protected override bool TryGetExistingScope(HttpContext context, out IServiceScope scope)
             {
-                object value;
                 // If we're running in ASP.NET, this should be set by the Nancy middleware.
-                if (context.Items.TryGetValue(Constants.AspNetRequestServices, out value))
+                if (context.Items.TryGetValue(Constants.AspNetRequestServices, out var value))
                 {
-                    var services = value as IServiceProvider;
-
-                    if (services != null)
+                    if (value is IServiceProvider services)
                     {
                         scope = new ExistingServiceScope(services);
                         return true;

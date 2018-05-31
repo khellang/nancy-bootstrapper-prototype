@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>Nancy.Bootstrappers.StructureMap</AssemblyName>
-    <PackageId>Nancy.Bootstrappers.StructureMap</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="structuremap" Version="4.4.5" />
+    <PackageReference Include="structuremap" Version="4.6.1" />
   </ItemGroup>
 </Project>

@@ -1,35 +1,26 @@
 ﻿namespace AspNetApp
 {
+    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
     using Nancy.AspNetCore;
 
-    public static class Program
+    public class Program : StartupBase
     {
         public static void Main(string[] args)
         {
-            const string url = "http://localhost:5000";
-
-            new WebHostBuilder()
-                .UseStartup<Startup>()
-                .UseKestrel()
-                .UseUrls(url)
-                .Build()
-                .Run();
+            WebHost.CreateDefaultBuilder<Program>(args).Build().Run();
         }
 
-        private class Startup
+        public override void ConfigureServices(IServiceCollection services)
         {
-            public void ConfigureServices(IServiceCollection services)
-            {
-                services.AddNancy();
-            }
+            services.AddNancy();
+        }
 
-            public void Configure(IApplicationBuilder app)
-            {
-                app.UseNancy();
-            }
+        public override void Configure(IApplicationBuilder app)
+        {
+            app.UseNancy();
         }
     }
 }

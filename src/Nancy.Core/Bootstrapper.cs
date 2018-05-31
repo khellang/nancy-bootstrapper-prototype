@@ -10,7 +10,7 @@ namespace Nancy.Core
     ///     application container and the framework as a whole.
     /// </summary>
     public abstract class Bootstrapper<TBuilder, TContainer> : IBootstrapper<TBuilder, TContainer>
-        where TContainer : IDisposable
+        where TContainer : class, IDisposable
     {
         public IApplication InitializeApplication(IPlatform platform)
         {
@@ -27,7 +27,7 @@ namespace Nancy.Core
             var container = this.BuildContainer(builder);
 
             // Since we've built the container, we want to dispose it as well.
-            var disposable = container.AsConditionalDisposable(shouldDispose: true);
+            var disposable = new Disposable<TContainer>(container);
 
             return this.InitializeApplication(disposable);
         }
@@ -73,12 +73,12 @@ namespace Nancy.Core
 
             // In this case, we don't want to control the container
             // lifetime, because it's passed from outside. We don't own it.
-            var disposable = container.AsConditionalDisposable(shouldDispose: false);
+            var disposable = new NonDisposable<TContainer>(container);
 
             return this.InitializeApplication(disposable);
         }
 
-        private IApplication<TContainer> InitializeApplication(ConditionalDisposable<TContainer> container)
+        private IApplication<TContainer> InitializeApplication(Disposable<TContainer> container)
         {
             // When the container is built, we offer the bootstrapper
             // implementation a chance to validate the container configuration
@@ -102,7 +102,7 @@ namespace Nancy.Core
 
         protected abstract void ValidateContainerConfiguration(TContainer container);
 
-        protected abstract IApplication<TContainer> CreateApplication(ConditionalDisposable<TContainer> container);
+        protected abstract IApplication<TContainer> CreateApplication(Disposable<TContainer> container);
     }
 
     /// <summary>
@@ -110,7 +110,7 @@ namespace Nancy.Core
     ///     split, i.e. they allow appending to an existing container instance.
     /// </summary>
     public abstract class Bootstrapper<TContainer> : Bootstrapper<TContainer, TContainer>
-        where TContainer : IDisposable
+        where TContainer : class, IDisposable
     {
         protected sealed override TContainer CreateBuilder() => this.CreateContainer();
 

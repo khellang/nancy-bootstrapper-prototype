@@ -64,8 +64,7 @@
                 valueString = "*/*";
             }
 
-            MediaRange range;
-            if (!Ranges.TryGetValue(valueString, out range))
+            if (!Ranges.TryGetValue(valueString, out var range))
             {
                 Ranges.Add(valueString, range = ParseString(valueString));
             }

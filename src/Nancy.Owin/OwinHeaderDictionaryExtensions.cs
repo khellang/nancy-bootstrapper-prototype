@@ -12,8 +12,7 @@
 
         public static string GetSingleValue(this IDictionary<string, string[]> headers, string name)
         {
-            string[] values;
-            if (!headers.TryGetValue(name, out values))
+            if (!headers.TryGetValue(name, out var values))
             {
                 return string.Empty;
             }

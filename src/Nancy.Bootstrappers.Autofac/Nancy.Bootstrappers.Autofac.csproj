@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>Nancy.Bootstrappers.Autofac</AssemblyName>
-    <PackageId>Nancy.Bootstrappers.Autofac</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.0" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
   </ItemGroup>
 </Project>

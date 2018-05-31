@@ -39,8 +39,7 @@
                 return Empty;
             }
 
-            SubMediaTypeSuffix suffix;
-            if (!Suffixes.TryGetValue(trimmedValue, out suffix))
+            if (!Suffixes.TryGetValue(trimmedValue, out var suffix))
             {
                 Suffixes.Add(trimmedValue, suffix = new SubMediaTypeSuffix(trimmedValue));
             }

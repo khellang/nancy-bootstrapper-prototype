@@ -49,8 +49,7 @@
                     Resources.Exception_InvalidHttpMethodToken, trimmedValue), nameof(value));
             }
 
-            HttpMethod method;
-            if (!Methods.TryGetValue(trimmedValue, out method))
+            if (!Methods.TryGetValue(trimmedValue, out var method))
             {
                 Methods.Add(trimmedValue, method = new HttpMethod(trimmedValue));
             }

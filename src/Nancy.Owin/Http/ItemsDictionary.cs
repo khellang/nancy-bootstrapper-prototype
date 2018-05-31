@@ -19,17 +19,15 @@ namespace Nancy.Owin.Http
         {
             get
             {
-                object value;
                 // We don't want the indexer to throw. Just return null.
-                return this.items.TryGetValue(key, out value) ? value : null;
+                return this.items.TryGetValue(key, out var value) ? value : null;
             }
             set { this.items[key] = value; }
         }
 
         bool ICollection<KeyValuePair<object, object>>.Remove(KeyValuePair<object, object> item)
         {
-            object value;
-            if (this.items.TryGetValue(item.Key, out value) && Equals(item.Value, value))
+            if (this.items.TryGetValue(item.Key, out var value) && Equals(item.Value, value))
             {
                 return this.items.Remove(item.Key);
             }

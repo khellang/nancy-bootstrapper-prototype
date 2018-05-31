@@ -16,8 +16,7 @@
                     return null;
                 }
 
-                long parsedValue;
-                if (long.TryParse(value, ContentLengthNumberStyle, CultureInfo.InvariantCulture, out parsedValue))
+                if (long.TryParse(value, ContentLengthNumberStyle, CultureInfo.InvariantCulture, out var parsedValue))
                 {
                     return parsedValue;
                 }

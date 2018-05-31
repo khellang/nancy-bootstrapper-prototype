@@ -28,14 +28,14 @@ namespace Nancy.Bootstrappers.Autofac
             // Not supported.
         }
 
-        protected sealed override IApplication<ILifetimeScope> CreateApplication(ConditionalDisposable<ILifetimeScope> lifetimeScope)
+        protected sealed override IApplication<ILifetimeScope> CreateApplication(Disposable<ILifetimeScope> lifetimeScope)
         {
             return new Application(lifetimeScope);
         }
 
         private sealed class Application : Application<ILifetimeScope>
         {
-            public Application(ConditionalDisposable<ILifetimeScope> lifetimeScope) : base(lifetimeScope)
+            public Application(Disposable<ILifetimeScope> lifetimeScope) : base(lifetimeScope)
             {
             }
 

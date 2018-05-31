@@ -37,7 +37,7 @@
                     convertedRegistrations.Add(lifestyle.CreateRegistration(implementationType, container));
                 }
 
-                container.RegisterCollection(collectionTypeRegistration.ServiceType, convertedRegistrations);
+                container.Collection.Register(collectionTypeRegistration.ServiceType, convertedRegistrations);
             }
         }
 
@@ -45,7 +45,7 @@
         {
             foreach (var registration in registrations)
             {
-                container.RegisterSingleton(registration.ServiceType, registration.Instance);
+                container.RegisterInstance(registration.ServiceType, registration.Instance);
             }
         }
 

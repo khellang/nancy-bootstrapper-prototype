@@ -10,10 +10,9 @@
             Check.NotNull(environment, nameof(environment));
             Check.NotNull(key, nameof(key));
 
-            object value;
-            if (environment.TryGetValue(key, out value) && value is T)
+            if (environment.TryGetValue(key, out var value) && value is T variable)
             {
-                return (T) value;
+                return variable;
             }
 
             return default(T);

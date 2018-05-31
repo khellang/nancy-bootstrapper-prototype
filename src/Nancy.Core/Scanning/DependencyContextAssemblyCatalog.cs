@@ -1,4 +1,3 @@
-#if !NET451
 namespace Nancy.Core.Scanning
 {
     using System.Collections.Generic;
@@ -50,4 +49,3 @@ namespace Nancy.Core.Scanning
         }
     }
 }
-#endif

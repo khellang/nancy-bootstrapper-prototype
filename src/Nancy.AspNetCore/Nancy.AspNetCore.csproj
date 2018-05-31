@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>Nancy.AspNetCore</AssemblyName>
-    <PackageId>Nancy.AspNetCore</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.0" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,6 @@
 ﻿namespace Nancy.Core
 {
-#if NET451
-    using System;
-#else
     using System.Reflection;
-#endif
     using Nancy.Core.Scanning;
 
     public class DefaultPlatform : IPlatform
@@ -18,11 +14,8 @@
 
         static DefaultPlatform()
         {
-#if NET451
-            var assemblyCatalog = new AppDomainAssemblyCatalog(AppDomain.CurrentDomain);
-#else
-            var assemblyCatalog = new DependencyContextAssemblyCatalog(Assembly.GetEntryAssembly());
-#endif
+            var assembly = Assembly.GetEntryAssembly();
+            var assemblyCatalog = new DependencyContextAssemblyCatalog(assembly);
             Instance = new DefaultPlatform(assemblyCatalog);
         }
 

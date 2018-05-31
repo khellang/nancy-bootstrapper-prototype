@@ -37,8 +37,7 @@
                 return Wildcard;
             }
 
-            MediaType mediaType;
-            if (!Types.TryGetValue(trimmedValue, out mediaType))
+            if (!Types.TryGetValue(trimmedValue, out var mediaType))
             {
                 Types.Add(trimmedValue, mediaType = new MediaType(trimmedValue));
             }

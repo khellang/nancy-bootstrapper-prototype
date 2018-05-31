@@ -116,8 +116,7 @@
 
         private static Encoding GetCharset(MediaRangeParameters parameters)
         {
-            string charset;
-            if (parameters.TryGetValue("charset", out charset))
+            if (parameters.TryGetValue("charset", out var charset))
             {
                 try
                 {

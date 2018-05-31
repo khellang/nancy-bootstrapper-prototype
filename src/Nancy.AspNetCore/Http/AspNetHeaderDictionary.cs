@@ -57,8 +57,7 @@
 
         public bool TryGetValue(string key, out string[] value)
         {
-            StringValues temp;
-            if (this.headers.TryGetValue(key, out temp))
+            if (this.headers.TryGetValue(key, out var temp))
             {
                 value = temp;
                 return true;

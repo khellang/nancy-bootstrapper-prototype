@@ -43,8 +43,7 @@
                 return Wildcard;
             }
 
-            SubMediaType subType;
-            if (!SubTypes.TryGetValue(trimmedValue, out subType))
+            if (!SubTypes.TryGetValue(trimmedValue, out var subType))
             {
                 SubTypes.Add(trimmedValue, subType = ParseString(trimmedValue));
             }

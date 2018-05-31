@@ -6,10 +6,10 @@ namespace Nancy.Core
     using Nancy.Core.Http;
 
     public abstract class Application<TContainer, TScope> : IApplication<TContainer>
-        where TContainer : IDisposable
-        where TScope : IDisposable
+        where TContainer : class, IDisposable
+        where TScope : class, IDisposable
     {
-        protected Application(ConditionalDisposable<TContainer> container)
+        protected Application(Disposable<TContainer> container)
         {
             Check.NotNull(container, nameof(container));
 
@@ -18,7 +18,7 @@ namespace Nancy.Core
 
         TContainer IApplication<TContainer>.Container => this.Container;
 
-        private ConditionalDisposable<TContainer> Container { get; }
+        private Disposable<TContainer> Container { get; }
 
         public Task HandleRequest(HttpContext context, CancellationToken cancellationToken)
         {
@@ -52,19 +52,18 @@ namespace Nancy.Core
             }
         }
 
-        private ConditionalDisposable<TScope> GetRequestScope(HttpContext context)
+        private Disposable<TScope> GetRequestScope(HttpContext context)
         {
-            TScope existingScope;
-            if (this.TryGetExistingScope(context, out existingScope))
+            if (this.TryGetExistingScope(context, out var existingScope))
             {
                 // We don't want to dispose an existing scope, that's out of our control.
-                return existingScope.AsConditionalDisposable(shouldDispose: false);
+                return new NonDisposable<TScope>(existingScope);
             }
 
             var scope = this.BeginRequestScope(context, this.Container);
 
             // We've created this scope, make sure we dispose it.
-            return scope.AsConditionalDisposable(shouldDispose: true);
+            return new Disposable<TScope>(scope);
         }
 
         private IEngine ComposeEngineSafely(TContainer container, TScope scope)
@@ -81,9 +80,9 @@ namespace Nancy.Core
     }
 
     public abstract class Application<TContainer> : Application<TContainer, TContainer>
-        where TContainer : IDisposable
+        where TContainer : class, IDisposable
     {
-        protected Application(ConditionalDisposable<TContainer> container) : base(container)
+        protected Application(Disposable<TContainer> container) : base(container)
         {
         }
 

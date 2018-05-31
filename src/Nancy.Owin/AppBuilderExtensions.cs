@@ -19,6 +19,11 @@
             return app.UseNancy(bootstrapper, platform);
         }
 
+        public static IAppBuilder UseNancy<TBootstrapper>(this IAppBuilder app) where TBootstrapper : IBootstrapper, new()
+        {
+            return app.UseNancy(new TBootstrapper());
+        }
+
         public static IAppBuilder UseNancy(this IAppBuilder app, IBootstrapper bootstrapper)
         {
             return app.UseNancy(bootstrapper, DefaultPlatform.Instance);
